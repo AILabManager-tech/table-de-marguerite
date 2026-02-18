@@ -1,9 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { motion, useReducedMotion } from "framer-motion";
 import { UtensilsCrossed, Beef, CakeSlice, Wine } from "lucide-react";
+import { useInView, useReducedMotion } from "@/hooks/useAnimations";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { TextReveal } from "@/components/animations/TextReveal";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
@@ -97,19 +98,19 @@ interface MenuItemProps {
 
 function MenuItem({ categoryKey, itemIndex, accent, prefersReduced }: MenuItemProps) {
   const t = useTranslations("services");
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
   const colors = accentMap[accent];
 
   return (
-    <motion.div
-      initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
-      whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.4,
-        delay: itemIndex * 0.1,
-        ease: "easeInOut" as const,
-      }}
+    <div
+      ref={ref}
       className={`group flex items-start justify-between rounded-xl border ${colors.border} bg-cream-100/80 p-5 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5`}
+      style={{
+        opacity: prefersReduced || isInView ? 1 : 0,
+        transform: prefersReduced || isInView ? "translateY(0)" : "translateY(20px)",
+        transition: `opacity 0.4s ease-in-out ${itemIndex * 0.1}s, transform 0.4s ease-in-out ${itemIndex * 0.1}s`,
+      }}
     >
       <div className="flex-1 pr-4">
         <h3 className={`mb-1 font-heading text-lg font-semibold ${colors.text}`}>
@@ -125,7 +126,7 @@ function MenuItem({ categoryKey, itemIndex, accent, prefersReduced }: MenuItemPr
           {t(`${categoryKey}.item_${itemIndex + 1}.price`)}
         </span>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -149,7 +150,7 @@ function MenuItem({ categoryKey, itemIndex, accent, prefersReduced }: MenuItemPr
  */
 export function ServicesContent() {
   const t = useTranslations("services");
-  const prefersReduced = useReducedMotion() ?? false;
+  const prefersReduced = useReducedMotion();
 
   const faqItems = Array.from({ length: 6 }, (_, i) => ({
     question: t(`faq.q${i + 1}`),

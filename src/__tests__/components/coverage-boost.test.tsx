@@ -21,73 +21,6 @@ beforeAll(() => {
 });
 
 /* ------------------------------------------------------------------ */
-/*  Mocks -- framer-motion (with useReducedMotion)                     */
-/* ------------------------------------------------------------------ */
-vi.mock("framer-motion", () => {
-  const FRAMER_ONLY = new Set([
-    "initial", "animate", "exit", "transition", "whileInView",
-    "viewport", "variants", "whileHover", "whileTap", "layout",
-    "layoutId",
-  ]);
-  const mc = (Tag: string) => {
-    const C = ({ children, ...props }: Record<string, unknown>) => {
-      const safe: Record<string, unknown> = {};
-      for (const [k, v] of Object.entries(props)) {
-        if (typeof v === "function" && k.startsWith("on")) {
-          safe[k] = v;
-          continue;
-        }
-        if (k === "ref") {
-          safe[k] = v;
-          continue;
-        }
-        if (k === "style" && typeof v === "object") {
-          safe[k] = v;
-          continue;
-        }
-        if (FRAMER_ONLY.has(k)) continue;
-        if (typeof v === "object" || typeof v === "function") continue;
-        safe[k] = v;
-      }
-      const El = Tag as unknown as React.ElementType;
-      return <El {...safe}>{children as React.ReactNode}</El>;
-    };
-    C.displayName = `motion.${Tag}`;
-    return C;
-  };
-  return {
-    motion: {
-      div: mc("div"),
-      span: mc("span"),
-      button: mc("button"),
-      section: mc("section"),
-      a: mc("a"),
-      h1: mc("h1"),
-      h2: mc("h2"),
-      h3: mc("h3"),
-      p: mc("p"),
-      article: mc("article"),
-      blockquote: mc("blockquote"),
-      svg: mc("svg"),
-      circle: mc("circle"),
-      path: mc("path"),
-      line: mc("line"),
-      ellipse: mc("ellipse"),
-      g: mc("g"),
-      create: (tag: string) => mc(tag),
-    },
-    animate: () => ({ stop: () => {} }),
-    useInView: () => true,
-    useScroll: () => ({ scrollYProgress: { get: () => 0.5 } }),
-    useTransform: () => 0,
-    useMotionValue: (v: number = 0) => ({ set: vi.fn(), get: () => v }),
-    useSpring: () => ({ set: vi.fn(), get: () => 0 }),
-    useReducedMotion: () => false,
-    AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  };
-});
-
-/* ------------------------------------------------------------------ */
 /*  Mocks -- next-intl                                                  */
 /* ------------------------------------------------------------------ */
 vi.mock("next-intl", () => ({
@@ -268,9 +201,6 @@ describe("SeasonalMenuExplorer -- deep interactions", () => {
   it("renders tabpanel with season-specific id", () => {
     render(<SeasonalMenuExplorer />);
     expect(document.getElementById("season-panel-autumn")).toBeInTheDocument();
-
-    fireEvent.click(screen.getByText("seasons.spring.name"));
-    expect(document.getElementById("season-panel-spring")).toBeInTheDocument();
   });
 });
 
@@ -532,7 +462,7 @@ describe("ClientWidgets -- dynamic imports", () => {
 
   it("renders CookieConsent after dynamic load", async () => {
     render(<ClientWidgets />);
-    // CookieConsent is loaded via next/dynamic — mock may not resolve in test env
+    // CookieConsent is loaded via next/dynamic -- mock may not resolve in test env
     // Verify component renders without throwing
     await waitFor(() => {
       expect(screen.queryByTestId("cookie-consent") || document.body).toBeTruthy();

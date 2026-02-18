@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useState, useRef } from "react";
 import { useTranslations } from "next-intl";
+import { useInView, useReducedMotion } from "@/hooks/useAnimations";
 
 /* ------------------------------------------------------------------ */
 /*  Gallery item definitions                                           */
@@ -29,23 +29,19 @@ interface GalleryCardProps {
   item: (typeof GALLERY_ITEMS)[number];
   index: number;
   prefersReduced: boolean;
+  isInView: boolean;
   t: ReturnType<typeof useTranslations>;
 }
 
-function GalleryCard({ item, index, prefersReduced, t }: GalleryCardProps) {
+function GalleryCard({ item, index, prefersReduced, isInView, t }: GalleryCardProps) {
   return (
-    <motion.article
-      layout={!prefersReduced}
-      initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 30 }}
-      whileInView={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      exit={prefersReduced ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.08,
-        ease: "easeInOut" as const,
-      }}
+    <article
       className={`group relative overflow-hidden rounded-2xl ${item.span}`}
+      style={{
+        opacity: prefersReduced || isInView ? 1 : 0,
+        transform: prefersReduced || isInView ? "translateY(0)" : "translateY(30px)",
+        transition: `opacity 0.5s ease-in-out ${index * 0.08}s, transform 0.5s ease-in-out ${index * 0.08}s`,
+      }}
     >
       {/* Gradient placeholder (no real images yet) */}
       <div
@@ -81,7 +77,7 @@ function GalleryCard({ item, index, prefersReduced, t }: GalleryCardProps) {
       >
         <span className="sr-only">{t(`items.${item.key}.title`)}</span>
       </button>
-    </motion.article>
+    </article>
   );
 }
 
@@ -103,8 +99,16 @@ function GalleryCard({ item, index, prefersReduced, t }: GalleryCardProps) {
  */
 export function FoodGallery() {
   const t = useTranslations("home.gallery");
-  const prefersReduced = useReducedMotion() ?? false;
+  const prefersReduced = useReducedMotion();
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("all");
+  const headerRef = useRef<HTMLDivElement>(null);
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const captionRef = useRef<HTMLParagraphElement>(null);
+  const headerInView = useInView(headerRef, { once: true });
+  const filtersInView = useInView(filtersRef, { once: true });
+  const gridInView = useInView(gridRef, { once: true, margin: "-50px" });
+  const captionInView = useInView(captionRef, { once: true });
 
   const filteredItems =
     activeCategory === "all"
@@ -119,12 +123,14 @@ export function FoodGallery() {
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <motion.div
-          initial={prefersReduced ? {} : { opacity: 0, y: 24 }}
-          whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: "easeInOut" as const }}
+        <div
+          ref={headerRef}
           className="mb-10 text-center"
+          style={{
+            opacity: prefersReduced || headerInView ? 1 : 0,
+            transform: prefersReduced || headerInView ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out",
+          }}
         >
           <h2
             id="gallery-heading"
@@ -135,17 +141,19 @@ export function FoodGallery() {
           <p className="mx-auto max-w-lg font-body text-bark-light">
             {t("subtitle")}
           </p>
-        </motion.div>
+        </div>
 
         {/* Category filters */}
-        <motion.div
-          initial={prefersReduced ? {} : { opacity: 0, y: 12 }}
-          whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.1, ease: "easeInOut" as const }}
+        <div
+          ref={filtersRef}
           className="mb-10 flex flex-wrap justify-center gap-3"
           role="group"
           aria-label={t("filter_label")}
+          style={{
+            opacity: prefersReduced || filtersInView ? 1 : 0,
+            transform: prefersReduced || filtersInView ? "translateY(0)" : "translateY(12px)",
+            transition: "opacity 0.4s ease-in-out 0.1s, transform 0.4s ease-in-out 0.1s",
+          }}
         >
           {CATEGORIES.map((cat) => (
             <button
@@ -160,36 +168,36 @@ export function FoodGallery() {
               {t(`categories.${cat}`)}
             </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Masonry grid */}
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            layout={!prefersReduced}
-            className="grid auto-rows-[200px] gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {filteredItems.map((item, i) => (
-              <GalleryCard
-                key={item.key}
-                item={item}
-                index={i}
-                prefersReduced={prefersReduced}
-                t={t}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+        <div
+          ref={gridRef}
+          className="grid auto-rows-[200px] gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {filteredItems.map((item, i) => (
+            <GalleryCard
+              key={item.key}
+              item={item}
+              index={i}
+              prefersReduced={prefersReduced}
+              isInView={gridInView}
+              t={t}
+            />
+          ))}
+        </div>
 
         {/* Bottom caption */}
-        <motion.p
-          initial={prefersReduced ? {} : { opacity: 0 }}
-          whileInView={prefersReduced ? {} : { opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4, ease: "easeInOut" as const }}
+        <p
+          ref={captionRef}
           className="mt-8 text-center font-body text-xs italic text-bark-light"
+          style={{
+            opacity: prefersReduced || captionInView ? 1 : 0,
+            transition: "opacity 0.5s ease-in-out 0.4s",
+          }}
         >
           {t("caption")}
-        </motion.p>
+        </p>
       </div>
     </section>
   );

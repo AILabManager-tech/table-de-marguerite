@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { useInView, useReducedMotion } from "@/hooks/useAnimations";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -14,28 +15,28 @@ interface BotanicalDividerProps {
 }
 
 /* ------------------------------------------------------------------ */
-/*  SVG path data per variant                                          */
+/*  SVG path data per variant (animated with CSS stroke-dash)          */
 /* ------------------------------------------------------------------ */
 
-/** Each variant produces a decorative botanical SVG pattern */
-function VinePaths() {
+function VinePaths({ isInView }: { isInView: boolean }) {
   return (
     <>
       {/* Central curving vine */}
-      <motion.path
+      <path
         d="M60,25 C120,5 180,45 240,25 C300,5 360,45 420,25 C480,5 540,45 600,25 C660,5 720,45 780,25 C840,5 900,45 940,25"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 2, ease: "easeInOut" as const }}
+        style={{
+          strokeDasharray: 1200,
+          strokeDashoffset: isInView ? 0 : 1200,
+          transition: "stroke-dashoffset 2s ease-in-out",
+        }}
       />
       {/* Small leaves along the vine */}
       {[150, 330, 510, 690, 870].map((cx, i) => (
-        <motion.ellipse
+        <ellipse
           key={i}
           cx={cx}
           cy={i % 2 === 0 ? 18 : 32}
@@ -43,13 +44,11 @@ function VinePaths() {
           ry="5"
           fill="currentColor"
           transform={`rotate(${i % 2 === 0 ? -30 : 30} ${cx} ${i % 2 === 0 ? 18 : 32})`}
-          initial={{ opacity: 0, scale: 0 }}
-          whileInView={{ opacity: 0.5, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.4,
-            delay: 0.3 + i * 0.2,
-            ease: "easeInOut" as const,
+          style={{
+            opacity: isInView ? 0.5 : 0,
+            transform: `rotate(${i % 2 === 0 ? -30 : 30}deg) scale(${isInView ? 1 : 0})`,
+            transformOrigin: `${cx}px ${i % 2 === 0 ? 18 : 32}px`,
+            transition: `opacity 0.4s ease-in-out ${0.3 + i * 0.2}s, transform 0.4s ease-in-out ${0.3 + i * 0.2}s`,
           }}
         />
       ))}
@@ -57,11 +56,11 @@ function VinePaths() {
   );
 }
 
-function LeafPaths() {
+function LeafPaths({ isInView }: { isInView: boolean }) {
   return (
     <>
       {/* Horizontal stem */}
-      <motion.line
+      <line
         x1="40"
         y1="25"
         x2="960"
@@ -69,24 +68,23 @@ function LeafPaths() {
         stroke="currentColor"
         strokeWidth="1"
         strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: "easeInOut" as const }}
+        style={{
+          strokeDasharray: 920,
+          strokeDashoffset: isInView ? 0 : 920,
+          transition: "stroke-dashoffset 1.5s ease-in-out",
+        }}
       />
       {/* Scattered leaf shapes */}
       {[160, 340, 500, 660, 840].map((cx, i) => (
-        <motion.path
+        <path
           key={i}
           d={`M${cx},25 C${cx - 12},${15 - (i % 2) * 20} ${cx + 12},${15 - (i % 2) * 20} ${cx},25`}
           fill="currentColor"
-          initial={{ opacity: 0, scale: 0 }}
-          whileInView={{ opacity: 0.4, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.5,
-            delay: 0.2 + i * 0.15,
-            ease: "easeInOut" as const,
+          style={{
+            opacity: isInView ? 0.4 : 0,
+            transform: `scale(${isInView ? 1 : 0})`,
+            transformOrigin: `${cx}px 25px`,
+            transition: `opacity 0.5s ease-in-out ${0.2 + i * 0.15}s, transform 0.5s ease-in-out ${0.2 + i * 0.15}s`,
           }}
         />
       ))}
@@ -94,11 +92,11 @@ function LeafPaths() {
   );
 }
 
-function WheatPaths() {
+function WheatPaths({ isInView }: { isInView: boolean }) {
   return (
     <>
       {/* Central line */}
-      <motion.line
+      <line
         x1="40"
         y1="25"
         x2="960"
@@ -106,22 +104,20 @@ function WheatPaths() {
         stroke="currentColor"
         strokeWidth="1"
         strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: "easeInOut" as const }}
+        style={{
+          strokeDasharray: 920,
+          strokeDashoffset: isInView ? 0 : 920,
+          transition: "stroke-dashoffset 1.5s ease-in-out",
+        }}
       />
       {/* Wheat ear clusters */}
       {[120, 280, 440, 560, 720, 880].map((cx, i) => (
-        <motion.g
+        <g
           key={i}
-          initial={{ opacity: 0, y: 5 }}
-          whileInView={{ opacity: 0.5, y: 0 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.4,
-            delay: 0.3 + i * 0.12,
-            ease: "easeInOut" as const,
+          style={{
+            opacity: isInView ? 0.5 : 0,
+            transform: `translateY(${isInView ? 0 : 5}px)`,
+            transition: `opacity 0.4s ease-in-out ${0.3 + i * 0.12}s, transform 0.4s ease-in-out ${0.3 + i * 0.12}s`,
           }}
         >
           {/* Three grain kernels per cluster */}
@@ -130,7 +126,7 @@ function WheatPaths() {
           <ellipse cx={cx + 4} cy={16} rx="3" ry="6" fill="currentColor" transform={`rotate(15 ${cx + 4} 16)`} />
           {/* Small stem down to main line */}
           <line x1={cx} y1={20} x2={cx} y2="25" stroke="currentColor" strokeWidth="0.8" />
-        </motion.g>
+        </g>
       ))}
     </>
   );
@@ -206,7 +202,7 @@ function StaticWheatPaths() {
  * BotanicalDivider -- Decorative SVG divider with organic botanical motifs.
  *
  * Three variants: vine (curving tendrils), leaf (scattered leaves),
- * wheat (grain ear clusters). Animated stroke-draw with framer-motion.
+ * wheat (grain ear clusters). Animated stroke-draw with CSS transitions.
  *
  * @component
  * @example
@@ -218,26 +214,25 @@ export function BotanicalDivider({
   className = "",
   variant = "vine",
 }: BotanicalDividerProps) {
-  const prefersReduced = useReducedMotion() ?? false;
+  const ref = useRef<HTMLDivElement>(null);
+  const prefersReduced = useReducedMotion();
+  const isInView = useInView(ref, { once: true });
 
-  const ANIMATED_VARIANTS: Record<DividerVariant, () => JSX.Element> = {
+  const ANIMATED_VARIANTS: Record<DividerVariant, React.FC<{ isInView: boolean }>> = {
     vine: VinePaths,
     leaf: LeafPaths,
     wheat: WheatPaths,
   };
 
-  const STATIC_VARIANTS: Record<DividerVariant, () => JSX.Element> = {
+  const STATIC_VARIANTS: Record<DividerVariant, React.FC> = {
     vine: StaticVinePaths,
     leaf: StaticLeafPaths,
     wheat: StaticWheatPaths,
   };
 
-  const PathComponent = prefersReduced
-    ? STATIC_VARIANTS[variant]
-    : ANIMATED_VARIANTS[variant];
-
   return (
     <div
+      ref={ref}
       className={`w-full overflow-hidden text-olive-400 ${className}`}
       role="separator"
       aria-hidden="true"
@@ -248,7 +243,17 @@ export function BotanicalDivider({
         preserveAspectRatio="xMidYMid meet"
         className="mx-auto h-[50px] w-full max-w-5xl"
       >
-        <PathComponent />
+        {prefersReduced ? (
+          (() => {
+            const StaticComp = STATIC_VARIANTS[variant];
+            return <StaticComp />;
+          })()
+        ) : (
+          (() => {
+            const AnimatedComp = ANIMATED_VARIANTS[variant];
+            return <AnimatedComp isInView={isInView} />;
+          })()
+        )}
       </svg>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import { useRef, useEffect, useState, type ReactNode } from "react";
+import { useReducedMotion } from "@/hooks/useAnimations";
 
 interface ParallaxSectionProps {
   children: ReactNode;
@@ -25,24 +25,49 @@ export function ParallaxSection({
   className,
   speed = 0.3,
 }: ParallaxSectionProps) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+  const [style, setStyle] = useState({ y: 0, opacity: 1 });
 
-  const y = useTransform(scrollYProgress, [0, 1], [speed * 100, -speed * 100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 1, 1, 0.4]);
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    const el = ref.current;
+    if (!el) return;
+
+    function onScroll() {
+      const rect = el!.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      const progress = (windowH - rect.top) / (windowH + rect.height);
+      const clamped = Math.max(0, Math.min(1, progress));
+      const y = (clamped - 0.5) * 2 * speed * -100;
+      const opacity =
+        clamped < 0.2
+          ? 0.4 + (clamped / 0.2) * 0.6
+          : clamped > 0.8
+            ? 0.4 + ((1 - clamped) / 0.2) * 0.6
+            : 1;
+      setStyle({ y, opacity });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [shouldReduceMotion, speed]);
 
   return (
     <div ref={ref} className={`relative overflow-hidden ${className ?? ""}`}>
       {shouldReduceMotion ? (
         <div>{children}</div>
       ) : (
-        <motion.div style={{ y, opacity }}>
+        <div
+          style={{
+            transform: `translateY(${style.y}px)`,
+            opacity: style.opacity,
+            willChange: "transform, opacity",
+          }}
+        >
           {children}
-        </motion.div>
+        </div>
       )}
     </div>
   );

@@ -1,9 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { motion, useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "@/hooks/useAnimations";
 import { TextReveal } from "@/components/animations/TextReveal";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
@@ -90,14 +91,18 @@ interface TestimonialCardProps {
 
 function TestimonialCard({ index, prefersReduced }: TestimonialCardProps) {
   const t = useTranslations("home.testimonials");
+  const ref = useRef<HTMLQuoteElement>(null);
+  const isInView = useInView(ref, { once: true });
 
   return (
-    <motion.blockquote
-      initial={prefersReduced ? {} : { opacity: 0, y: 30 }}
-      whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.15, ease: "easeInOut" as const }}
+    <blockquote
+      ref={ref}
       className="flex flex-col rounded-2xl border border-cream-300 bg-cream-100/80 p-6 shadow-sm backdrop-blur-sm"
+      style={{
+        opacity: prefersReduced || isInView ? 1 : 0,
+        transform: prefersReduced || isInView ? "translateY(0)" : "translateY(30px)",
+        transition: `opacity 0.5s ease-in-out ${index * 0.15}s, transform 0.5s ease-in-out ${index * 0.15}s`,
+      }}
     >
       {/* Stars */}
       <div className="mb-4 flex gap-1 text-terra-400" aria-hidden="true">
@@ -125,7 +130,7 @@ function TestimonialCard({ index, prefersReduced }: TestimonialCardProps) {
           </p>
         </div>
       </footer>
-    </motion.blockquote>
+    </blockquote>
   );
 }
 
@@ -162,7 +167,9 @@ const GALLERY_IMAGES = [
  */
 export function HomeContent() {
   const t = useTranslations("home");
-  const prefersReduced = useReducedMotion() ?? false;
+  const prefersReduced = useReducedMotion();
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const galleryInView = useInView(galleryRef, { once: true });
 
   return (
     <main>
@@ -316,18 +323,15 @@ export function HomeContent() {
           </AnimatedSection>
           <LineReveal className="mx-auto mb-12 w-24" color="bg-terra-400" delay={0.3} />
 
-          <div className="grid auto-rows-[180px] grid-cols-2 gap-4 md:grid-cols-4">
+          <div ref={galleryRef} className="grid auto-rows-[180px] grid-cols-2 gap-4 md:grid-cols-4">
             {GALLERY_IMAGES.map(({ key, span }, i) => (
-              <motion.div
+              <div
                 key={key}
                 className={`group relative overflow-hidden rounded-xl ${span}`}
-                initial={prefersReduced ? {} : { opacity: 0, scale: 0.95 }}
-                whileInView={prefersReduced ? {} : { opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.4,
-                  delay: i * 0.08,
-                  ease: "easeInOut" as const,
+                style={{
+                  opacity: prefersReduced || galleryInView ? 1 : 0,
+                  transform: prefersReduced || galleryInView ? "scale(1)" : "scale(0.95)",
+                  transition: `opacity 0.4s ease-in-out ${i * 0.08}s, transform 0.4s ease-in-out ${i * 0.08}s`,
                 }}
               >
                 <div className="h-full w-full bg-gradient-to-br from-olive-100 to-cream-300 flex items-center justify-center">
@@ -335,7 +339,7 @@ export function HomeContent() {
                     {t(`gallery.${key}.caption`)}
                   </span>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

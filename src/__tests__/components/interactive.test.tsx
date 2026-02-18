@@ -10,54 +10,6 @@ vi.mock("sonner", () => ({
   toast: { success: vi.fn(), error: vi.fn() },
 }));
 
-vi.mock("framer-motion", () => {
-  const mc = (Tag: string) => {
-    const FM_PROPS = new Set([
-      "initial", "animate", "exit", "transition", "whileInView",
-      "viewport", "variants", "whileHover", "whileTap", "layout",
-      "layoutId",
-    ]);
-    const C = ({ children, ...props }: Record<string, unknown>) => {
-      const safe: Record<string, unknown> = {};
-      for (const [k, v] of Object.entries(props)) {
-        if (typeof v === "function" && k.startsWith("on")) {
-          safe[k] = v;
-          continue;
-        }
-        if (k === "ref" || k === "style") {
-          safe[k] = v;
-          continue;
-        }
-        if (FM_PROPS.has(k)) continue;
-        if (typeof v === "object" || typeof v === "function") continue;
-        safe[k] = v;
-      }
-      const El = Tag as unknown as React.ElementType;
-      return <El {...safe}>{children as React.ReactNode}</El>;
-    };
-    C.displayName = `motion.${Tag}`;
-    return C;
-  };
-  return {
-    motion: {
-      div: mc("div"), span: mc("span"), button: mc("button"),
-      section: mc("section"), a: mc("a"), h1: mc("h1"),
-      h2: mc("h2"), h3: mc("h3"), p: mc("p"),
-      article: mc("article"), g: mc("g"),
-      path: mc("path"), line: mc("line"), ellipse: mc("ellipse"),
-      create: (tag: string) => mc(tag),
-    },
-    animate: () => ({ stop: () => {} }),
-    useInView: () => true,
-    useScroll: () => ({ scrollYProgress: { get: () => 0.5 } }),
-    useTransform: () => 0,
-    useMotionValue: (v: number = 0) => ({ set: vi.fn(), get: () => v }),
-    useSpring: () => ({ set: vi.fn(), get: () => 0 }),
-    useReducedMotion: () => false,
-    AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  };
-});
-
 vi.mock("next/image", () => ({
   default: (props: { alt: string; src: string }) => <img alt={props.alt} src={props.src} />,
 }));
@@ -110,7 +62,6 @@ describe("SeasonalMenuExplorer", () => {
 
   it("renders 3 dish cards for active season (starter, main, dessert)", () => {
     render(<SeasonalMenuExplorer />);
-    // autumn is default, check for course badges
     const courseLabels = screen.getAllByText("courses.starter");
     expect(courseLabels.length).toBeGreaterThanOrEqual(1);
   });
@@ -201,7 +152,6 @@ describe("FoodGallery", () => {
   it("renders gallery cards", () => {
     render(<FoodGallery />);
     const buttons = screen.getAllByRole("button");
-    // 4 filter buttons + 6 gallery card buttons
     expect(buttons.length).toBeGreaterThanOrEqual(6);
   });
 
@@ -209,8 +159,6 @@ describe("FoodGallery", () => {
     render(<FoodGallery />);
     const startersBtn = screen.getAllByText("categories.starters")[0];
     fireEvent.click(startersBtn);
-
-    // After filtering, only starters items should show
     const allBtn = screen.getByText("categories.all");
     expect(allBtn).toBeInTheDocument();
   });
@@ -219,7 +167,6 @@ describe("FoodGallery", () => {
     render(<FoodGallery />);
     const allBtn = screen.getByText("categories.all");
     fireEvent.click(allBtn);
-    // 4 filter buttons + 6 gallery card buttons
     const buttons = screen.getAllByRole("button");
     expect(buttons.length).toBeGreaterThanOrEqual(10);
   });

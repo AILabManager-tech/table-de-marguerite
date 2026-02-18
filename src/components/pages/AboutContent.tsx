@@ -1,10 +1,11 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { motion, useReducedMotion } from "framer-motion";
 import { Leaf, ChefHat, Heart } from "lucide-react";
+import { useInView, useReducedMotion } from "@/hooks/useAnimations";
 import { TextReveal } from "@/components/animations/TextReveal";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
@@ -84,18 +85,24 @@ interface TeamMemberProps {
 
 function TeamMemberCard({ index, prefersReduced }: TeamMemberProps) {
   const t = useTranslations("about.team");
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
 
   const accentColors = ["olive", "terra", "prune"] as const;
   const accent = accentColors[index % accentColors.length] ?? "olive";
   const colors = valueAccentMap[accent];
 
   return (
-    <motion.div
-      initial={prefersReduced ? {} : { opacity: 0, y: 30 }}
-      whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.15, ease: "easeInOut" as const }}
+    <div
+      ref={ref}
       className={`group rounded-2xl border ${colors.border} bg-cream-100/80 p-6 text-center shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
+      style={{
+        opacity: prefersReduced || isInView ? 1 : 0,
+        transform: prefersReduced || isInView
+          ? undefined
+          : "translateY(30px)",
+        transition: `opacity 0.5s ease-in-out ${index * 0.15}s, transform 0.5s ease-in-out ${index * 0.15}s`,
+      }}
     >
       {/* Avatar placeholder */}
       <div
@@ -113,7 +120,7 @@ function TeamMemberCard({ index, prefersReduced }: TeamMemberProps) {
       <p className="font-body text-sm leading-relaxed text-bark-light">
         {t(`${index}.bio`)}
       </p>
-    </motion.div>
+    </div>
   );
 }
 
@@ -136,7 +143,7 @@ function TeamMemberCard({ index, prefersReduced }: TeamMemberProps) {
  */
 export function AboutContent() {
   const t = useTranslations("about");
-  const prefersReduced = useReducedMotion() ?? false;
+  const prefersReduced = useReducedMotion();
 
   return (
     <main>

@@ -1,13 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useReducedMotion,
-} from "framer-motion";
+import { useState, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Sprout, Sun, Leaf, Snowflake } from "lucide-react";
+import { useInView, useReducedMotion } from "@/hooks/useAnimations";
 
 /* ------------------------------------------------------------------ */
 /*  Season definitions                                                 */
@@ -82,23 +78,27 @@ interface DishCardProps {
   course: CourseKey;
   index: number;
   prefersReduced: boolean;
+  show: boolean;
   t: ReturnType<typeof useTranslations>;
 }
 
-function DishCard({ season, course, index, prefersReduced, t }: DishCardProps) {
+function DishCard({ season, course, index, prefersReduced, show, t }: DishCardProps) {
   const colors = SEASON_COLORS[season];
 
   return (
-    <motion.article
-      initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 20 }}
-      animate={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -10 }}
-      transition={{
-        duration: 0.4,
-        delay: index * 0.1,
-        ease: "easeInOut" as const,
-      }}
+    <article
       className={`group rounded-xl border ${colors.border} bg-cream-100 p-6 transition-shadow duration-300 hover:shadow-md`}
+      style={{
+        opacity: show ? 1 : 0,
+        transform: show
+          ? "translateY(0)"
+          : prefersReduced
+            ? undefined
+            : "translateY(20px)",
+        transition: prefersReduced
+          ? "opacity 0.01s"
+          : `opacity 0.4s ease-in-out ${index * 0.1}s, transform 0.4s ease-in-out ${index * 0.1}s`,
+      }}
     >
       {/* Course badge */}
       <span
@@ -131,7 +131,7 @@ function DishCard({ season, course, index, prefersReduced, t }: DishCardProps) {
           {t(`seasons.${season}.dishes.${course}.price`)}
         </span>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -143,11 +143,10 @@ interface SeasonTabProps {
   season: SeasonKey;
   isActive: boolean;
   onClick: () => void;
-  prefersReduced: boolean;
   t: ReturnType<typeof useTranslations>;
 }
 
-function SeasonTab({ season, isActive, onClick, prefersReduced, t }: SeasonTabProps) {
+function SeasonTab({ season, isActive, onClick, t }: SeasonTabProps) {
   const colors = SEASON_COLORS[season];
   const IconComp = SEASON_ICON[season];
 
@@ -167,15 +166,6 @@ function SeasonTab({ season, isActive, onClick, prefersReduced, t }: SeasonTabPr
         aria-hidden="true"
       />
       <span>{t(`seasons.${season}.name`)}</span>
-
-      {/* Active underline indicator */}
-      {isActive && !prefersReduced && (
-        <motion.div
-          layoutId="season-indicator"
-          className="absolute inset-0 rounded-full"
-          transition={{ duration: 0.3, ease: "easeInOut" as const }}
-        />
-      )}
     </button>
   );
 }
@@ -188,7 +178,7 @@ function SeasonTab({ season, isActive, onClick, prefersReduced, t }: SeasonTabPr
  * SeasonalMenuExplorer -- Interactive seasonal menu carousel for La Table de Marguerite.
  *
  * Displays 4 season tabs (Printemps, Ete, Automne, Hiver), each with 3 signature
- * dishes (starter, main, dessert). Uses AnimatePresence for smooth transitions.
+ * dishes (starter, main, dessert). Uses CSS transitions for smooth tab changes.
  *
  * @component
  * @example
@@ -198,8 +188,28 @@ function SeasonTab({ season, isActive, onClick, prefersReduced, t }: SeasonTabPr
  */
 export function SeasonalMenuExplorer() {
   const t = useTranslations("home.seasonal_menu");
-  const prefersReduced = useReducedMotion() ?? false;
+  const prefersReduced = useReducedMotion();
   const [activeSeason, setActiveSeason] = useState<SeasonKey>("autumn");
+  const [displayedSeason, setDisplayedSeason] = useState<SeasonKey>("autumn");
+  const [show, setShow] = useState(true);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const headerInView = useInView(headerRef, { once: true });
+  const tabsInView = useInView(tabsRef, { once: true });
+
+  function handleSeasonChange(season: SeasonKey) {
+    if (season === activeSeason) return;
+    setActiveSeason(season);
+    if (prefersReduced) {
+      setDisplayedSeason(season);
+      return;
+    }
+    setShow(false);
+    setTimeout(() => {
+      setDisplayedSeason(season);
+      setShow(true);
+    }, 300);
+  }
 
   return (
     <section
@@ -209,12 +219,14 @@ export function SeasonalMenuExplorer() {
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <motion.div
-          initial={prefersReduced ? {} : { opacity: 0, y: 24 }}
-          whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: "easeInOut" as const }}
+        <div
+          ref={headerRef}
           className="mb-12 text-center"
+          style={{
+            opacity: prefersReduced || headerInView ? 1 : 0,
+            transform: prefersReduced || headerInView ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out",
+          }}
         >
           <h2
             id="seasonal-menu-heading"
@@ -225,69 +237,79 @@ export function SeasonalMenuExplorer() {
           <p className="mx-auto max-w-xl font-body text-bark-light">
             {t("subtitle")}
           </p>
-        </motion.div>
+        </div>
 
         {/* Season tabs */}
-        <motion.div
-          initial={prefersReduced ? {} : { opacity: 0, y: 16 }}
-          whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.15, ease: "easeInOut" as const }}
+        <div
+          ref={tabsRef}
           className="mb-10 flex flex-wrap justify-center gap-3"
           role="tablist"
           aria-label={t("tabs_label")}
+          style={{
+            opacity: prefersReduced || tabsInView ? 1 : 0,
+            transform: prefersReduced || tabsInView ? "translateY(0)" : "translateY(16px)",
+            transition: "opacity 0.4s ease-in-out 0.15s, transform 0.4s ease-in-out 0.15s",
+          }}
         >
           {SEASONS.map((season) => (
             <SeasonTab
               key={season}
               season={season}
               isActive={activeSeason === season}
-              onClick={() => setActiveSeason(season)}
-              prefersReduced={prefersReduced}
+              onClick={() => handleSeasonChange(season)}
               t={t}
             />
           ))}
-        </motion.div>
+        </div>
 
         {/* Dishes grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSeason}
-            id={`season-panel-${activeSeason}`}
-            role="tabpanel"
-            aria-labelledby={`season-tab-${activeSeason}`}
-            initial={prefersReduced ? { opacity: 0 } : { opacity: 0, x: 30 }}
-            animate={prefersReduced ? { opacity: 1 } : { opacity: 1, x: 0 }}
-            exit={prefersReduced ? { opacity: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.35, ease: "easeInOut" as const }}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {COURSE_KEYS.map((course, i) => (
-              <DishCard
-                key={`${activeSeason}-${course}`}
-                season={activeSeason}
-                course={course}
-                index={i}
-                prefersReduced={prefersReduced}
-                t={t}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+        <div
+          id={`season-panel-${activeSeason}`}
+          role="tabpanel"
+          aria-labelledby={`season-tab-${activeSeason}`}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          style={{
+            opacity: show ? 1 : 0,
+            transform: show
+              ? "translateX(0)"
+              : prefersReduced
+                ? undefined
+                : "translateX(30px)",
+            transition: prefersReduced
+              ? "opacity 0.01s"
+              : "opacity 0.35s ease-in-out, transform 0.35s ease-in-out",
+          }}
+        >
+          {COURSE_KEYS.map((course, i) => (
+            <DishCard
+              key={`${displayedSeason}-${course}`}
+              season={displayedSeason}
+              course={course}
+              index={i}
+              prefersReduced={prefersReduced}
+              show={show}
+              t={t}
+            />
+          ))}
+        </div>
 
         {/* Season description */}
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={`desc-${activeSeason}`}
-            initial={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 10 }}
-            animate={prefersReduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, delay: 0.2, ease: "easeInOut" as const }}
-            className="mt-8 text-center font-body text-sm italic text-bark-light"
-          >
-            {t(`seasons.${activeSeason}.note`)}
-          </motion.p>
-        </AnimatePresence>
+        <p
+          className="mt-8 text-center font-body text-sm italic text-bark-light"
+          style={{
+            opacity: show ? 1 : 0,
+            transform: show
+              ? "translateY(0)"
+              : prefersReduced
+                ? undefined
+                : "translateY(10px)",
+            transition: prefersReduced
+              ? "opacity 0.01s"
+              : "opacity 0.3s ease-in-out 0.2s, transform 0.3s ease-in-out 0.2s",
+          }}
+        >
+          {t(`seasons.${displayedSeason}.note`)}
+        </p>
       </div>
     </section>
   );

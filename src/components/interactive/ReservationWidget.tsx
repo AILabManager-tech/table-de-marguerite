@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useState, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Calendar, Users, Clock, Phone, User } from "lucide-react";
 import { toast } from "sonner";
+import { useInView, useReducedMotion } from "@/hooks/useAnimations";
 
 /* ------------------------------------------------------------------ */
 /*  Form state                                                         */
@@ -89,9 +89,13 @@ function FormField({ icon, label, htmlFor, children }: FieldProps) {
  */
 export function ReservationWidget() {
   const t = useTranslations("home.reservation");
-  const prefersReduced = useReducedMotion() ?? false;
+  const prefersReduced = useReducedMotion();
   const [form, setForm] = useState<ReservationForm>(INITIAL_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const headerInView = useInView(headerRef, { once: true });
+  const cardInView = useInView(cardRef, { once: true });
 
   /** Update a single field */
   const updateField = useCallback(
@@ -148,12 +152,14 @@ export function ReservationWidget() {
     >
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <motion.div
-          initial={prefersReduced ? {} : { opacity: 0, y: 24 }}
-          whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease: "easeInOut" as const }}
+        <div
+          ref={headerRef}
           className="mb-10 text-center"
+          style={{
+            opacity: prefersReduced || headerInView ? 1 : 0,
+            transform: prefersReduced || headerInView ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out",
+          }}
         >
           <h2
             id="reservation-heading"
@@ -164,15 +170,17 @@ export function ReservationWidget() {
           <p className="mx-auto max-w-md font-body text-bark-light">
             {t("subtitle")}
           </p>
-        </motion.div>
+        </div>
 
         {/* Reservation card */}
-        <motion.div
-          initial={prefersReduced ? {} : { opacity: 0, y: 20, scale: 0.98 }}
-          whileInView={prefersReduced ? {} : { opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15, ease: "easeInOut" as const }}
+        <div
+          ref={cardRef}
           className="rounded-2xl border border-olive-200 bg-cream-100 p-6 shadow-sm sm:p-8"
+          style={{
+            opacity: prefersReduced || cardInView ? 1 : 0,
+            transform: prefersReduced || cardInView ? "translateY(0) scale(1)" : "translateY(20px) scale(0.98)",
+            transition: "opacity 0.5s ease-in-out 0.15s, transform 0.5s ease-in-out 0.15s",
+          }}
         >
           <form onSubmit={handleSubmit} className="space-y-5" noValidate>
             {/* Row 1: Date + Guests */}
@@ -288,13 +296,10 @@ export function ReservationWidget() {
             <div className="border-t border-olive-100" />
 
             {/* Submit */}
-            <motion.button
+            <button
               type="submit"
               disabled={isSubmitting}
-              whileHover={prefersReduced ? {} : { scale: 1.02 }}
-              whileTap={prefersReduced ? {} : { scale: 0.98 }}
-              transition={{ duration: 0.15, ease: "easeInOut" as const }}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-terra-500 px-6 py-3.5 font-heading text-base font-bold text-cream-100 shadow-md shadow-terra-300/30 transition-colors duration-300 hover:bg-terra-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terra-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-terra-500 px-6 py-3.5 font-heading text-base font-bold text-cream-100 shadow-md shadow-terra-300/30 transition-all duration-300 hover:bg-terra-600 hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terra-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? (
                 <>
@@ -328,14 +333,14 @@ export function ReservationWidget() {
                   {t("submit")}
                 </>
               )}
-            </motion.button>
+            </button>
 
             {/* Privacy note */}
             <p className="text-center font-body text-[11px] text-bark-light">
               {t("privacy_note")}
             </p>
           </form>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

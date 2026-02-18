@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
+import { useInView, useReducedMotion } from "@/hooks/useAnimations";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -11,10 +11,10 @@ interface AnimatedSectionProps {
 }
 
 const directions = {
-  up: { y: 30, x: 0 },
-  left: { x: -30, y: 0 },
-  right: { x: 30, y: 0 },
-  none: { x: 0, y: 0 },
+  up: { x: "0px", y: "30px" },
+  left: { x: "-30px", y: "0px" },
+  right: { x: "30px", y: "0px" },
+  none: { x: "0px", y: "0px" },
 };
 
 /**
@@ -34,7 +34,9 @@ export function AnimatedSection({
   delay = 0,
   direction = "up",
 }: AnimatedSectionProps) {
+  const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const offset = directions[direction];
 
   if (shouldReduceMotion) {
@@ -42,14 +44,18 @@ export function AnimatedSection({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, ...offset }}
-      whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+    <div
+      ref={ref}
       className={className}
+      style={{
+        opacity: isInView ? 1 : 0,
+        transform: isInView
+          ? "translate(0px, 0px)"
+          : `translate(${offset.x}, ${offset.y})`,
+        transition: `opacity 0.6s ease-out ${delay}s, transform 0.6s ease-out ${delay}s`,
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
