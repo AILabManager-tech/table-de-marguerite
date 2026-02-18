@@ -186,7 +186,7 @@ export function FoodGallery() {
           whileInView={prefersReduced ? {} : { opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4, ease: "easeInOut" as const }}
-          className="mt-8 text-center font-body text-xs italic text-cream-600"
+          className="mt-8 text-center font-body text-xs italic text-bark-light"
         >
           {t("caption")}
         </motion.p>

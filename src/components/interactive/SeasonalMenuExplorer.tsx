@@ -108,11 +108,11 @@ function DishCard({ season, course, index, prefersReduced, t }: DishCardProps) {
       </span>
 
       {/* Dish name */}
-      <h4
+      <h3
         className={`mb-2 font-heading text-xl font-bold ${colors.accent}`}
       >
         {t(`seasons.${season}.dishes.${course}.name`)}
-      </h4>
+      </h3>
 
       {/* Description */}
       <p className="mb-4 font-body text-sm leading-relaxed text-bark-light">
@@ -121,7 +121,7 @@ function DishCard({ season, course, index, prefersReduced, t }: DishCardProps) {
 
       {/* Price */}
       <div className="flex items-center justify-between border-t border-cream-300 pt-3">
-        <span className="font-body text-xs uppercase tracking-wider text-cream-600">
+        <span className="font-body text-xs uppercase tracking-wider text-bark-light">
           {t(`courses.${course}`)}
         </span>
         <div

@@ -42,10 +42,10 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-4">
           {/* Address */}
           <div>
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-terra-400">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-terra-400">
               {locale === "fr" ? "Adresse" : "Address"}
-            </h4>
-            <div className="flex flex-col gap-2 text-sm text-cream-500">
+            </h3>
+            <div className="flex flex-col gap-2 text-sm text-cream-400">
               <p>
                 42, rue du Petit-Champlain
                 <br />
@@ -68,10 +68,10 @@ export function Footer() {
 
           {/* Hours */}
           <div>
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-terra-400">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-terra-400">
               {locale === "fr" ? "Horaires" : "Hours"}
-            </h4>
-            <div className="flex flex-col gap-1 text-sm text-cream-500">
+            </h3>
+            <div className="flex flex-col gap-1 text-sm text-cream-400">
               <p>
                 {locale === "fr" ? "Mar\u2013Sam" : "Tue\u2013Sat"}{" "}
                 <span className="text-cream-300">17h \u2013 22h</span>
@@ -82,7 +82,7 @@ export function Footer() {
               </p>
               <p>
                 {locale === "fr" ? "Lun" : "Mon"}{" "}
-                <span className="text-cream-600">
+                <span className="text-cream-500">
                   {locale === "fr" ? "Ferm\u00e9" : "Closed"}
                 </span>
               </p>
@@ -91,31 +91,31 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-terra-400">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-terra-400">
               Navigation
-            </h4>
+            </h3>
             <div className="flex flex-col gap-2">
               <Link
                 href="/"
-                className="text-sm text-cream-500 transition-colors hover:text-cream-200"
+                className="text-sm text-cream-400 transition-colors hover:text-cream-200"
               >
                 {nav("home")}
               </Link>
               <Link
                 href="/menu"
-                className="text-sm text-cream-500 transition-colors hover:text-cream-200"
+                className="text-sm text-cream-400 transition-colors hover:text-cream-200"
               >
                 {nav("menu")}
               </Link>
               <Link
                 href="/notre-histoire"
-                className="text-sm text-cream-500 transition-colors hover:text-cream-200"
+                className="text-sm text-cream-400 transition-colors hover:text-cream-200"
               >
                 {nav("about")}
               </Link>
               <Link
                 href="/contact"
-                className="text-sm text-cream-500 transition-colors hover:text-cream-200"
+                className="text-sm text-cream-400 transition-colors hover:text-cream-200"
               >
                 {nav("contact")}
               </Link>
@@ -124,10 +124,10 @@ export function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-terra-400">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-terra-400">
               {locale === "fr" ? "Infolettre" : "Newsletter"}
-            </h4>
-            <p className="mb-3 text-sm text-cream-500">
+            </h3>
+            <p className="mb-3 text-sm text-cream-400">
               {locale === "fr"
                 ? "Recevez nos menus saisonniers et invitations."
                 : "Receive our seasonal menus and invitations."}
@@ -136,7 +136,7 @@ export function Footer() {
               <input
                 type="email"
                 placeholder={locale === "fr" ? "Votre courriel" : "Your email"}
-                className="flex-1 rounded-lg border border-bark-light bg-bark/50 px-3 py-2 text-sm text-cream-200 placeholder:text-cream-600 focus:border-terra-400 focus:outline-none focus:ring-1 focus:ring-terra-400"
+                className="flex-1 rounded-lg border border-bark-light bg-bark/50 px-3 py-2 text-sm text-cream-200 placeholder:text-cream-500 focus:border-terra-400 focus:outline-none focus:ring-1 focus:ring-terra-400"
                 aria-label={locale === "fr" ? "Adresse courriel" : "Email address"}
               />
               <button
@@ -152,7 +152,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-cream-500 transition-colors hover:text-terra-400"
+                className="inline-flex items-center gap-1.5 text-sm text-cream-400 transition-colors hover:text-terra-400"
                 aria-label="Instagram"
               >
                 <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -164,7 +164,7 @@ export function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-cream-500 transition-colors hover:text-terra-400"
+                className="inline-flex items-center gap-1.5 text-sm text-cream-400 transition-colors hover:text-terra-400"
                 aria-label="Facebook"
               >
                 <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -183,13 +183,13 @@ export function Footer() {
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-6">
           <Link
             href="/mentions-legales"
-            className="text-xs text-cream-500 transition-colors hover:text-cream-200"
+            className="text-xs text-cream-400 transition-colors hover:text-cream-200"
           >
             {locale === "fr" ? "Mentions l\u00e9gales" : "Legal Notice"}
           </Link>
           <Link
             href="/politique-confidentialite"
-            className="text-xs text-cream-500 transition-colors hover:text-cream-200"
+            className="text-xs text-cream-400 transition-colors hover:text-cream-200"
           >
             {locale === "fr" ? "Politique de confidentialit\u00e9" : "Privacy Policy"}
           </Link>
@@ -197,7 +197,7 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-4 text-center text-xs text-cream-600">
+        <div className="mt-4 text-center text-xs text-cream-500">
           <p>
             &copy; {year} La Table de Marguerite.{" "}
             {locale === "fr" ? "Tous droits r\u00e9serv\u00e9s." : "All rights reserved."}

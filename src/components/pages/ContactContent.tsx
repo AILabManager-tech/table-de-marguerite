@@ -2,15 +2,34 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
 import { toast } from "sonner";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { AuroraBackground } from "@/components/animations/AuroraBackground";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { LineReveal } from "@/components/animations/LineReveal";
+
+/* ------------------------------------------------------------------ */
+/*  Dynamic imports for heavy components                                */
+/* ------------------------------------------------------------------ */
+
+const AuroraBackground = dynamic(
+  () =>
+    import("@/components/animations/AuroraBackground").then((m) => ({
+      default: m.AuroraBackground,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const LineReveal = dynamic(
+  () =>
+    import("@/components/animations/LineReveal").then((m) => ({
+      default: m.LineReveal,
+    })),
+  { ssr: false, loading: () => null }
+);
 
 /* ------------------------------------------------------------------ */
 /*  Zod schema (v4 format)                                             */
@@ -55,6 +74,9 @@ function FieldError({ errors, field }: { errors: Record<string, string>; field: 
  * ContactContent -- Contact page for La Table de Marguerite with a
  * Zod-validated form (name, email, phone, type, guests, message,
  * consent), an information sidebar, and a map placeholder.
+ *
+ * Heavy animation components loaded via next/dynamic with ssr:false
+ * to reduce Total Blocking Time.
  *
  * @component
  * @example
@@ -143,6 +165,7 @@ export function ContactContent() {
       <section className="section-padding relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh-bg" />
         <div className="container-wide relative z-10">
+          <h2 className="sr-only">{t("form_section_heading")}</h2>
           <div className="grid gap-12 md:grid-cols-5">
             {/* --- Form (3 cols) --- */}
             <AnimatedSection direction="left" className="md:col-span-3">
@@ -431,9 +454,9 @@ export function ContactContent() {
 
               {/* Loi 25 notice */}
               <div className="mt-6 rounded-2xl border border-olive-200/50 bg-olive-50 p-6">
-                <h4 className="mb-2 font-heading text-sm font-semibold text-olive-700">
+                <h3 className="mb-2 font-heading text-sm font-semibold text-olive-700">
                   {t("loi25.title")}
-                </h4>
+                </h3>
                 <p className="font-body text-sm text-bark-light leading-relaxed">
                   {t("loi25.notice")}{" "}
                   <Link

@@ -1,15 +1,48 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
 import { UtensilsCrossed, Beef, CakeSlice, Wine } from "lucide-react";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { LineReveal } from "@/components/animations/LineReveal";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { AuroraBackground } from "@/components/animations/AuroraBackground";
-import { StaggerGrid } from "@/components/animations/StaggerGrid";
-import { BotanicalDivider } from "@/components/interactive/BotanicalDivider";
+
+/* ------------------------------------------------------------------ */
+/*  Dynamic imports for heavy components                                */
+/* ------------------------------------------------------------------ */
+
+const AuroraBackground = dynamic(
+  () =>
+    import("@/components/animations/AuroraBackground").then((m) => ({
+      default: m.AuroraBackground,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const LineReveal = dynamic(
+  () =>
+    import("@/components/animations/LineReveal").then((m) => ({
+      default: m.LineReveal,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const StaggerGrid = dynamic(
+  () =>
+    import("@/components/animations/StaggerGrid").then((m) => ({
+      default: m.StaggerGrid,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const BotanicalDivider = dynamic(
+  () =>
+    import("@/components/interactive/BotanicalDivider").then((m) => ({
+      default: m.BotanicalDivider,
+    })),
+  { ssr: false, loading: () => <div className="my-4 h-[50px]" /> }
+);
 
 /* ------------------------------------------------------------------ */
 /*  Menu category definitions                                          */
@@ -79,9 +112,9 @@ function MenuItem({ categoryKey, itemIndex, accent, prefersReduced }: MenuItemPr
       className={`group flex items-start justify-between rounded-xl border ${colors.border} bg-cream-100/80 p-5 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5`}
     >
       <div className="flex-1 pr-4">
-        <h4 className={`mb-1 font-heading text-lg font-semibold ${colors.text}`}>
+        <h3 className={`mb-1 font-heading text-lg font-semibold ${colors.text}`}>
           {t(`${categoryKey}.item_${itemIndex + 1}.name`)}
-        </h4>
+        </h3>
         <p className="font-body text-sm leading-relaxed text-bark-light">
           {t(`${categoryKey}.item_${itemIndex + 1}.description`)}
         </p>
@@ -104,6 +137,9 @@ function MenuItem({ categoryKey, itemIndex, accent, prefersReduced }: MenuItemPr
  * ServicesContent -- "Le Menu" page for La Table de Marguerite.
  * Displays 4 menu categories (Entrees, Plats, Desserts, Vins)
  * with individual items, a chef's note, and an FAQ section.
+ *
+ * Heavy animation components loaded via next/dynamic with ssr:false
+ * to reduce Total Blocking Time.
  *
  * @component
  * @example

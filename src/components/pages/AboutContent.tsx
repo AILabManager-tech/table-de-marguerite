@@ -1,16 +1,59 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
 import { Leaf, ChefHat, Heart } from "lucide-react";
-import { AuroraBackground } from "@/components/animations/AuroraBackground";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { LineReveal } from "@/components/animations/LineReveal";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { StaggerGrid } from "@/components/animations/StaggerGrid";
-import { MagneticButton } from "@/components/animations/MagneticButton";
-import { BotanicalDivider } from "@/components/interactive/BotanicalDivider";
+
+/* ------------------------------------------------------------------ */
+/*  Dynamic imports for heavy components                                */
+/* ------------------------------------------------------------------ */
+
+const AuroraBackground = dynamic(
+  () =>
+    import("@/components/animations/AuroraBackground").then((m) => ({
+      default: m.AuroraBackground,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const LineReveal = dynamic(
+  () =>
+    import("@/components/animations/LineReveal").then((m) => ({
+      default: m.LineReveal,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const StaggerGrid = dynamic(
+  () =>
+    import("@/components/animations/StaggerGrid").then((m) => ({
+      default: m.StaggerGrid,
+    })),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
+
+const MagneticButton = dynamic(
+  () =>
+    import("@/components/animations/MagneticButton").then((m) => ({
+      default: m.MagneticButton,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const BotanicalDivider = dynamic(
+  () =>
+    import("@/components/interactive/BotanicalDivider").then((m) => ({
+      default: m.BotanicalDivider,
+    })),
+  { ssr: false, loading: () => <div className="my-4 h-[50px]" /> }
+);
 
 /* ------------------------------------------------------------------ */
 /*  Values data                                                        */
@@ -81,6 +124,9 @@ function TeamMemberCard({ index, prefersReduced }: TeamMemberProps) {
 /**
  * AboutContent -- "Notre Histoire" page for La Table de Marguerite.
  * Features the founding story, core values, team members, and a CTA.
+ *
+ * Heavy animation components loaded via next/dynamic with ssr:false
+ * to reduce Total Blocking Time.
  *
  * @component
  * @example

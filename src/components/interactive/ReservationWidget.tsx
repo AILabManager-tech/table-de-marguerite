@@ -135,7 +135,7 @@ export function ReservationWidget() {
   const today = new Date().toISOString().split("T")[0];
 
   const inputClasses =
-    "w-full rounded-lg border border-olive-200 bg-cream-50 px-4 py-2.5 font-body text-sm text-bark transition-colors duration-200 placeholder:text-cream-500 focus:border-olive-500 focus:outline-none focus:ring-2 focus:ring-olive-200";
+    "w-full rounded-lg border border-olive-200 bg-cream-50 px-4 py-2.5 font-body text-sm text-bark transition-colors duration-200 placeholder:text-cream-600 focus:border-olive-500 focus:outline-none focus:ring-2 focus:ring-olive-200";
 
   const selectClasses =
     "w-full appearance-none rounded-lg border border-olive-200 bg-cream-50 px-4 py-2.5 font-body text-sm text-bark transition-colors duration-200 focus:border-olive-500 focus:outline-none focus:ring-2 focus:ring-olive-200";
@@ -331,7 +331,7 @@ export function ReservationWidget() {
             </motion.button>
 
             {/* Privacy note */}
-            <p className="text-center font-body text-[11px] text-cream-600">
+            <p className="text-center font-body text-[11px] text-bark-light">
               {t("privacy_note")}
             </p>
           </form>

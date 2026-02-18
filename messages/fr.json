@@ -569,6 +569,7 @@
       "title": "Contactez-nous",
       "subtitle": "Réservez votre table, organisez un événement ou posez-nous vos questions. Notre équipe se fera un plaisir de vous répondre."
     },
+    "form_section_heading": "Formulaire de contact et informations",
     "form": {
       "name": "Votre nom complet",
       "email": "Courriel",

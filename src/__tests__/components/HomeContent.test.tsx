@@ -83,6 +83,28 @@ vi.mock("next/link", () => ({
   ),
 }));
 
+// Mock next/dynamic — collect promises on globalThis and resolve before tests.
+vi.mock("next/dynamic", () => {
+  // globalThis is accessible inside hoisted vi.mock factories
+  const g = globalThis as unknown as { __dynPromises: Promise<void>[] };
+  if (!g.__dynPromises) g.__dynPromises = [];
+  return {
+    __esModule: true,
+    default: (loader: () => Promise<unknown>) => {
+      let C: React.ComponentType<Record<string, unknown>> = () => null;
+      const p = loader().then((mod: unknown) => {
+        const m = mod as { default?: React.ComponentType<Record<string, unknown>> };
+        if (m?.default) C = m.default;
+      });
+      g.__dynPromises.push(p);
+      return (props: Record<string, unknown>) => {
+        const Comp = C;
+        return <Comp {...props} />;
+      };
+    },
+  };
+});
+
 vi.mock("@/components/animations/TextReveal", () => ({
   TextReveal: ({
     children,
@@ -141,6 +163,13 @@ vi.mock("@/components/interactive/BotanicalDivider", () => ({
 }));
 
 import { HomeContent } from "@/components/pages/HomeContent";
+import { beforeAll } from "vitest";
+
+// Flush all dynamic import promises before tests run
+beforeAll(async () => {
+  const g = globalThis as unknown as { __dynPromises?: Promise<void>[] };
+  if (g.__dynPromises) await Promise.all(g.__dynPromises);
+});
 
 afterEach(cleanup);
 

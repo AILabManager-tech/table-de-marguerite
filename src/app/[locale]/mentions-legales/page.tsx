@@ -33,7 +33,7 @@ export default function LegalNoticePage() {
         {isFr ? "Mentions légales" : "Legal Notice"}
       </h1>
 
-      <div className="prose prose-bark max-w-none space-y-8 text-bark/80">
+      <div className="prose prose-bark max-w-none space-y-8 text-bark-light">
         {/* 1. Identification */}
         <section>
           <h2 className="font-heading text-xl font-semibold text-bark">

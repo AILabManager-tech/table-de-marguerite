@@ -1,17 +1,83 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
-import { AuroraBackground } from "@/components/animations/AuroraBackground";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { LineReveal } from "@/components/animations/LineReveal";
-import { CountUp } from "@/components/animations/CountUp";
-import { FloatingElement } from "@/components/animations/FloatingElement";
-import { MagneticButton } from "@/components/animations/MagneticButton";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { SeasonalMenuExplorer } from "@/components/interactive/SeasonalMenuExplorer";
-import { BotanicalDivider } from "@/components/interactive/BotanicalDivider";
+
+/* ------------------------------------------------------------------ */
+/*  Dynamic imports for below-fold heavy components                     */
+/* ------------------------------------------------------------------ */
+
+const AuroraBackground = dynamic(
+  () =>
+    import("@/components/animations/AuroraBackground").then((m) => ({
+      default: m.AuroraBackground,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const CountUp = dynamic(
+  () =>
+    import("@/components/animations/CountUp").then((m) => ({
+      default: m.CountUp,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const FloatingElement = dynamic(
+  () =>
+    import("@/components/animations/FloatingElement").then((m) => ({
+      default: m.FloatingElement,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const MagneticButton = dynamic(
+  () =>
+    import("@/components/animations/MagneticButton").then((m) => ({
+      default: m.MagneticButton,
+    })),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
+
+const LineReveal = dynamic(
+  () =>
+    import("@/components/animations/LineReveal").then((m) => ({
+      default: m.LineReveal,
+    })),
+  { ssr: false, loading: () => null }
+);
+
+const SeasonalMenuExplorer = dynamic(
+  () =>
+    import("@/components/interactive/SeasonalMenuExplorer").then((m) => ({
+      default: m.SeasonalMenuExplorer,
+    })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="bg-cream-200 py-16 lg:py-24">
+        <div className="mx-auto max-w-6xl px-4 text-center">
+          <div className="h-8 w-64 mx-auto rounded bg-cream-300 animate-pulse" />
+        </div>
+      </div>
+    ),
+  }
+);
+
+const BotanicalDivider = dynamic(
+  () =>
+    import("@/components/interactive/BotanicalDivider").then((m) => ({
+      default: m.BotanicalDivider,
+    })),
+  { ssr: false, loading: () => <div className="my-4 h-[50px]" /> }
+);
 
 /* ------------------------------------------------------------------ */
 /*  Testimonial card                                                   */
@@ -64,7 +130,7 @@ function TestimonialCard({ index, prefersReduced }: TestimonialCardProps) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Gallery card (inline — lightweight masonry)                        */
+/*  Gallery card (inline -- lightweight masonry)                        */
 /* ------------------------------------------------------------------ */
 
 const GALLERY_IMAGES = [
@@ -84,6 +150,9 @@ const GALLERY_IMAGES = [
  * HomeContent -- Landing page for La Table de Marguerite featuring a
  * gastronomic hero, philosophy section, seasonal menu explorer,
  * food gallery, testimonials, and reservation CTA.
+ *
+ * Below-fold sections use next/dynamic with ssr:false to reduce
+ * initial JavaScript bundle and Total Blocking Time (TBT).
  *
  * @component
  * @example
@@ -262,7 +331,7 @@ export function HomeContent() {
                 }}
               >
                 <div className="h-full w-full bg-gradient-to-br from-olive-100 to-cream-300 flex items-center justify-center">
-                  <span className="font-heading text-sm text-olive-400">
+                  <span className="font-heading text-sm text-olive-600">
                     {t(`gallery.${key}.caption`)}
                   </span>
                 </div>
