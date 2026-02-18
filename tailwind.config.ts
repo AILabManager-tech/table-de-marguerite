@@ -9,90 +9,64 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // NEXOS: Palette industrielle — HR Factory / L'Usine RH
-        sage: {
-          // Remappé → Vert sécurité chantier
-          50: "#EEF3F0",
-          100: "#D5E5DC",
-          200: "#ABCBB9",
-          300: "#81B196",
-          400: "#5A9775",
-          500: "#4A7C59",
-          600: "#3D6347",
-          700: "#2F4A36",
-          800: "#213126",
-          900: "#141D16",
+        // NEXOS: Palette La Table de Marguerite — Chaleureux organique, textures vivantes
+        olive: {
+          50: "#F5F6F2",
+          100: "#E8EBE0",
+          200: "#D1D7C1",
+          300: "#B3BCA0",
+          400: "#8E9C78",
+          500: "#6B7D58",
+          600: "#4A5A3C",
+          700: "#3A4730",
+          800: "#2B3524",
+          900: "#1C2317",
         },
-        terracotta: {
-          // Remappé → Rouille / Brique industrielle
-          50: "#F9F0EE",
-          100: "#EDDBD5",
-          200: "#D9B7AB",
-          300: "#C59381",
-          400: "#B16F57",
-          500: "#A0522D",
-          600: "#8B4513",
-          700: "#6A340F",
-          800: "#4A230A",
-          900: "#291306",
+        terra: {
+          50: "#FDF5EE",
+          100: "#FAE8D5",
+          200: "#F5D0AB",
+          300: "#EFB580",
+          400: "#D4854A",
+          500: "#C07038",
+          600: "#A45C2B",
+          700: "#834A23",
+          800: "#62371A",
+          900: "#412511",
         },
-        gold: {
-          // Remappé → Cuivre oxydé
-          50: "#FBF4EE",
-          100: "#F5E5D5",
-          200: "#EBCBAB",
-          300: "#E1B181",
-          400: "#D79757",
-          500: "#B87333",
-          600: "#A0632B",
-          700: "#7A4C21",
-          800: "#543517",
-          900: "#2E1E0D",
+        prune: {
+          50: "#F8F2F6",
+          100: "#EFE2EA",
+          200: "#DFC5D5",
+          300: "#CDA7BF",
+          400: "#A97292",
+          500: "#874873",
+          600: "#6B3A5E",
+          700: "#552E4A",
+          800: "#402337",
+          900: "#2A1724",
         },
         cream: {
-          // Remappé → Blanc cassé / Gris ciment
           50: "#FFFFFF",
-          100: "#F0EDE8",
-          200: "#E1DBD1",
-          300: "#D2C9BA",
-          400: "#C3B7A3",
-          500: "#7A756F",
-          600: "#7D7A75",
-          700: "#5E5C5A",
-          800: "#3F3E3D",
-          900: "#201F1F",
+          100: "#FEFDFB",
+          200: "#FBF7F0",
+          300: "#F5EDE0",
+          400: "#EBE0CD",
+          500: "#D4C7AD",
+          600: "#B8A88A",
+          700: "#8E7E68",
+          800: "#655949",
+          900: "#3C352C",
         },
-        charcoal: {
-          // Béton anthracite
-          DEFAULT: "#2C2C2C",
-          light: "#3A3632",
-          dark: "#1A1A1A",
-        },
-        taupe: "#6B6560",
-        teal: {
-          50: "#F0FDFA",
-          100: "#CCFBF1",
-          200: "#99F6E4",
-          300: "#5EEAD4",
-          400: "#2DD4BF",
-          500: "#14B8A6",
-          600: "#0D9488",
-          700: "#0F766E",
-        },
-        violet: {
-          50: "#F5F3FF",
-          100: "#EDE9FE",
-          200: "#DDD6FE",
-          300: "#C4B5FD",
-          400: "#A78BFA",
-          500: "#8B5CF6",
-          600: "#7C3AED",
+        bark: {
+          DEFAULT: "#3C2E24",
+          light: "#5A4A3C",
+          dark: "#2A1F17",
         },
       },
       fontFamily: {
-        // NEXOS: Typographie industrielle
-        heading: ["var(--font-oswald)", "var(--font-bebas-neue)", "sans-serif"],
-        body: ["var(--font-barlow)", "sans-serif"],
+        heading: ["var(--font-cormorant)", "Georgia", "serif"],
+        body: ["var(--font-lato)", "system-ui", "sans-serif"],
       },
       keyframes: {
         "fade-in": {
@@ -127,6 +101,10 @@ const config: Config = {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        simmer: {
+          "0%, 100%": { opacity: "0.3", transform: "scaleY(1)" },
+          "50%": { opacity: "0.7", transform: "scaleY(1.15)" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.6s ease-out forwards",
@@ -137,11 +115,12 @@ const config: Config = {
         "gradient-shift": "gradient-shift 8s ease infinite",
         "glow-pulse": "glow-pulse 4s ease-in-out infinite",
         "spin-slow": "spin-slow 20s linear infinite",
+        simmer: "simmer 4s ease-in-out infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "grid-pattern":
-          "linear-gradient(rgba(135,148,122,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(135,148,122,0.08) 1px, transparent 1px)",
+          "linear-gradient(rgba(74,90,60,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(74,90,60,0.06) 1px, transparent 1px)",
       },
       backgroundSize: {
         "grid-40": "40px 40px",

@@ -22,32 +22,63 @@ vi.mock("@/i18n/routing", () => ({
   ),
 }));
 
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({
-      children,
-      className,
-      ...rest
-    }: React.HTMLAttributes<HTMLDivElement>) => (
-      <div className={className} {...rest}>
-        {children}
-      </div>
-    ),
-    span: ({
-      children,
-      ...rest
-    }: React.HTMLAttributes<HTMLSpanElement>) => (
-      <span {...rest}>{children}</span>
-    ),
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-}));
+vi.mock("framer-motion", () => {
+  const mc = (Tag: string) => {
+    const FM_PROPS = new Set([
+      "initial", "animate", "exit", "transition", "whileInView",
+      "viewport", "variants", "whileHover", "whileTap", "layout",
+      "layoutId",
+    ]);
+    const C = ({ children, ...props }: Record<string, unknown>) => {
+      const safe: Record<string, unknown> = {};
+      for (const [k, v] of Object.entries(props)) {
+        if (!FM_PROPS.has(k)) {
+          safe[k] = v;
+        }
+      }
+      const El = Tag as unknown as React.ElementType;
+      return <El {...safe}>{children as React.ReactNode}</El>;
+    };
+    C.displayName = `motion.${Tag}`;
+    return C;
+  };
+  return {
+    motion: {
+      div: mc("div"), span: mc("span"), button: mc("button"),
+      section: mc("section"), a: mc("a"), h1: mc("h1"),
+      h2: mc("h2"), h3: mc("h3"), p: mc("p"),
+      create: (tag: string) => mc(tag),
+    },
+    animate: () => ({ stop: () => {} }),
+    useInView: () => true,
+    useScroll: () => ({ scrollYProgress: { get: () => 0.5 } }),
+    useTransform: () => 0,
+    useMotionValue: (v: number = 0) => ({ set: () => {}, get: () => v }),
+    useSpring: () => ({ set: () => {}, get: () => 0 }),
+    useReducedMotion: () => false,
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  };
+});
 
 vi.mock("next/image", () => ({
   default: (props: { alt: string; src: string }) => (
     <img alt={props.alt} src={props.src} />
+  ),
+}));
+
+vi.mock("next/link", () => ({
+  default: ({
+    children,
+    href,
+    ...props
+  }: {
+    children: React.ReactNode;
+    href: string;
+    [key: string]: unknown;
+  }) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
   ),
 }));
 
@@ -67,19 +98,34 @@ vi.mock("@/components/animations/LineReveal", () => ({
   LineReveal: () => <div data-testid="line-reveal" />,
 }));
 
-vi.mock("@/components/animations/CountUp", () => ({
-  CountUp: ({ to, suffix }: { to: number; suffix: string }) => (
-    <span>
-      {to}
-      {suffix}
-    </span>
-  ),
+vi.mock("@/components/animations/MagneticButton", () => ({
+  MagneticButton: ({
+    children,
+    href,
+  }: {
+    children: React.ReactNode;
+    href: string;
+  }) => <a href={href}>{children}</a>,
 }));
 
 vi.mock("@/components/ui/AnimatedSection", () => ({
   AnimatedSection: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),
+}));
+
+vi.mock("@/components/animations/StaggerGrid", () => ({
+  StaggerGrid: ({
+    children,
+    className,
+  }: {
+    children: React.ReactNode;
+    className?: string;
+  }) => <div className={className}>{children}</div>,
+}));
+
+vi.mock("@/components/interactive/BotanicalDivider", () => ({
+  BotanicalDivider: () => <div data-testid="botanical-divider" />,
 }));
 
 import { AboutContent } from "@/components/pages/AboutContent";
@@ -92,33 +138,52 @@ describe("AboutContent", () => {
     expect(document.querySelector("main")).toBeInTheDocument();
   });
 
-  it("renders hero title", () => {
+  it("renders hero title (Notre Histoire)", () => {
     render(<AboutContent />);
     expect(screen.getByText("hero.title")).toBeInTheDocument();
+  });
+
+  it("renders hero badge", () => {
+    render(<AboutContent />);
+    expect(screen.getByText("hero.badge")).toBeInTheDocument();
   });
 
   it("renders story section", () => {
     render(<AboutContent />);
     expect(screen.getByText("story.title")).toBeInTheDocument();
     expect(screen.getByText("story.p1")).toBeInTheDocument();
+    expect(screen.getByText("story.p2")).toBeInTheDocument();
+    expect(screen.getByText("story.p3")).toBeInTheDocument();
   });
 
-  it("renders philosophy section", () => {
+  it("renders values section (Terroir, Savoir-faire, Convivialite)", () => {
     render(<AboutContent />);
-    expect(screen.getByText("philosophy.title")).toBeInTheDocument();
+    expect(screen.getByText("values.title")).toBeInTheDocument();
+    expect(screen.getByText("values.terroir.title")).toBeInTheDocument();
+    expect(screen.getByText("values.savoirfaire.title")).toBeInTheDocument();
+    expect(screen.getByText("values.convivialite.title")).toBeInTheDocument();
   });
 
-  it("renders value cards", () => {
+  it("renders team section", () => {
     render(<AboutContent />);
-    expect(screen.getByText("empathy.title")).toBeInTheDocument();
-    expect(screen.getByText("transparency.title")).toBeInTheDocument();
-    expect(screen.getByText("autonomy.title")).toBeInTheDocument();
+    expect(screen.getByText("team.title")).toBeInTheDocument();
   });
 
-  it("renders stats section", () => {
+  it("renders CTA section", () => {
     render(<AboutContent />);
-    expect(screen.getByText("12 ans")).toBeInTheDocument();
-    expect(screen.getByText("3 ans")).toBeInTheDocument();
-    expect(screen.getByText("100%")).toBeInTheDocument();
+    expect(screen.getByText("cta.title")).toBeInTheDocument();
+    expect(screen.getByText("cta.button")).toBeInTheDocument();
+  });
+
+  it("renders BotanicalDivider components", () => {
+    render(<AboutContent />);
+    const dividers = screen.getAllByTestId("botanical-divider");
+    expect(dividers.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("renders multiple sections", () => {
+    render(<AboutContent />);
+    const sections = document.querySelectorAll("section");
+    expect(sections.length).toBeGreaterThanOrEqual(4);
   });
 });

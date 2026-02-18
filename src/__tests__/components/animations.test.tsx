@@ -73,7 +73,7 @@ describe("Animation components smoke tests", () => {
   });
 
   it("CountUp renders with props", () => {
-    const { container } = render(<CountUp to={100} suffix="+" />);
+    const { container } = render(<CountUp to={37} suffix=" ans" />);
     expect(container.firstChild).toBeTruthy();
   });
 
@@ -91,9 +91,9 @@ describe("Animation components smoke tests", () => {
 
   it("MagneticButton renders with children", () => {
     const { getByText } = render(
-      <MagneticButton href="/test">Click</MagneticButton>
+      <MagneticButton href="/menu">Voir le menu</MagneticButton>
     );
-    expect(getByText("Click")).toBeInTheDocument();
+    expect(getByText("Voir le menu")).toBeInTheDocument();
   });
 
   it("ParallaxSection renders with children", () => {

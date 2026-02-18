@@ -15,6 +15,7 @@ interface FaqAccordionProps {
 
 /**
  * FaqAccordion - Accessible accordion that displays a list of FAQ items with expand/collapse.
+ * Palette: cream dividers, olive accents for La Table de Marguerite.
  *
  * @component
  * @example
@@ -26,7 +27,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="divide-y divide-cream-400">
+    <div className="divide-y divide-cream/40">
       {items.map((item, index) => (
         <div key={index}>
           <button
@@ -38,12 +39,12 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
             aria-expanded={openIndex === index}
             aria-controls={`faq-panel-${index}`}
           >
-            <span className="pr-4 font-heading text-lg font-medium text-charcoal">
+            <span className="pr-4 font-heading text-lg font-medium text-bark">
               {item.question}
             </span>
             <ChevronDown
               className={clsx(
-                "h-5 w-5 shrink-0 text-sage-500 transition-transform",
+                "h-5 w-5 shrink-0 text-olive-500 transition-transform",
                 openIndex === index && "rotate-180"
               )}
             />
@@ -59,7 +60,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
                 : "max-h-0 opacity-0"
             )}
           >
-            <p className="text-taupe leading-relaxed">{item.answer}</p>
+            <p className="text-bark/70 leading-relaxed">{item.answer}</p>
           </div>
         </div>
       ))}

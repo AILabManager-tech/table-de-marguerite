@@ -1,322 +1,431 @@
 {
   "meta": {
-    "title": "L'Usine RH — Consultante RH pour PME industrielles",
-    "description": "On diagnostique. On implante. On coache. Processus RH durables pour PME de 10 à 50 employés — secteurs industriel, manufacturier, construction."
+    "title": "La Table de Marguerite — Bistro gastronomique, Vieux-Québec",
+    "description": "La Table de Marguerite : bistro gastronomique dans le Vieux-Québec. Cuisine française et québécoise, produits locaux et de saison, depuis 1987."
   },
   "nav": {
     "home": "Accueil",
-    "services": "Services",
-    "about": "À propos",
+    "menu": "Le Menu",
+    "notre-histoire": "Notre Histoire",
     "contact": "Contact",
-    "cta": "Réservez une consultation"
+    "cta": "Réserver"
   },
   "home": {
     "hero": {
-      "title": "Vos RH, forgées pour durer.",
-      "subtitle": "Je diagnostique. J'implante. Je coache. Pour que votre équipe tienne le coup.",
-      "cta": "Réservez une consultation découverte",
-      "cta_secondary": "Découvrir mes services"
+      "title": "Une cuisine qui raconte le terroir.",
+      "subtitle": "Au cœur du Vieux-Québec, La Table de Marguerite célèbre les saveurs du Québec depuis près de quatre décennies. Chaque assiette est un hommage aux producteurs d'ici.",
+      "badge": "Depuis 1987",
+      "cta_primary": "Réserver",
+      "cta_secondary": "Voir le menu"
     },
-    "stats": {
-      "experience": "Ans d'expérience",
-      "clients": "PME accompagnées",
-      "employees": "Employés / entreprise"
+    "philosophy": {
+      "title": "Notre philosophie",
+      "subtitle": "La cuisine comme art de vivre, le terroir comme source d'inspiration.",
+      "p1": "Chez La Table de Marguerite, chaque plat est une conversation entre la terre et la table. Nous travaillons exclusivement avec des producteurs locaux, des maraîchers aux fromagers, pour offrir une cuisine authentique qui évolue au fil des saisons.",
+      "p2": "Notre cheffe Marguerite Tremblay puise dans la tradition gastronomique française tout en célébrant les ingrédients du Québec. Le résultat : une cuisine sincère, généreuse et profondément enracinée dans notre terroir.",
+      "stat1_value": "37",
+      "stat1_label": "années",
+      "stat2_value": "100%",
+      "stat2_label": "produits locaux",
+      "stat3_value": "4",
+      "stat3_label": "saisons"
     },
-    "pain": {
-      "title": "Vous naviguez seul dans la RH?",
-      "owner": {
-        "title": "Propriétaire débordé",
-        "description": "Vous gérez le recrutement, les conflits et les évaluations en plus de tout le reste. Ça marche... jusqu'à ce que ça marche plus."
+    "seasonal_menu": {
+      "title": "Le menu saisonnier",
+      "subtitle": "Notre carte évolue au rythme des récoltes et des arrivages. Découvrez nos inspirations de la saison.",
+      "spring": {
+        "name": "Printemps",
+        "dish1": {
+          "name": "Asperges du Québec, œuf poché et hollandaise à l'estragon",
+          "description": "Asperges vertes de la Montérégie, œuf bio fermier, sauce hollandaise légère parfumée à l'estragon frais.",
+          "price": "24"
+        },
+        "dish2": {
+          "name": "Truite de rivière, beurre noisette et fines herbes",
+          "description": "Truite arc-en-ciel de la Beauce, beurre noisette aux câpres, bouquet de fines herbes du jardin.",
+          "price": "38"
+        },
+        "dish3": {
+          "name": "Tarte à la rhubarbe et crème glacée à la vanille",
+          "description": "Rhubarbe de l'Île d'Orléans, pâte sablée au beurre, crème glacée vanille de Madagascar.",
+          "price": "16"
+        }
       },
-      "manager": {
-        "title": "Gestionnaire sans formation RH",
-        "description": "Vos gestionnaires improvisent les conversations difficiles et les évaluations de performance. Les talents partent."
+      "summer": {
+        "name": "Été",
+        "dish1": {
+          "name": "Gaspacho de tomates ancestrales et burrata",
+          "description": "Tomates de variétés anciennes du marché, burrata crémeuse, huile d'olive vierge, basilic frais.",
+          "price": "22"
+        },
+        "dish2": {
+          "name": "Canard du Lac Brome, cerises et jus au thym",
+          "description": "Magret de canard rôti, cerises de saison confites, jus corsé au thym et à l'érable.",
+          "price": "42"
+        },
+        "dish3": {
+          "name": "Crème brûlée aux bleuets du Lac-Saint-Jean",
+          "description": "Crème vanillée onctueuse, bleuets sauvages caramélisés, tuile craquante au miel.",
+          "price": "16"
+        }
       },
-      "growing": {
-        "title": "PME en croissance",
-        "description": "Vos processus ad-hoc ne suivent plus. Ce qui fonctionnait à 10 employés ne fonctionne plus à 30."
+      "autumn": {
+        "name": "Automne",
+        "dish1": {
+          "name": "Velouté de courge butternut et noisettes torréfiées",
+          "description": "Courge butternut de Portneuf, noisettes du Québec torréfiées, huile de noisette et crème fraîche.",
+          "price": "20"
+        },
+        "dish2": {
+          "name": "Cerf de Boileau, sauce au vin rouge et champignons",
+          "description": "Médaillon de cerf rouge, sauce demi-glace au cabernet, chanterelles et cèpes forestiers.",
+          "price": "46"
+        },
+        "dish3": {
+          "name": "Tarte Tatin aux pommes et caramel à l'érable",
+          "description": "Pommes Cortland de Charlevoix, caramel d'érable, crème chantilly légèrement vanillée.",
+          "price": "17"
+        }
+      },
+      "winter": {
+        "name": "Hiver",
+        "dish1": {
+          "name": "Soupe à l'oignon gratinée au fromage d'Oka",
+          "description": "Oignons caramélisés lentement, bouillon maison, croûton de pain artisanal, fromage d'Oka fondu.",
+          "price": "19"
+        },
+        "dish2": {
+          "name": "Braisé de joues de bœuf au vin et légumes racines",
+          "description": "Joues de bœuf braisées 8 heures, légumes racines du Québec, purée de céleri-rave.",
+          "price": "44"
+        },
+        "dish3": {
+          "name": "Fondant au chocolat noir et coulis de framboises",
+          "description": "Chocolat noir 72% Valrhona, cœur coulant, coulis de framboises du Québec, éclats de pralin.",
+          "price": "18"
+        }
       }
     },
-    "services": {
-      "title": "Une approche en trois temps",
-      "diagnostic": {
-        "title": "Diagnostic",
-        "description": "On fait le point. J'analyse votre situation RH actuelle — processus, défis, opportunités.",
-        "duration": "2-3 semaines"
+    "gallery": {
+      "title": "Ambiance & savoir-faire",
+      "subtitle": "Un lieu où l'élégance du Vieux-Québec rencontre la chaleur d'un bistro de quartier.",
+      "item1": {
+        "title": "La salle principale",
+        "category": "Ambiance"
       },
-      "implementation": {
-        "title": "Implantation",
-        "description": "On construit ensemble. Je mets en place des processus RH durables, adaptés à votre réalité.",
-        "duration": "8-12 semaines"
+      "item2": {
+        "title": "Dressage du jour",
+        "category": "Cuisine"
       },
-      "coaching": {
-        "title": "Coaching",
-        "description": "On assure la relève. Je forme vos gestionnaires pour qu'ils maintiennent ces acquis de façon autonome.",
-        "duration": "3-6 mois"
+      "item3": {
+        "title": "Notre cave à vins",
+        "category": "Cave"
+      },
+      "item4": {
+        "title": "La terrasse d'été",
+        "category": "Terrasse"
+      },
+      "item5": {
+        "title": "Cheffe Marguerite en cuisine",
+        "category": "Équipe"
+      },
+      "item6": {
+        "title": "Le marché du matin",
+        "category": "Approvisionnement"
       }
     },
     "testimonials": {
-      "title": "Ce que mes clients en disent"
-    },
-    "cta_final": {
-      "title": "Prêt à structurer votre RH?",
-      "subtitle": "Pas de cirque commercial. Juste une discussion franche sur ce qu'on peut faire ensemble.",
-      "button": "Réservez une consultation découverte"
-    }
-  },
-  "quiz": {
-    "title": "Évaluez votre maturité RH",
-    "subtitle": "5 questions rapides pour savoir où vous en êtes",
-    "q1": {
-      "question": "Comment gérez-vous le recrutement?",
-      "a": "Au feeling, quand c'est urgent",
-      "b": "On a un processus, mais informel",
-      "c": "Processus structuré avec guide d'entrevue"
-    },
-    "q2": {
-      "question": "Comment se font les évaluations de performance?",
-      "a": "On n'en fait pas vraiment",
-      "b": "Une fois par an, quand on y pense",
-      "c": "Régulières avec objectifs clairs"
-    },
-    "q3": {
-      "question": "Vos politiques RH sont...",
-      "a": "Inexistantes ou dans ma tête",
-      "b": "Écrites mais pas à jour",
-      "c": "Documentées et communiquées"
-    },
-    "q4": {
-      "question": "La gestion des conflits se fait...",
-      "a": "En mode pompier quand ça explose",
-      "b": "On essaie de régler, mais sans méthode",
-      "c": "Avec un processus clair de résolution"
-    },
-    "q5": {
-      "question": "L'intégration des nouveaux employés...",
-      "a": "C'est 'bienvenue, voici ton bureau'",
-      "b": "On a un plan sommaire de première semaine",
-      "c": "Programme structuré de 90 jours"
-    },
-    "score": "Votre score",
-    "next_step": "Prochaine étape recommandée",
-    "restart": "Recommencer",
-    "results": {
-      "low": {
-        "title": "Zone rouge — Urgence RH",
-        "description": "Vos processus RH sont minimaux. C'est normal pour une PME en croissance, mais ça vous coûte cher en roulement et en temps. Un diagnostic rapide pourrait tout changer.",
-        "cta": "Réservez votre diagnostic"
+      "title": "Ce que nos convives en disent",
+      "subtitle": "Des moments de partage autour d'une cuisine sincère.",
+      "t1": {
+        "quote": "Un repas à La Table de Marguerite, c'est un voyage gustatif au cœur du Québec. Chaque bouchée raconte une histoire. Le cerf de Boileau était tout simplement sublime.",
+        "author": "Marie-Pierre L.",
+        "role": "Gastronome"
       },
-      "mid": {
-        "title": "Zone jaune — Fondations à consolider",
-        "description": "Vous avez des bases, mais elles ne sont pas solides. Quelques processus clés bien implantés pourraient transformer votre quotidien de gestionnaire.",
-        "cta": "Découvrez l'implantation"
+      "t2": {
+        "quote": "Nous y célébrons chaque anniversaire depuis 15 ans. L'accueil est toujours aussi chaleureux, et le menu saisonnier nous surprend à chaque visite. Un incontournable du Vieux-Québec.",
+        "author": "Jean-François et Claire D.",
+        "role": "Habitués"
       },
-      "high": {
-        "title": "Zone verte — Optimisation",
-        "description": "Bravo! Vous avez de bonnes bases RH. Le coaching de gestionnaires pourrait amener votre équipe au niveau supérieur.",
-        "cta": "Explorez le coaching"
+      "t3": {
+        "quote": "La cheffe Marguerite fait un travail remarquable avec les produits locaux. Le brunch du dimanche est une pure merveille — les œufs bénédictine au saumon fumé de Gaspésie sont inoubliables.",
+        "author": "Catherine B.",
+        "role": "Critique culinaire"
       }
-    }
-  },
-  "calculator": {
-    "title": "Combien vous coûte le chaos RH?",
-    "subtitle": "Estimez l'impact financier du roulement de personnel",
-    "employees_label": "Nombre d'employés",
-    "salary_label": "Salaire moyen annuel",
-    "turnover_label": "Taux de roulement annuel",
-    "result_title": "Coût annuel estimé du roulement",
-    "formula": "Le roulement coûte en moyenne 33% du salaire annuel par départ",
-    "departures": "départs estimés / année",
-    "cost_per": "coût par départ",
-    "cta": "Réduisons ce chiffre ensemble"
-  },
-  "myths": {
-    "title": "Mythes RH — Ce qu'on entend souvent",
-    "subtitle": "Cliquez pour découvrir la réalité",
-    "m1": {
-      "myth": "La RH, c'est juste pour les grandes entreprises",
-      "reality": "Dès 15 employés, les enjeux RH coûtent réellement. Un processus de recrutement défaillant peut vous coûter 50 000 $ par mauvaise embauche."
     },
-    "m2": {
-      "myth": "Un bon salaire suffit pour garder les employés",
-      "reality": "Le salaire arrive 4e dans les raisons de départ. Le manque de reconnaissance, de développement et un mauvais gestionnaire passent avant."
-    },
-    "m3": {
-      "myth": "Les évaluations de performance, ça sert à rien",
-      "reality": "Mal faites, oui. Bien faites, elles réduisent le roulement de 14.9% et augmentent l'engagement. C'est l'outil le plus sous-estimé."
-    },
-    "m4": {
-      "myth": "Je connais mon monde, pas besoin de processus",
-      "reality": "Ça marche à 10 employés. À 30, c'est impossible de tout suivre. Sans processus, les bonnes intentions deviennent des angles morts."
-    }
-  },
-  "testimonials": {
-    "title": "Transformations concrètes",
-    "subtitle": "Résultats réels, noms changés pour confidentialité",
-    "c1": {
-      "industry": "Manufacturier — 35 employés",
-      "before_title": "Avant",
-      "before": "Roulement de 40%. Aucun processus d'intégration. Les gestionnaires évitaient les conversations difficiles.",
-      "after_title": "Après 6 mois",
-      "after": "Roulement réduit à 18%. Programme d'intégration 90 jours. Gestionnaires formés au feedback constructif.",
-      "metric": "-55% roulement"
-    },
-    "c2": {
-      "industry": "Services professionnels — 22 employés",
-      "before_title": "Avant",
-      "before": "Recrutement au feeling. 3 mois pour combler un poste. Mauvaises embauches fréquentes.",
-      "after_title": "Après 3 mois",
-      "after": "Processus structuré. Temps de comblement réduit à 5 semaines. Guide d'entrevue standardisé.",
-      "metric": "-60% temps recrutement"
-    },
-    "c3": {
-      "industry": "Construction — 48 employés",
-      "before_title": "Avant",
-      "before": "Aucune politique écrite. Conflits gérés au cas par cas. Propriétaire épuisé par les urgences RH.",
-      "after_title": "Après 4 mois",
-      "after": "Manuel employé complet. Processus de gestion des conflits. Gestionnaires autonomes pour 80% des situations.",
-      "metric": "80% autonomie"
+    "reservation": {
+      "title": "Réservez votre table",
+      "subtitle": "Laissez-nous vous accueillir pour un moment de gastronomie et de convivialité.",
+      "phone_label": "Par téléphone",
+      "phone": "(418) 555-0142",
+      "online_label": "En ligne",
+      "cta": "Réserver maintenant"
     }
   },
   "services": {
     "meta": {
-      "title": "Services — Diagnostic, Implantation, Coaching RH",
-      "description": "Découvrez mes trois volets d'accompagnement RH pour PME : diagnostic organisationnel, implantation de processus et coaching de gestionnaires."
+      "title": "Le Menu — La Table de Marguerite",
+      "description": "Découvrez le menu gastronomique de La Table de Marguerite : entrées raffinées, plats de saison, desserts maison et carte des vins québécois."
     },
     "hero": {
-      "title": "Services",
-      "subtitle": "Trois volets pour structurer, implanter et maintenir une RH qui tient la route."
+      "title": "Le Menu",
+      "subtitle": "Une cuisine d'inspiration française, sublimée par les trésors du terroir québécois.",
+      "badge": "Menu saisonnier"
     },
-    "diagnostic": {
-      "title": "Diagnostic organisationnel",
-      "description": "Comprendre où vous en êtes — sans jugement.",
-      "includes": "Ce que ça inclut",
-      "item1": "Entretiens confidentiels avec les parties prenantes",
-      "item2": "Audit des politiques, processus et pratiques RH actuels",
-      "item3": "Rapport de recommandations priorisées",
-      "duration": "2-3 semaines",
-      "result": "Vous savez exactement ce qui bloque — et comment le fixer."
+    "categories": {
+      "entrees": {
+        "title": "Entrées",
+        "description": "Des entrées qui mettent en valeur la fraîcheur et la finesse des produits d'ici.",
+        "item1": {
+          "name": "Tartare de saumon de Gaspésie",
+          "description": "Saumon atlantique, avocat, mangue, vinaigrette aux agrumes et sésame torréfié.",
+          "price": "22"
+        },
+        "item2": {
+          "name": "Velouté de saison",
+          "description": "Soupe crémeuse aux légumes de saison, crème fraîche et croûtons maison.",
+          "price": "16"
+        },
+        "item3": {
+          "name": "Foie gras poêlé aux pommes",
+          "description": "Foie gras du Québec, compote de pommes au cidre de glace, brioche toastée.",
+          "price": "28"
+        }
+      },
+      "plats": {
+        "title": "Plats principaux",
+        "description": "Des plats généreux qui célèbrent les producteurs et artisans du Québec.",
+        "item1": {
+          "name": "Filet de bœuf Angus du Québec",
+          "description": "Filet grillé, sauce au poivre vert, gratin dauphinois et légumes rôtis de saison.",
+          "price": "48"
+        },
+        "item2": {
+          "name": "Pavé de morue des Îles-de-la-Madeleine",
+          "description": "Morue fraîche, beurre blanc au citron, risotto aux herbes et petits légumes.",
+          "price": "38"
+        },
+        "item3": {
+          "name": "Magret de canard du Lac Brome",
+          "description": "Magret rôti rosé, jus à l'érable et au thym, purée de patates douces.",
+          "price": "42"
+        },
+        "item4": {
+          "name": "Risotto aux champignons forestiers",
+          "description": "Riz arborio crémeux, chanterelles, pleurotes et shiitakes, copeaux de parmesan. Végétarien.",
+          "price": "34"
+        }
+      },
+      "desserts": {
+        "title": "Desserts",
+        "description": "Des douceurs maison pour conclure votre repas en beauté.",
+        "item1": {
+          "name": "Crème brûlée à l'érable",
+          "description": "Crème onctueuse au sirop d'érable du Québec, caramélisée au chalumeau.",
+          "price": "16"
+        },
+        "item2": {
+          "name": "Fondant au chocolat noir",
+          "description": "Chocolat Valrhona 72%, cœur coulant, glace vanille et éclats de pralin.",
+          "price": "18"
+        },
+        "item3": {
+          "name": "Assiette de fromages du Québec",
+          "description": "Sélection de 5 fromages affinés, confiture de figues, noix et pain aux fruits.",
+          "price": "24"
+        }
+      },
+      "vins": {
+        "title": "Carte des vins",
+        "description": "Une sélection de vins québécois et importations privées pour accompagner votre repas.",
+        "item1": {
+          "name": "Domaine St-Jacques, Réserve Rouge",
+          "description": "Vin rouge du Québec, fruité et charpenté. Notes de cerise noire et d'épices.",
+          "price": "58"
+        },
+        "item2": {
+          "name": "Vignoble de l'Orpailleur, Blanc",
+          "description": "Vin blanc sec du Québec, vif et minéral. Poire, agrumes et fleurs blanches.",
+          "price": "52"
+        },
+        "item3": {
+          "name": "Cidre de glace, Domaine Pinnacle",
+          "description": "Cidre de glace du Québec, doux et onctueux. Pomme confite, miel et épices.",
+          "price": "45"
+        }
+      }
     },
-    "implementation": {
-      "title": "Implantation de processus RH",
-      "description": "Construire des processus qui durent — pas juste un document sur une tablette.",
-      "includes": "Exemples de processus",
-      "item1": "Recrutement : du sourcing à l'intégration 90 jours",
-      "item2": "Évaluation de performance : objectifs, feedback, développement",
-      "item3": "Rétention : compensation, culture, parcours de carrière",
-      "item4": "Conformité : normes du travail, politiques internes",
-      "duration": "8-12 semaines",
-      "result": "Des processus documentés, votre équipe formée pour les maintenir."
-    },
-    "coaching": {
-      "title": "Coaching de gestionnaires",
-      "description": "Transformer vos gestionnaires en leaders RH confiants.",
-      "includes": "Sujets populaires",
-      "item1": "Conversations difficiles (performance, discipline)",
-      "item2": "Délégation et feedback constructif",
-      "item3": "Gestion de conflits d'équipe",
-      "item4": "Leadership et culture d'entreprise",
-      "duration": "3-6 mois",
-      "result": "Des gestionnaires autonomes qui savent gérer leur monde."
+    "chef_note": {
+      "title": "Le mot de la cheffe",
+      "quote": "Chaque plat que je compose est une lettre d'amour au Québec. Les producteurs d'ici sont mes complices — leur passion nourrit la mienne. Ma cuisine, c'est leur histoire racontée dans l'assiette.",
+      "author": "Marguerite Tremblay, cheffe fondatrice"
     },
     "faq": {
       "title": "Questions fréquentes",
-      "q1": "Combien ça coûte?",
-      "a1": "Un diagnostic complet se situe entre 2 000 $ et 4 000 $. L'implantation de processus entre 8 000 $ et 15 000 $. Je peux affiner après notre première conversation — pas de surprises tarifaires.",
-      "q2": "Mon entreprise est-elle trop petite?",
-      "a2": "Mon créneau, c'est les PME de 10 à 50 employés — secteurs industriel, manufacturier, construction et services. Assez pour que les enjeux RH coûtent réellement, pas assez gros pour un département RH à temps plein.",
-      "q3": "Combien de temps ça prend?",
-      "a3": "Diagnostic : 2-3 semaines. Implantation : 8-12 semaines. Coaching : 3-6 mois. Tout dépend de l'ampleur et de votre disponibilité.",
-      "q4": "Offrez-vous du support après le mandat?",
-      "a4": "Oui, en option. Suivi mensuel, accompagnement ad-hoc, ou point trimestriel — selon vos besoins.",
-      "q5": "Quelle est la différence entre un coach et une consultante RH?",
-      "a5": "Un coach se concentre sur le développement personnel du leader. Moi, je vais plus loin : je diagnostique, j'implante des processus concrets, ET je coache. C'est une approche complète.",
-      "q6": "Travaillez-vous en anglais aussi?",
-      "a6": "Absolument. Je suis bilingue — consultations, coaching et documentation en français et en anglais."
+      "subtitle": "Tout ce que vous devez savoir avant votre visite.",
+      "q1": "Faut-il réserver à l'avance?",
+      "a1": "Oui, nous recommandons fortement la réservation, surtout les vendredis et samedis soir. Vous pouvez réserver par téléphone au (418) 555-0142 ou via notre formulaire en ligne. Nous acceptons les réservations jusqu'à 48 heures à l'avance.",
+      "q2": "Proposez-vous des options végétariennes ou sans gluten?",
+      "a2": "Absolument. Notre carte propose toujours au moins deux plats végétariens et nous pouvons adapter la majorité de nos plats pour les régimes sans gluten. Informez-nous de vos restrictions alimentaires lors de la réservation et notre cheffe s'en fera un plaisir.",
+      "q3": "Quel est le code vestimentaire?",
+      "a3": "Nous privilégions une tenue soignée décontractée (smart casual). Pas de shorts ni de sandales de plage en salle, mais nul besoin de cravate. L'essentiel est de se sentir à l'aise pour profiter du repas.",
+      "q4": "Acceptez-vous les groupes et événements privés?",
+      "a4": "Oui, notre salon privé peut accueillir jusqu'à 20 convives pour des événements spéciaux : anniversaires, repas d'affaires, célébrations. Contactez-nous pour un menu personnalisé et un devis sur mesure.",
+      "q5": "D'où proviennent vos produits?",
+      "a5": "Nous travaillons exclusivement avec des producteurs québécois. Nos légumes viennent de maraîchers de Portneuf et de l'Île d'Orléans, nos viandes de fermes de Charlevoix et du Lac Brome, nos fromages d'artisans de partout au Québec. Le menu change au fil des saisons et des arrivages.",
+      "q6": "Le brunch du dimanche nécessite-t-il une réservation?",
+      "a6": "Fortement recommandé. Notre brunch du dimanche (10h-14h) est très populaire et les places partent vite. Le menu brunch propose des classiques revisités : œufs bénédictine au saumon fumé, crêpes soufflées à l'érable, tartines gourmandes et plus encore."
     }
   },
   "about": {
     "meta": {
-      "title": "À propos — L'Usine RH",
-      "description": "12 ans en direction RH corporative, 3 ans comme consultante RH pour PME industrielles au Québec. Découvrez mon parcours et ma philosophie."
+      "title": "Notre Histoire — La Table de Marguerite",
+      "description": "Découvrez l'histoire de La Table de Marguerite, bistro gastronomique fondé en 1987 par Marguerite Tremblay dans le Vieux-Québec."
     },
     "hero": {
-      "title": "À propos",
-      "subtitle": "12 ans en direction RH. 3 ans comme consultante RH pour PME industrielles."
+      "title": "Notre Histoire",
+      "subtitle": "Du marché du Vieux-Port à la rue du Petit-Champlain — 37 ans de passion pour le terroir québécois.",
+      "established": "Fondé en 1987"
     },
     "story": {
-      "title": "Pourquoi j'ai quitté le corporate",
-      "p1": "Pendant 12 ans, j'ai été directrice RH dans le secteur manufacturier à Québec. J'ai vu de près : des propriétaires qui s'épuisent, des gestionnaires qui improvisent, des talents qui partent faute de structure.",
-      "p2": "J'en pouvais plus du corporate. Je voulais avoir un vrai impact — pas juste remplir des cases dans un système. Dans une PME, quand tu changes quelque chose, tu vois la différence la semaine d'après.",
-      "p3": "J'ai lancé ma pratique pour offrir aux PME ce que les grandes firmes facturent 50 000 $ par an — mais de façon accessible, concrète et durable."
-    },
-    "philosophy": {
-      "title": "Ma philosophie",
-      "p1": "Mon but, c'est de vous rendre autonome. Pas de créer une dépendance. Après 6 mois, votre équipe sait maintenir les processus. Vous n'avez plus besoin de moi — et c'est exactement ce que je vise."
+      "title": "De la ferme à la table, depuis toujours",
+      "p1": "En 1987, Marguerite Tremblay ouvrait les portes d'un petit bistro au 42, rue du Petit-Champlain avec une conviction simple : la meilleure cuisine naît du respect des produits et des gens qui les cultivent. Formée à l'Institut de tourisme et d'hôtellerie du Québec puis perfectionnée à Lyon, elle rêvait de marier la rigueur de la gastronomie française à la générosité du terroir québécois.",
+      "p2": "Dès le premier jour, Marguerite a noué des liens avec les producteurs locaux — maraîchers de l'Île d'Orléans, fromagers de Charlevoix, pêcheurs de la Gaspésie. Ces partenariats, certains vieux de trois décennies, sont le socle de notre cuisine. Chaque matin, notre équipe parcourt les marchés pour sélectionner les plus beaux produits du jour.",
+      "p3": "Aujourd'hui, La Table de Marguerite est un lieu de rendez-vous pour les amoureux de la bonne cuisine. Notre bistro a su évoluer tout en préservant ce qui fait son âme : une cuisine sincère, des produits d'exception et un accueil chaleureux qui donne envie de revenir.",
+      "quote": "La cuisine, c'est l'art de transformer la générosité de la terre en moments de bonheur partagé.",
+      "quote_attr": "Marguerite Tremblay, cheffe fondatrice",
+      "stat1_value": "1987",
+      "stat1_label": "Année de fondation",
+      "stat2_value": "30+",
+      "stat2_label": "Producteurs partenaires"
     },
     "values": {
-      "empathy": {
-        "title": "Pragmatisme",
-        "description": "Je comprends la réalité des propriétaires de PME industrielles. Pas de théorie, juste des solutions qui tiennent la route.",
-        "example": "Quand un propriétaire me dit qu'il fait les paies à minuit, je ne le juge pas — je l'aide à sortir de ce cycle."
+      "title": "Nos valeurs",
+      "subtitle": "Trois piliers qui guident chaque décision, chaque plat, chaque accueil.",
+      "terroir": {
+        "title": "Terroir",
+        "description": "100% de nos produits proviennent du Québec. Nous célébrons la richesse de notre terroir en cuisinant au rythme des saisons, en respectant les cycles naturels et en valorisant le travail de nos producteurs locaux."
       },
-      "transparency": {
-        "title": "Transparence",
-        "description": "Vous savez d'avance ce que ça coûte, combien de temps ça prend, et ce que vous allez avoir.",
-        "example": "Mon offre de service inclut toujours un échéancier détaillé, un budget fixe et des livrables clairs. Pas de zone grise."
+      "savoirfaire": {
+        "title": "Savoir-faire",
+        "description": "Chaque technique, chaque recette est le fruit de décennies d'expérience. Nous allions la précision de la gastronomie française à la créativité québécoise pour créer des plats qui marquent la mémoire."
       },
-      "autonomy": {
-        "title": "Autonomisation",
-        "description": "Je pars quand vous êtes prêts. Mon succès se mesure à votre autonomie.",
-        "example": "Après 6 mois, vos gestionnaires gèrent les évaluations de performance seuls. Vous n'avez plus besoin de moi — mission accomplie."
+      "convivialite": {
+        "title": "Convivialité",
+        "description": "La Table de Marguerite est plus qu'un restaurant — c'est un lieu de partage. Que ce soit pour un souper en amoureux, un repas de famille ou une célébration entre amis, nous créons des moments de bonheur autour de la table."
       }
+    },
+    "team": {
+      "title": "Notre équipe",
+      "subtitle": "Des passionnés qui font vivre La Table de Marguerite au quotidien.",
+      "member1": {
+        "name": "Marguerite Tremblay",
+        "role": "Cheffe fondatrice",
+        "specialty": "Cuisine française et terroir québécois"
+      },
+      "member2": {
+        "name": "Antoine Lavoie",
+        "role": "Sous-chef",
+        "specialty": "Pâtisserie et desserts"
+      },
+      "member3": {
+        "name": "Sophie Gagnon",
+        "role": "Sommelière",
+        "specialty": "Vins du Québec et accords mets-vins"
+      }
+    },
+    "cta": {
+      "title": "Venez nous rencontrer",
+      "subtitle": "Réservez votre table et laissez-nous vous raconter notre histoire autour d'un bon repas.",
+      "button": "Réserver une table"
     }
   },
   "contact": {
     "meta": {
-      "title": "Contact — Réservez une consultation découverte",
-      "description": "Contactez L'Usine RH pour une consultation découverte gratuite. PME de 10 à 50 employés — secteurs industriel, manufacturier, construction au Québec."
+      "title": "Contact — La Table de Marguerite",
+      "description": "Contactez La Table de Marguerite pour réserver votre table ou organiser un événement privé au cœur du Vieux-Québec."
     },
     "hero": {
-      "title": "Parlons de votre situation",
-      "subtitle": "Pas de cirque commercial. Juste une discussion franche sur ce qu'on peut faire ensemble."
+      "title": "Contactez-nous",
+      "subtitle": "Réservez votre table, organisez un événement ou posez-nous vos questions. Notre équipe se fera un plaisir de vous répondre."
     },
     "form": {
-      "name": "Votre nom",
+      "name": "Votre nom complet",
       "email": "Courriel",
-      "company": "Entreprise",
-      "employees": "Nombre d'employés",
-      "challenge": "Votre défi RH principal",
-      "challenge_placeholder": "Décrivez brièvement votre situation...",
-      "submit": "Envoyer",
-      "response_time": "Je réponds sous 24h. Généralement plus tôt."
+      "phone": "Téléphone",
+      "type": "Type de demande",
+      "type_options": {
+        "reservation": "Réservation",
+        "event": "Événement privé",
+        "question": "Question générale",
+        "other": "Autre"
+      },
+      "guests": "Nombre de convives",
+      "message": "Votre message",
+      "consent": "J'accepte que mes données soient utilisées pour traiter ma demande.",
+      "consent_notice": "Vos renseignements personnels sont traités conformément à la Loi 25 du Québec.",
+      "consent_link": "Politique de confidentialité",
+      "submit": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès! Nous vous répondrons dans les 24 heures.",
+      "error": "Une erreur est survenue. Veuillez réessayer ou nous appeler directement."
     },
     "info": {
-      "email_label": "Courriel",
-      "phone_label": "Téléphone",
-      "location_label": "Localisation",
-      "location": "Québec, QC",
-      "linkedin": "LinkedIn"
+      "address_title": "Adresse",
+      "address": "42, rue du Petit-Champlain, Québec, QC G1K 4H4",
+      "phone": "(418) 555-0142",
+      "email": "info@tablede-marguerite.ca",
+      "hours_title": "Heures d'ouverture",
+      "hours_detail": "Mar-Sam : 17h-22h | Dim Brunch : 10h-14h | Lun : Fermé"
+    },
+    "validation": {
+      "name_min": "Le nom doit contenir au moins 2 caractères.",
+      "email": "Veuillez entrer une adresse courriel valide.",
+      "phone": "Veuillez entrer un numéro de téléphone valide.",
+      "type": "Veuillez sélectionner un type de demande.",
+      "guests": "Veuillez indiquer le nombre de convives.",
+      "message_min": "Le message doit contenir au moins 10 caractères.",
+      "message_max": "Le message ne peut pas dépasser 2000 caractères.",
+      "consent": "Vous devez accepter le traitement de vos données pour envoyer le formulaire."
     }
   },
   "footer": {
-    "copyright": "L'Usine RH — Émilie Poirier. Tous droits réservés.",
-    "tagline": "On forge vos RH.",
-    "cta": "Prêt à structurer votre RH?",
-    "cta_button": "Consultation gratuite",
-    "blog": "Blogue"
+    "description": "Bistro gastronomique au cœur du Vieux-Québec. Cuisine française et québécoise, produits locaux et de saison depuis 1987.",
+    "nav_title": "Navigation",
+    "legal_title": "Légal",
+    "mentions": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "contact_title": "Contact",
+    "address": "42, rue du Petit-Champlain, Québec, QC G1K 4H4",
+    "phone": "(418) 555-0142",
+    "email": "info@tablede-marguerite.ca",
+    "hours": "Mar-Sam 17h-22h | Dim Brunch 10h-14h",
+    "rpp": "Responsable de la protection des renseignements personnels : Marguerite Tremblay — info@tablede-marguerite.ca",
+    "newsletter_title": "Infolettre",
+    "newsletter_placeholder": "Votre courriel",
+    "newsletter_cta": "S'inscrire",
+    "newsletter_note": "Recevez nos actualités saisonnières. Aucun pourriel, promis.",
+    "copyright": "\u00a9 2026 La Table de Marguerite. Tous droits réservés."
   },
-  "chatbot": {
-    "toggle": "Ouvrir le clavardage",
-    "title": "L'Usine RH",
-    "subtitle": "Assistante virtuelle",
-    "close": "Fermer",
-    "placeholder": "Écrivez votre message...",
-    "send": "Envoyer"
+  "legal": {
+    "cookie_title": "Gestion des témoins (cookies)",
+    "cookie_description": "Nous utilisons des témoins pour améliorer votre expérience. Conformément à la Loi 25 du Québec, seuls les témoins essentiels sont actifs par défaut. Vous pouvez accepter ou refuser les témoins optionnels.",
+    "essential": "Essentiels",
+    "analytics": "Analytiques",
+    "marketing": "Marketing",
+    "accept": "Tout accepter",
+    "reject": "Tout refuser",
+    "customize": "Personnaliser",
+    "save": "Sauvegarder mes choix"
   },
-  "common": {
-    "duration": "Durée",
-    "learn_more": "En savoir plus",
-    "back_home": "Retour à l'accueil"
+  "error": {
+    "title": "Quelque chose s'est mal passé",
+    "description": "Nous sommes désolés, une erreur inattendue est survenue. Veuillez réessayer.",
+    "retry": "Réessayer"
+  },
+  "not_found": {
+    "title": "Page introuvable",
+    "description": "Désolé, cette page n'existe pas ou a été déplacée. Peut-être cherchez-vous notre menu ou souhaitez-vous réserver?",
+    "back": "Retour à l'accueil"
   }
 }

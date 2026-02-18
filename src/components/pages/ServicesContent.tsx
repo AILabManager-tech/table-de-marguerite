@@ -1,38 +1,119 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { motion, useReducedMotion } from "framer-motion";
+import { UtensilsCrossed, Beef, CakeSlice, Wine } from "lucide-react";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { TextReveal } from "@/components/animations/TextReveal";
-import { StaggerGrid } from "@/components/animations/StaggerGrid";
 import { LineReveal } from "@/components/animations/LineReveal";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { AuroraBackground } from "@/components/animations/AuroraBackground";
+import { StaggerGrid } from "@/components/animations/StaggerGrid";
+import { BotanicalDivider } from "@/components/interactive/BotanicalDivider";
 
-const services = ["diagnostic", "implementation", "coaching"] as const;
+/* ------------------------------------------------------------------ */
+/*  Menu category definitions                                          */
+/* ------------------------------------------------------------------ */
 
-const serviceImages = [
-  "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80&auto=format",
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format",
-  "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80&auto=format",
-];
+const CATEGORIES = [
+  { key: "starters", Icon: UtensilsCrossed, accent: "olive", items: 4 },
+  { key: "mains", Icon: Beef, accent: "terra", items: 4 },
+  { key: "desserts", Icon: CakeSlice, accent: "prune", items: 3 },
+  { key: "drinks", Icon: Wine, accent: "bark", items: 4 },
+] as const;
 
-const serviceColors = [
-  "from-sage-500 to-sage-600",
-  "from-terracotta-400 to-terracotta-600",
-  "from-gold-400 to-gold-600",
-];
+type AccentKey = "olive" | "terra" | "prune" | "bark";
+
+const accentMap: Record<AccentKey, { bg: string; text: string; border: string; badge: string }> = {
+  olive: {
+    bg: "bg-olive-50",
+    text: "text-olive-600",
+    border: "border-olive-200",
+    badge: "bg-olive-100 text-olive-700",
+  },
+  terra: {
+    bg: "bg-terra-50",
+    text: "text-terra-500",
+    border: "border-terra-200",
+    badge: "bg-terra-100 text-terra-700",
+  },
+  prune: {
+    bg: "bg-prune-50",
+    text: "text-prune-600",
+    border: "border-prune-200",
+    badge: "bg-prune-100 text-prune-700",
+  },
+  bark: {
+    bg: "bg-cream-200",
+    text: "text-bark",
+    border: "border-cream-400",
+    badge: "bg-cream-300 text-bark",
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/*  Menu item card                                                     */
+/* ------------------------------------------------------------------ */
+
+interface MenuItemProps {
+  categoryKey: string;
+  itemIndex: number;
+  accent: AccentKey;
+  prefersReduced: boolean;
+}
+
+function MenuItem({ categoryKey, itemIndex, accent, prefersReduced }: MenuItemProps) {
+  const t = useTranslations("services");
+  const colors = accentMap[accent];
+
+  return (
+    <motion.div
+      initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
+      whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.4,
+        delay: itemIndex * 0.1,
+        ease: "easeInOut" as const,
+      }}
+      className={`group flex items-start justify-between rounded-xl border ${colors.border} bg-cream-100/80 p-5 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5`}
+    >
+      <div className="flex-1 pr-4">
+        <h4 className={`mb-1 font-heading text-lg font-semibold ${colors.text}`}>
+          {t(`${categoryKey}.item_${itemIndex + 1}.name`)}
+        </h4>
+        <p className="font-body text-sm leading-relaxed text-bark-light">
+          {t(`${categoryKey}.item_${itemIndex + 1}.description`)}
+        </p>
+      </div>
+      <div className="flex items-center">
+        <div className={`h-px w-8 ${colors.border} border-t border-dashed`} />
+        <span className={`ml-3 whitespace-nowrap font-heading text-lg font-bold ${colors.text}`}>
+          {t(`${categoryKey}.item_${itemIndex + 1}.price`)}
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Main export                                                        */
+/* ------------------------------------------------------------------ */
 
 /**
- * Services page content with detailed service cards, images, and FAQ accordion.
+ * ServicesContent -- "Le Menu" page for La Table de Marguerite.
+ * Displays 4 menu categories (Entrees, Plats, Desserts, Vins)
+ * with individual items, a chef's note, and an FAQ section.
  *
  * @component
  * @example
+ * ```tsx
  * <ServicesContent />
+ * ```
  */
 export function ServicesContent() {
   const t = useTranslations("services");
-  const common = useTranslations("common");
+  const prefersReduced = useReducedMotion() ?? false;
 
   const faqItems = Array.from({ length: 6 }, (_, i) => ({
     question: t(`faq.q${i + 1}`),
@@ -41,88 +122,133 @@ export function ServicesContent() {
 
   return (
     <main>
-      {/* Hero with aurora */}
-      <section className="relative section-padding flex items-center overflow-hidden">
+      {/* ============================================================ */}
+      {/*  1. Hero -- Menu page header                                 */}
+      {/* ============================================================ */}
+      <section className="relative flex min-h-[45vh] items-center overflow-hidden bg-bark">
         <AuroraBackground />
-        <div className="absolute inset-0 gradient-mesh-bg" />
-        <div className="container-narrow text-center relative z-10">
-          <TextReveal className="mb-4">{t("hero.title")}</TextReveal>
+        <div className="absolute inset-0 grid-overlay opacity-20" />
+        <div className="container-narrow text-center relative z-10 section-padding">
+          <AnimatedSection delay={0.1} direction="none">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full glass-dark px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-olive-400 animate-glow-pulse" />
+              <span className="font-body text-sm font-medium text-cream-300">
+                {t("hero.badge")}
+              </span>
+            </div>
+          </AnimatedSection>
+          <TextReveal className="mb-4 !text-cream-100">{t("hero.title")}</TextReveal>
           <AnimatedSection delay={0.4} direction="none">
-            <p className="text-lg text-taupe md:text-xl">{t("hero.subtitle")}</p>
+            <p className="font-body text-lg text-cream-300/90 md:text-xl">
+              {t("hero.subtitle")}
+            </p>
           </AnimatedSection>
           <LineReveal className="mx-auto mt-8 w-24" delay={0.6} />
         </div>
       </section>
 
-      {services.map((key, index) => {
-        const isEven = index % 2 === 0;
-        const items =
-          key === "diagnostic"
-            ? (["item1", "item2", "item3"] as const)
-            : (["item1", "item2", "item3", "item4"] as const);
+      {/* ============================================================ */}
+      {/*  2. Menu categories                                          */}
+      {/* ============================================================ */}
+      {CATEGORIES.map(({ key, Icon, accent, items }, catIndex) => {
+        const colors = accentMap[accent];
+        const isEven = catIndex % 2 === 0;
 
         return (
-          <section key={key} className={`section-padding relative overflow-hidden ${isEven ? "" : "bg-cream-300/50"}`}>
+          <section
+            key={key}
+            className={`section-padding relative overflow-hidden ${isEven ? "" : "bg-cream-200/50"}`}
+          >
             {!isEven && <div className="absolute inset-0 gradient-mesh-bg" />}
-            <div className="container-wide relative">
-              <div className="grid items-start gap-12 md:grid-cols-2">
-                <AnimatedSection direction={isEven ? "left" : "right"} className={isEven ? "" : "md:order-2"}>
-                  <span className={`mb-2 inline-block font-heading text-7xl font-bold bg-gradient-to-br ${serviceColors[index]} bg-clip-text text-transparent opacity-40`}>
-                    {index + 1}
-                  </span>
-                  <h2 className="mb-3">{t(`${key}.title`)}</h2>
-                  <p className="mb-6 text-lg text-taupe">{t(`${key}.description`)}</p>
-                  <h3 className="mb-3 text-sage-600">{t(`${key}.includes`)}</h3>
-                  <StaggerGrid className="space-y-3" stagger={0.08}>
-                    {items.map((item) => (
-                      <div key={item} className="flex items-start gap-3 group">
-                        <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-gradient-to-br from-sage-400 to-terracotta-400 transition-transform group-hover:scale-125" />
-                        <span className="text-taupe">{t(`${key}.${item}`)}</span>
-                      </div>
-                    ))}
-                  </StaggerGrid>
-                </AnimatedSection>
-                <AnimatedSection direction={isEven ? "right" : "left"} delay={0.2} className={isEven ? "" : "md:order-1"}>
-                  <div className="space-y-6">
-                    {/* Image */}
-                    <div className="relative rounded-2xl overflow-hidden shadow-lg">
-                      <Image
-                        src={serviceImages[index] ?? ""}
-                        alt={t(`${key}.title`)}
-                        width={600}
-                        height={400}
-                        className="object-cover w-full h-[280px]"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal-dark/40 to-transparent" />
-                    </div>
-                    {/* Info card */}
-                    <div className="card-elevated">
-                      <div className="mb-4 flex items-center gap-2 text-sm text-sage-600">
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>{common("duration")} : {t(`${key}.duration`)}</span>
-                      </div>
-                      <LineReveal className="mb-4 w-12" delay={0.4} />
-                      <p className="font-heading text-lg font-medium text-charcoal">{t(`${key}.result`)}</p>
-                    </div>
+            <div className="container-wide relative z-10">
+              {/* Category header */}
+              <AnimatedSection>
+                <div className="mb-8 flex items-center gap-4">
+                  <div
+                    className={`flex h-14 w-14 items-center justify-center rounded-xl ${colors.bg} ${colors.text}`}
+                  >
+                    <Icon className="h-7 w-7" strokeWidth={1.5} />
                   </div>
-                </AnimatedSection>
-              </div>
+                  <div>
+                    <h2 className={`font-heading text-2xl font-bold ${colors.text} lg:text-3xl`}>
+                      {t(`${key}.title`)}
+                    </h2>
+                    <p className="font-body text-sm text-bark-light">
+                      {t(`${key}.subtitle`)}
+                    </p>
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              <LineReveal className="mb-8 w-16" color={`bg-${accent}-400`} delay={0.2} />
+
+              {/* Items */}
+              <StaggerGrid className="grid gap-4 md:grid-cols-2" stagger={0.08}>
+                {Array.from({ length: items }, (_, i) => (
+                  <MenuItem
+                    key={`${key}-${i}`}
+                    categoryKey={key}
+                    itemIndex={i}
+                    accent={accent}
+                    prefersReduced={prefersReduced}
+                  />
+                ))}
+              </StaggerGrid>
             </div>
+
+            {catIndex < CATEGORIES.length - 1 && (
+              <BotanicalDivider
+                variant={catIndex === 0 ? "vine" : catIndex === 1 ? "leaf" : "wheat"}
+                className="mt-12"
+              />
+            )}
           </section>
         );
       })}
 
-      <div className="section-divider" />
+      {/* ============================================================ */}
+      {/*  3. Note du chef                                             */}
+      {/* ============================================================ */}
+      <section className="relative overflow-hidden bg-bark py-16 lg:py-20">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-1/4 top-0 h-[400px] w-[400px] rounded-full bg-olive-700/10 blur-[100px]" />
+          <div className="absolute -right-1/4 bottom-0 h-[300px] w-[300px] rounded-full bg-terra-500/8 blur-[80px]" />
+        </div>
+        <div className="container-narrow relative z-10 text-center">
+          <AnimatedSection>
+            <BotanicalDivider variant="wheat" className="mb-8" />
+          </AnimatedSection>
+          <AnimatedSection delay={0.2}>
+            <blockquote className="font-heading text-xl italic leading-relaxed text-cream-200 md:text-2xl">
+              &ldquo;{t("chef_note.quote")}&rdquo;
+            </blockquote>
+          </AnimatedSection>
+          <AnimatedSection delay={0.4} direction="none">
+            <p className="mt-6 font-heading text-sm font-semibold uppercase tracking-wider text-terra-400">
+              {t("chef_note.author")}
+            </p>
+            <p className="font-body text-sm text-cream-400">
+              {t("chef_note.role")}
+            </p>
+          </AnimatedSection>
+          <AnimatedSection>
+            <BotanicalDivider variant="wheat" className="mt-8" />
+          </AnimatedSection>
+        </div>
+      </section>
 
+      {/* ============================================================ */}
+      {/*  4. FAQ                                                      */}
+      {/* ============================================================ */}
       <section className="section-padding relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh-bg" />
         <div className="container-narrow relative z-10">
           <AnimatedSection>
-            <TextReveal as="h2" className="mb-4 text-center">{t("faq.title")}</TextReveal>
+            <TextReveal as="h2" className="mb-4 text-center">
+              {t("faq.title")}
+            </TextReveal>
           </AnimatedSection>
-          <LineReveal className="mx-auto mb-8 w-24" color="bg-sage-400" delay={0.3} />
+          <LineReveal className="mx-auto mb-8 w-24" color="bg-olive-400" delay={0.3} />
           <AnimatedSection delay={0.2}>
             <FaqAccordion items={faqItems} />
           </AnimatedSection>

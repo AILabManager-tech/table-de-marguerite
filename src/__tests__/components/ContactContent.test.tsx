@@ -26,6 +26,22 @@ vi.mock("@/i18n/routing", () => ({
   ),
 }));
 
+vi.mock("next/link", () => ({
+  default: ({
+    children,
+    href,
+    ...props
+  }: {
+    children: React.ReactNode;
+    href: string;
+    [key: string]: unknown;
+  }) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  ),
+}));
+
 vi.mock("framer-motion", () => {
   const mc = (Tag: string) => {
     const FM_PROPS = new Set([
@@ -82,6 +98,18 @@ vi.mock("@/components/animations/AuroraBackground", () => ({
   AuroraBackground: () => <div data-testid="aurora" />,
 }));
 
+vi.mock("@/components/animations/TextReveal", () => ({
+  TextReveal: ({
+    children,
+  }: {
+    children: React.ReactNode;
+  }) => <h2>{children}</h2>,
+}));
+
+vi.mock("@/components/animations/LineReveal", () => ({
+  LineReveal: () => <div data-testid="line-reveal" />,
+}));
+
 import { ContactContent } from "@/components/pages/ContactContent";
 import { toast } from "sonner";
 
@@ -102,15 +130,19 @@ describe("ContactContent", () => {
     expect(screen.getByText("hero.title")).toBeInTheDocument();
   });
 
-  it("renders the contact form", () => {
+  it("renders the contact form with name and email fields", () => {
     render(<ContactContent />);
-    expect(screen.getByLabelText("form.name")).toBeInTheDocument();
-    expect(screen.getByLabelText("form.email")).toBeInTheDocument();
-    expect(screen.getByLabelText("form.company")).toBeInTheDocument();
-    expect(screen.getByLabelText("form.challenge")).toBeInTheDocument();
+    expect(screen.getByLabelText(/form\.name/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/form\.email/)).toBeInTheDocument();
   });
 
-  it("renders the consent checkbox", () => {
+  it("renders type select and message textarea", () => {
+    render(<ContactContent />);
+    expect(screen.getByLabelText(/form\.type/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/form\.message/)).toBeInTheDocument();
+  });
+
+  it("renders the consent checkbox (Loi 25)", () => {
     render(<ContactContent />);
     const checkbox = document.querySelector('input[name="consent"]');
     expect(checkbox).toBeInTheDocument();
@@ -123,15 +155,17 @@ describe("ContactContent", () => {
     expect(screen.getByText("form.submit")).toBeInTheDocument();
   });
 
-  it("renders contact info section", () => {
+  it("renders contact info (phone, email, address)", () => {
     render(<ContactContent />);
-    expect(screen.getByText("info@emiliepoirierrh.ca")).toBeInTheDocument();
-    expect(screen.getByText("info.location")).toBeInTheDocument();
+    expect(screen.getByText("(418) 555-0142")).toBeInTheDocument();
+    expect(screen.getByText("info@tablede-marguerite.ca")).toBeInTheDocument();
+    expect(screen.getByText(/42, rue du Petit-Champlain/)).toBeInTheDocument();
   });
 
-  it("renders LinkedIn link in French", () => {
+  it("renders hours info", () => {
     render(<ContactContent />);
-    expect(screen.getByText("L'Usine RH")).toBeInTheDocument();
+    expect(screen.getByText("info.hours_dinner")).toBeInTheDocument();
+    expect(screen.getByText("info.hours_brunch")).toBeInTheDocument();
   });
 
   it("submit button is enabled before submission", () => {
@@ -144,6 +178,14 @@ describe("ContactContent", () => {
     vi.useFakeTimers();
     render(<ContactContent />);
 
+    // Fill valid data so Zod validation passes and setSending(true) is reached
+    fireEvent.change(screen.getByLabelText(/form\.name/), { target: { value: "Jean Tremblay" } });
+    fireEvent.change(screen.getByLabelText(/form\.email/), { target: { value: "jean@example.com" } });
+    fireEvent.change(screen.getByLabelText(/form\.message/), { target: { value: "Bonjour je voudrais reserver une table pour 4 personnes" } });
+    fireEvent.change(screen.getByLabelText(/form\.type/), { target: { value: "reservation" } });
+    const checkbox = document.querySelector('input[name="consent"]') as HTMLInputElement;
+    fireEvent.click(checkbox);
+
     const form = document.querySelector("form") as HTMLFormElement;
     await act(async () => {
       fireEvent.submit(form);
@@ -153,7 +195,6 @@ describe("ContactContent", () => {
     expect(btn).toBeDisabled();
     expect(document.querySelector(".animate-spin")).toBeInTheDocument();
 
-    // Advance timers to let the async chain resolve
     await act(async () => {
       await vi.runAllTimersAsync();
     });
@@ -163,9 +204,14 @@ describe("ContactContent", () => {
     vi.useFakeTimers();
     render(<ContactContent />);
 
-    fireEvent.change(screen.getByLabelText("form.name"), { target: { value: "Marie Tremblay" } });
-    fireEvent.change(screen.getByLabelText("form.email"), { target: { value: "marie@example.com" } });
-    fireEvent.change(screen.getByLabelText("form.challenge"), { target: { value: "Besoin d'aide RH" } });
+    fireEvent.change(screen.getByLabelText(/form\.name/), { target: { value: "Marguerite Tremblay" } });
+    fireEvent.change(screen.getByLabelText(/form\.email/), { target: { value: "marguerite@example.com" } });
+    fireEvent.change(screen.getByLabelText(/form\.message/), { target: { value: "Je voudrais reserver une table pour 4" } });
+
+    // Select type
+    const typeSelect = screen.getByLabelText(/form\.type/);
+    fireEvent.change(typeSelect, { target: { value: "reservation" } });
+
     const checkbox = document.querySelector('input[name="consent"]') as HTMLInputElement;
     fireEvent.click(checkbox);
 
@@ -200,14 +246,9 @@ describe("ContactContent", () => {
 
   it("form fields accept user input", () => {
     render(<ContactContent />);
-    const nameInput = screen.getByLabelText("form.name") as HTMLInputElement;
+    const nameInput = screen.getByLabelText(/form\.name/) as HTMLInputElement;
     fireEvent.change(nameInput, { target: { value: "Test User" } });
     expect(nameInput.value).toBe("Test User");
-  });
-
-  it("renders employees field", () => {
-    render(<ContactContent />);
-    expect(screen.getByLabelText("form.employees")).toBeInTheDocument();
   });
 
   it("renders aurora background", () => {
@@ -222,13 +263,23 @@ describe("ContactContent", () => {
 
   it("required fields have correct required attribute", () => {
     render(<ContactContent />);
-    expect(screen.getByLabelText("form.name")).toHaveAttribute("required");
-    expect(screen.getByLabelText("form.email")).toHaveAttribute("required");
-    expect(screen.getByLabelText("form.challenge")).toHaveAttribute("required");
+    expect(screen.getByLabelText(/form\.name/)).toHaveAttribute("required");
+    expect(screen.getByLabelText(/form\.email/)).toHaveAttribute("required");
+    expect(screen.getByLabelText(/form\.message/)).toHaveAttribute("required");
   });
 
   it("email field has type email", () => {
     render(<ContactContent />);
-    expect(screen.getByLabelText("form.email")).toHaveAttribute("type", "email");
+    expect(screen.getByLabelText(/form\.email/)).toHaveAttribute("type", "email");
+  });
+
+  it("renders Loi 25 notice section", () => {
+    render(<ContactContent />);
+    expect(screen.getByText("loi25.title")).toBeInTheDocument();
+  });
+
+  it("renders map placeholder", () => {
+    render(<ContactContent />);
+    expect(screen.getByText("map.label")).toBeInTheDocument();
   });
 });

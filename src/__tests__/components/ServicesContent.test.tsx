@@ -22,22 +22,43 @@ vi.mock("@/i18n/routing", () => ({
   ),
 }));
 
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({
-      children,
-      className,
-      ...rest
-    }: React.HTMLAttributes<HTMLDivElement>) => (
-      <div className={className} {...rest}>
-        {children}
-      </div>
-    ),
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-}));
+vi.mock("framer-motion", () => {
+  const mc = (Tag: string) => {
+    const FM_PROPS = new Set([
+      "initial", "animate", "exit", "transition", "whileInView",
+      "viewport", "variants", "whileHover", "whileTap", "layout",
+      "layoutId",
+    ]);
+    const C = ({ children, ...props }: Record<string, unknown>) => {
+      const safe: Record<string, unknown> = {};
+      for (const [k, v] of Object.entries(props)) {
+        if (!FM_PROPS.has(k)) {
+          safe[k] = v;
+        }
+      }
+      const El = Tag as unknown as React.ElementType;
+      return <El {...safe}>{children as React.ReactNode}</El>;
+    };
+    C.displayName = `motion.${Tag}`;
+    return C;
+  };
+  return {
+    motion: {
+      div: mc("div"), span: mc("span"), button: mc("button"),
+      section: mc("section"), a: mc("a"), h1: mc("h1"),
+      h2: mc("h2"), h3: mc("h3"), p: mc("p"),
+      create: (tag: string) => mc(tag),
+    },
+    animate: () => ({ stop: () => {} }),
+    useInView: () => true,
+    useScroll: () => ({ scrollYProgress: { get: () => 0.5 } }),
+    useTransform: () => 0,
+    useMotionValue: (v: number = 0) => ({ set: () => {}, get: () => v }),
+    useSpring: () => ({ set: () => {}, get: () => 0 }),
+    useReducedMotion: () => false,
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  };
+});
 
 vi.mock("next/image", () => ({
   default: (props: { alt: string; src: string }) => (
@@ -87,26 +108,41 @@ vi.mock("@/components/ui/FaqAccordion", () => ({
   ),
 }));
 
+vi.mock("@/components/interactive/BotanicalDivider", () => ({
+  BotanicalDivider: () => <div data-testid="botanical-divider" />,
+}));
+
 import { ServicesContent } from "@/components/pages/ServicesContent";
 
 afterEach(cleanup);
 
-describe("ServicesContent", () => {
+describe("ServicesContent (Le Menu page)", () => {
   it("renders the main element", () => {
     render(<ServicesContent />);
     expect(document.querySelector("main")).toBeInTheDocument();
   });
 
-  it("renders hero title", () => {
+  it("renders hero title (Le Menu)", () => {
     render(<ServicesContent />);
     expect(screen.getByText("hero.title")).toBeInTheDocument();
   });
 
-  it("renders service sections", () => {
+  it("renders hero badge", () => {
     render(<ServicesContent />);
-    expect(screen.getByText("diagnostic.title")).toBeInTheDocument();
-    expect(screen.getByText("implementation.title")).toBeInTheDocument();
-    expect(screen.getByText("coaching.title")).toBeInTheDocument();
+    expect(screen.getByText("hero.badge")).toBeInTheDocument();
+  });
+
+  it("renders menu category sections (starters, mains, desserts, drinks)", () => {
+    render(<ServicesContent />);
+    expect(screen.getByText("starters.title")).toBeInTheDocument();
+    expect(screen.getByText("mains.title")).toBeInTheDocument();
+    expect(screen.getByText("desserts.title")).toBeInTheDocument();
+    expect(screen.getByText("drinks.title")).toBeInTheDocument();
+  });
+
+  it("renders chef note section", () => {
+    render(<ServicesContent />);
+    expect(screen.getByText("chef_note.author")).toBeInTheDocument();
   });
 
   it("renders FAQ section", () => {
@@ -115,9 +151,15 @@ describe("ServicesContent", () => {
     expect(screen.getByTestId("faq-accordion")).toBeInTheDocument();
   });
 
-  it("renders service images", () => {
+  it("renders BotanicalDivider components", () => {
     render(<ServicesContent />);
-    const images = document.querySelectorAll("img");
-    expect(images.length).toBeGreaterThanOrEqual(3);
+    const dividers = screen.getAllByTestId("botanical-divider");
+    expect(dividers.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("renders multiple sections", () => {
+    render(<ServicesContent />);
+    const sections = document.querySelectorAll("section");
+    expect(sections.length).toBeGreaterThanOrEqual(5);
   });
 });

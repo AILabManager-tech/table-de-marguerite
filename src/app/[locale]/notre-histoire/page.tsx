@@ -13,15 +13,15 @@ export async function generateMetadata({
     title: t("title"),
     description: t("description"),
     alternates: {
-      canonical: `https://emiliepoirierrh.ca/${locale}/a-propos`,
+      canonical: `https://table-de-marguerite.vercel.app/${locale}/notre-histoire`,
       languages: {
-        fr: "https://emiliepoirierrh.ca/fr/a-propos",
-        en: "https://emiliepoirierrh.ca/en/a-propos",
+        fr: "https://table-de-marguerite.vercel.app/fr/notre-histoire",
+        en: "https://table-de-marguerite.vercel.app/en/notre-histoire",
       },
     },
   };
 }
 
-export default function AboutPage() {
+export default function NotreHistoirePage() {
   return <AboutContent />;
 }

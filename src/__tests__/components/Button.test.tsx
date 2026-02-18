@@ -6,10 +6,11 @@ afterEach(cleanup);
 
 describe("Button", () => {
   it("renders as a button by default", () => {
-    render(<Button>Click me</Button>);
-    const btn = screen.getByRole("button", { name: "Click me" });
+    render(<Button>Réserver</Button>);
+    const btn = screen.getByRole("button");
     expect(btn).toBeInTheDocument();
     expect(btn.tagName).toBe("BUTTON");
+    expect(btn).toHaveTextContent("Réserver");
   });
 
   it("renders as an anchor when href is provided", () => {
@@ -19,22 +20,28 @@ describe("Button", () => {
     expect(link).toHaveAttribute("href", "/contact");
   });
 
-  it("applies primary variant classes by default", () => {
+  it("applies primary variant classes by default (olive)", () => {
     render(<Button>Primary</Button>);
     const btn = screen.getByRole("button", { name: "Primary" });
-    expect(btn.className).toContain("bg-terracotta-500");
+    expect(btn.className).toContain("bg-olive-600");
   });
 
-  it("applies secondary variant classes", () => {
+  it("applies secondary variant classes (terra)", () => {
     render(<Button variant="secondary">Secondary</Button>);
     const btn = screen.getByRole("button", { name: "Secondary" });
-    expect(btn.className).toContain("bg-sage-500");
+    expect(btn.className).toContain("bg-terra-500");
   });
 
-  it("applies outline variant classes", () => {
+  it("applies outline variant classes (olive border)", () => {
     render(<Button variant="outline">Outline</Button>);
     const btn = screen.getByRole("button", { name: "Outline" });
-    expect(btn.className).toContain("border-sage-500");
+    expect(btn.className).toContain("border-olive-600");
+  });
+
+  it("applies ghost variant classes", () => {
+    render(<Button variant="ghost">Ghost</Button>);
+    const btn = screen.getByRole("button", { name: "Ghost" });
+    expect(btn.className).toContain("text-olive-600");
   });
 
   it("applies size classes", () => {

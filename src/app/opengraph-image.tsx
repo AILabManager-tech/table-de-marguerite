@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "L'Usine RH — Consultante en ressources humaines";
+export const alt = "La Table de Marguerite — Bistro gastronomique";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -10,7 +10,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: "linear-gradient(135deg, #5a7a64 0%, #3d5a45 50%, #2d4433 100%)",
+          background: "linear-gradient(135deg, #4A5A3C 0%, #3C4A30 50%, #2E3A24 100%)",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -28,23 +28,23 @@ export default async function Image() {
             gap: "16px",
           }}
         >
-          <div style={{ fontSize: 72, fontWeight: 700, color: "#fff", letterSpacing: "-2px" }}>
-            L&apos;Usine RH
+          <div style={{ fontSize: 64, fontWeight: 700, color: "#FBF7F0", letterSpacing: "-2px" }}>
+            La Table de Marguerite
           </div>
-          <div style={{ fontSize: 28, color: "#d4c5a0", fontWeight: 400 }}>
-            Consultante en ressources humaines
+          <div style={{ fontSize: 28, color: "#D4854A", fontWeight: 400 }}>
+            Bistro gastronomique
           </div>
           <div
             style={{
               marginTop: "24px",
               width: "80px",
               height: "4px",
-              background: "linear-gradient(90deg, #c4724e, #d4a85c)",
+              background: "linear-gradient(90deg, #D4854A, #6B3A5E)",
               borderRadius: "2px",
             }}
           />
-          <div style={{ fontSize: 20, color: "#c9d4cb", marginTop: "8px" }}>
-            emiliepoirierrh.ca
+          <div style={{ fontSize: 20, color: "#FBF7F0", marginTop: "8px", opacity: 0.8 }}>
+            Vieux-Québec — Depuis 1987
           </div>
         </div>
       </div>

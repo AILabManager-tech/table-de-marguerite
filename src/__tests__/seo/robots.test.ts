@@ -15,7 +15,7 @@ describe("robots", () => {
     expect(rules!.allow).toBe("/");
   });
 
-  it("includes sitemap URL", () => {
-    expect(config.sitemap).toBe("https://emiliepoirierrh.ca/sitemap.xml");
+  it("includes sitemap URL for table-de-marguerite.vercel.app", () => {
+    expect(config.sitemap).toBe("https://table-de-marguerite.vercel.app/sitemap.xml");
   });
 });

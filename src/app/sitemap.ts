@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = "https://emiliepoirierrh.ca";
+const BASE_URL = "https://table-de-marguerite.vercel.app";
 
-const routes = ["", "/services", "/a-propos", "/contact", "/politique-confidentialite", "/mentions-legales"];
+const routes = ["", "/menu", "/notre-histoire", "/contact", "/politique-confidentialite", "/mentions-legales"];
 const locales = ["fr", "en"];
 
 export default function sitemap(): MetadataRoute.Sitemap {

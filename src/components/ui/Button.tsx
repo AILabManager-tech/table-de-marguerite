@@ -5,13 +5,13 @@ type Variant = "primary" | "secondary" | "outline" | "ghost";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-terracotta-500 text-white hover:bg-terracotta-600 hover:scale-[1.02]",
+    "bg-olive-600 text-white hover:bg-olive-500 hover:scale-[1.02]",
   secondary:
-    "bg-sage-500 text-white hover:bg-sage-600 hover:scale-[1.02]",
+    "bg-terra-500 text-white hover:bg-terra-400 hover:scale-[1.02]",
   outline:
-    "border-2 border-sage-500 text-sage-600 hover:bg-sage-50",
+    "border-2 border-olive-600 text-olive-600 hover:bg-olive-50",
   ghost:
-    "text-sage-600 hover:bg-sage-50",
+    "text-olive-600 hover:bg-olive-50",
 };
 
 interface BaseProps {
@@ -29,12 +29,13 @@ type Props = ButtonProps | LinkProps;
 
 /**
  * Button - Polymorphic button/link component with variant and size support.
+ * Palette: olive (primary), terra (secondary), prune, cream, bark.
  *
  * @component
  * @example
  * ```tsx
- * <Button variant="primary" size="md">Click me</Button>
- * <Button href="/about" variant="outline">Learn more</Button>
+ * <Button variant="primary" size="md">Réserver</Button>
+ * <Button href="/menu" variant="outline">Voir le menu</Button>
  * ```
  */
 export function Button({

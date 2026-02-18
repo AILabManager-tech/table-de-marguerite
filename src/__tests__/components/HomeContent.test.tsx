@@ -22,32 +22,64 @@ vi.mock("@/i18n/routing", () => ({
   ),
 }));
 
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({
-      children,
-      className,
-      ...rest
-    }: React.HTMLAttributes<HTMLDivElement>) => (
-      <div className={className} {...rest}>
-        {children}
-      </div>
-    ),
-    button: ({
-      children,
-      ...props
-    }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-      <button {...props}>{children}</button>
-    ),
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-}));
+vi.mock("framer-motion", () => {
+  const mc = (Tag: string) => {
+    const FM_PROPS = new Set([
+      "initial", "animate", "exit", "transition", "whileInView",
+      "viewport", "variants", "whileHover", "whileTap", "layout",
+      "layoutId",
+    ]);
+    const C = ({ children, ...props }: Record<string, unknown>) => {
+      const safe: Record<string, unknown> = {};
+      for (const [k, v] of Object.entries(props)) {
+        if (!FM_PROPS.has(k)) {
+          safe[k] = v;
+        }
+      }
+      const El = Tag as unknown as React.ElementType;
+      return <El {...safe}>{children as React.ReactNode}</El>;
+    };
+    C.displayName = `motion.${Tag}`;
+    return C;
+  };
+  return {
+    motion: {
+      div: mc("div"), span: mc("span"), button: mc("button"),
+      section: mc("section"), a: mc("a"), h1: mc("h1"),
+      h2: mc("h2"), h3: mc("h3"), p: mc("p"),
+      blockquote: mc("blockquote"),
+      create: (tag: string) => mc(tag),
+    },
+    animate: () => ({ stop: () => {} }),
+    useInView: () => true,
+    useScroll: () => ({ scrollYProgress: { get: () => 0.5 } }),
+    useTransform: () => 0,
+    useMotionValue: (v: number = 0) => ({ set: () => {}, get: () => v }),
+    useSpring: () => ({ set: () => {}, get: () => 0 }),
+    useReducedMotion: () => false,
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  };
+});
 
 vi.mock("next/image", () => ({
   default: (props: { alt: string; src: string }) => (
     <img alt={props.alt} src={props.src} />
+  ),
+}));
+
+vi.mock("next/link", () => ({
+  default: ({
+    children,
+    href,
+    ...props
+  }: {
+    children: React.ReactNode;
+    href: string;
+    [key: string]: unknown;
+  }) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
   ),
 }));
 
@@ -76,7 +108,7 @@ vi.mock("@/components/animations/AuroraBackground", () => ({
 }));
 
 vi.mock("@/components/animations/CountUp", () => ({
-  CountUp: ({ to, suffix }: { to: number; suffix: string }) => (
+  CountUp: ({ to, suffix }: { to: number; suffix?: string }) => (
     <span>
       {to}
       {suffix}
@@ -100,34 +132,12 @@ vi.mock("@/components/ui/AnimatedSection", () => ({
   ),
 }));
 
-vi.mock("@/components/interactive/ScrollTimeline", () => ({
-  ScrollTimeline: () => <div data-testid="scroll-timeline" />,
+vi.mock("@/components/interactive/SeasonalMenuExplorer", () => ({
+  SeasonalMenuExplorer: () => <div data-testid="seasonal-menu-explorer" />,
 }));
 
-vi.mock("@/components/interactive/DiagnosticQuiz", () => ({
-  DiagnosticQuiz: () => <div data-testid="diagnostic-quiz" />,
-}));
-
-vi.mock("@/components/interactive/CostCalculator", () => ({
-  CostCalculator: () => <div data-testid="cost-calculator" />,
-}));
-
-vi.mock("@/components/interactive/FlipCards", () => ({
-  FlipCards: () => <div data-testid="flip-cards" />,
-}));
-
-vi.mock("@/components/interactive/TestimonialsCarousel", () => ({
-  TestimonialsCarousel: () => <div data-testid="testimonials" />,
-}));
-
-vi.mock("@/components/animations/StaggerGrid", () => ({
-  StaggerGrid: ({
-    children,
-    className,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-  }) => <div className={className}>{children}</div>,
+vi.mock("@/components/interactive/BotanicalDivider", () => ({
+  BotanicalDivider: () => <div data-testid="botanical-divider" />,
 }));
 
 import { HomeContent } from "@/components/pages/HomeContent";
@@ -150,33 +160,56 @@ describe("HomeContent", () => {
     expect(screen.getByText("hero.subtitle")).toBeInTheDocument();
   });
 
-  it("renders hero CTA buttons", () => {
+  it("renders hero CTA buttons (Reserver + Voir le menu)", () => {
     render(<HomeContent />);
     expect(screen.getByText("hero.cta")).toBeInTheDocument();
     expect(screen.getByText("hero.cta_secondary")).toBeInTheDocument();
   });
 
-  it("renders stats section", () => {
+  it("renders stats section (years, local, seasons)", () => {
     render(<HomeContent />);
     expect(screen.getByText("stats.experience")).toBeInTheDocument();
-    expect(screen.getByText("stats.clients")).toBeInTheDocument();
-    expect(screen.getByText("stats.employees")).toBeInTheDocument();
+    expect(screen.getByText("stats.local")).toBeInTheDocument();
+    expect(screen.getByText("stats.seasons")).toBeInTheDocument();
   });
 
-  it("renders pain points section", () => {
+  it("renders philosophy section", () => {
     render(<HomeContent />);
-    expect(screen.getByText("pain.title")).toBeInTheDocument();
+    expect(screen.getByText("philosophy.title")).toBeInTheDocument();
+    expect(screen.getByText("philosophy.p1")).toBeInTheDocument();
+  });
+
+  it("renders SeasonalMenuExplorer component", () => {
+    render(<HomeContent />);
+    expect(screen.getByTestId("seasonal-menu-explorer")).toBeInTheDocument();
+  });
+
+  it("renders BotanicalDivider components", () => {
+    render(<HomeContent />);
+    const dividers = screen.getAllByTestId("botanical-divider");
+    expect(dividers.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("renders gallery section", () => {
+    render(<HomeContent />);
+    expect(screen.getByText("gallery.title")).toBeInTheDocument();
+    expect(screen.getByText("gallery.subtitle")).toBeInTheDocument();
+  });
+
+  it("renders testimonials section", () => {
+    render(<HomeContent />);
+    expect(screen.getByText("testimonials.title")).toBeInTheDocument();
+  });
+
+  it("renders reservation CTA section", () => {
+    render(<HomeContent />);
+    expect(screen.getByText("reservation.title")).toBeInTheDocument();
+    expect(screen.getByText("reservation.cta")).toBeInTheDocument();
   });
 
   it("renders multiple content sections", () => {
     render(<HomeContent />);
     const sections = document.querySelectorAll("section");
-    expect(sections.length).toBeGreaterThanOrEqual(3);
-  });
-
-  it("renders final CTA", () => {
-    render(<HomeContent />);
-    expect(screen.getByText("cta_final.title")).toBeInTheDocument();
-    expect(screen.getByText("cta_final.button")).toBeInTheDocument();
+    expect(sections.length).toBeGreaterThanOrEqual(4);
   });
 });

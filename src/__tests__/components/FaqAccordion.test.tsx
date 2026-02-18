@@ -3,9 +3,9 @@ import { describe, it, expect, afterEach } from "vitest";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 
 const mockItems = [
-  { question: "Question 1?", answer: "Answer 1" },
-  { question: "Question 2?", answer: "Answer 2" },
-  { question: "Question 3?", answer: "Answer 3" },
+  { question: "Faut-il r\u00e9server \u00e0 l'avance?", answer: "Oui, nous recommandons fortement la r\u00e9servation." },
+  { question: "Proposez-vous des options v\u00e9g\u00e9tariennes?", answer: "Absolument, notre carte propose toujours au moins deux plats v\u00e9g\u00e9tariens." },
+  { question: "Quel est le code vestimentaire?", answer: "Tenue soign\u00e9e d\u00e9contract\u00e9e (smart casual)." },
 ];
 
 afterEach(cleanup);
@@ -13,15 +13,15 @@ afterEach(cleanup);
 describe("FaqAccordion", () => {
   it("renders all questions", () => {
     render(<FaqAccordion items={mockItems} />);
-    expect(screen.getByText("Question 1?")).toBeInTheDocument();
-    expect(screen.getByText("Question 2?")).toBeInTheDocument();
-    expect(screen.getByText("Question 3?")).toBeInTheDocument();
+    expect(screen.getByText("Faut-il r\u00e9server \u00e0 l'avance?")).toBeInTheDocument();
+    expect(screen.getByText("Proposez-vous des options v\u00e9g\u00e9tariennes?")).toBeInTheDocument();
+    expect(screen.getByText("Quel est le code vestimentaire?")).toBeInTheDocument();
   });
 
   it("renders all answers in DOM", () => {
     render(<FaqAccordion items={mockItems} />);
-    expect(screen.getByText("Answer 1")).toBeInTheDocument();
-    expect(screen.getByText("Answer 2")).toBeInTheDocument();
+    expect(screen.getByText(/Oui, nous recommandons/)).toBeInTheDocument();
+    expect(screen.getByText(/Absolument/)).toBeInTheDocument();
   });
 
   it("all items start collapsed (aria-expanded=false)", () => {

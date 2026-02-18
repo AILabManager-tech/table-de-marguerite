@@ -24,7 +24,7 @@ describe("sitemap", () => {
 
   it("homepage has priority 1", () => {
     const homeFr = entries.find(
-      (e) => e.url === "https://emiliepoirierrh.ca/fr"
+      (e) => e.url === "https://table-de-marguerite.vercel.app/fr"
     );
     expect(homeFr).toBeDefined();
     expect(homeFr!.priority).toBe(1);
@@ -39,10 +39,24 @@ describe("sitemap", () => {
     expect(legal).toBeDefined();
   });
 
-  it("includes all main routes", () => {
+  it("includes all main routes (/menu, /notre-histoire, /contact)", () => {
     const urls = entries.map((e) => e.url);
-    expect(urls.some((u) => u.includes("/services"))).toBe(true);
-    expect(urls.some((u) => u.includes("/a-propos"))).toBe(true);
+    expect(urls.some((u) => u.includes("/menu"))).toBe(true);
+    expect(urls.some((u) => u.includes("/notre-histoire"))).toBe(true);
     expect(urls.some((u) => u.includes("/contact"))).toBe(true);
+  });
+
+  it("uses table-de-marguerite.vercel.app as base URL", () => {
+    for (const entry of entries) {
+      expect(entry.url).toContain("table-de-marguerite.vercel.app");
+    }
+  });
+
+  it("alternates use correct base URL", () => {
+    for (const entry of entries) {
+      const langs = entry.alternates!.languages as Record<string, string>;
+      expect(langs.fr).toContain("table-de-marguerite.vercel.app/fr");
+      expect(langs.en).toContain("table-de-marguerite.vercel.app/en");
+    }
   });
 });

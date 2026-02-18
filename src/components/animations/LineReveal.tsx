@@ -11,16 +11,17 @@ interface LineRevealProps {
 
 /**
  * LineReveal - Animated horizontal line that scales in when scrolled into view.
+ * Default color: bg-olive-400 for La Table de Marguerite.
  *
  * @component
  * @example
  * ```tsx
- * <LineReveal color="bg-terracotta-400" delay={0.2} />
+ * <LineReveal color="bg-olive-400" delay={0.2} />
  * ```
  */
 export function LineReveal({
   className,
-  color = "bg-terracotta-400",
+  color = "bg-olive-400",
   delay = 0,
 }: LineRevealProps) {
   const ref = useRef(null);
