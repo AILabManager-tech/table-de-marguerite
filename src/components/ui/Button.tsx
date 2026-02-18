@@ -7,7 +7,7 @@ const variants: Record<Variant, string> = {
   primary:
     "bg-olive-600 text-white hover:bg-olive-500 hover:scale-[1.02]",
   secondary:
-    "bg-terra-500 text-white hover:bg-terra-400 hover:scale-[1.02]",
+    "bg-terra-600 text-white hover:bg-terra-700 hover:scale-[1.02]",
   outline:
     "border-2 border-olive-600 text-olive-600 hover:bg-olive-50",
   ghost:

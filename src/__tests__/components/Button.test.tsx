@@ -29,7 +29,7 @@ describe("Button", () => {
   it("applies secondary variant classes (terra)", () => {
     render(<Button variant="secondary">Secondary</Button>);
     const btn = screen.getByRole("button", { name: "Secondary" });
-    expect(btn.className).toContain("bg-terra-500");
+    expect(btn.className).toContain("bg-terra-600");
   });
 
   it("applies outline variant classes (olive border)", () => {

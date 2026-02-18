@@ -280,7 +280,7 @@ export function AboutContent() {
           <AnimatedSection delay={0.5}>
             <MagneticButton
               href="/contact"
-              className="inline-flex items-center justify-center rounded-xl bg-terra-400 px-10 py-5 font-heading text-lg font-medium text-cream-100 transition-all hover:bg-terra-500 hover:shadow-xl hover:shadow-terra-400/25"
+              className="inline-flex items-center justify-center rounded-xl bg-terra-600 px-10 py-5 font-heading text-lg font-medium text-cream-100 transition-all hover:bg-terra-700 hover:shadow-xl hover:shadow-terra-600/25"
               strength={0.4}
             >
               {t("cta.button")}

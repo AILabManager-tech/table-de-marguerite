@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { AboutContent } from "@/components/pages/AboutContent";
+import { AboutContentLazy } from "@/components/pages/AboutContentLazy";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -23,5 +23,5 @@ export async function generateMetadata({
 }
 
 export default function NotreHistoirePage() {
-  return <AboutContent />;
+  return <AboutContentLazy />;
 }

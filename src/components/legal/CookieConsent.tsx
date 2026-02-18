@@ -91,14 +91,14 @@ export function CookieConsent() {
       role="dialog"
       aria-label="Gestion des témoins (cookies)"
       aria-modal="true"
-      className="fixed bottom-0 left-0 right-0 z-[60] border-t border-olive-300 bg-cream p-4 shadow-2xl md:p-6"
+      className="fixed bottom-0 left-0 right-0 z-[60] border-t border-olive-300 bg-cream-100 p-4 shadow-2xl md:p-6"
     >
       <div className="mx-auto max-w-4xl">
         <div className="mb-4">
           <h2 className="mb-2 font-heading text-lg font-semibold text-bark">
             Gestion des témoins (cookies)
           </h2>
-          <p className="text-sm text-bark/70">
+          <p className="text-sm text-bark-light">
             Nous utilisons des témoins pour améliorer votre expérience. Conformément à
             la <strong>Loi 25 du Québec</strong>, seuls les témoins essentiels sont
             actifs par défaut. Vous pouvez accepter ou refuser les témoins optionnels.
@@ -117,8 +117,8 @@ export function CookieConsent() {
               />
               <div>
                 <span className="font-medium text-bark">Essentiels</span>
-                <span className="ml-2 text-xs text-bark/50">(toujours actifs)</span>
-                <p className="mt-1 text-xs text-bark/70">
+                <span className="ml-2 text-xs text-bark-light">(toujours actifs)</span>
+                <p className="mt-1 text-xs text-bark-light">
                   Nécessaires au fonctionnement du site. Ne peuvent pas être désactivés.
                 </p>
               </div>
@@ -134,7 +134,7 @@ export function CookieConsent() {
               />
               <div>
                 <span className="font-medium text-bark">Analytiques</span>
-                <p className="mt-1 text-xs text-bark/70">
+                <p className="mt-1 text-xs text-bark-light">
                   Nous aident à comprendre comment les visiteurs utilisent le site (ex. : Google Analytics).
                 </p>
               </div>
@@ -150,7 +150,7 @@ export function CookieConsent() {
               />
               <div>
                 <span className="font-medium text-bark">Marketing</span>
-                <p className="mt-1 text-xs text-bark/70">
+                <p className="mt-1 text-xs text-bark-light">
                   Utilisés pour afficher des publicités pertinentes et mesurer leur efficacité.
                 </p>
               </div>
@@ -187,18 +187,18 @@ export function CookieConsent() {
 
           <button
             onClick={handleAcceptAll}
-            className="flex-1 rounded-xl bg-terra-500 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-terra-600 focus:outline-none focus:ring-2 focus:ring-terra-400 focus:ring-offset-2"
+            className="flex-1 rounded-xl bg-terra-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-terra-700 focus:outline-none focus:ring-2 focus:ring-terra-400 focus:ring-offset-2"
             aria-label="Accepter tous les témoins"
           >
             Tout accepter
           </button>
         </div>
 
-        <p className="mt-3 text-center text-xs text-bark/50">
+        <p className="mt-3 text-center text-xs text-bark-light">
           Pour en savoir plus, consultez notre{" "}
           <Link
             href="/fr/politique-confidentialite"
-            className="underline hover:text-bark/70 focus:outline-none focus:ring-2 focus:ring-olive-400"
+            className="underline hover:text-bark focus:outline-none focus:ring-2 focus:ring-olive-400"
           >
             politique de confidentialité
           </Link>
@@ -218,7 +218,7 @@ export function CookieSettingsButton() {
   return (
     <button
       onClick={handleOpen}
-      className="text-sm text-cream/70 underline transition-colors hover:text-cream focus:outline-none focus:ring-2 focus:ring-olive-400"
+      className="text-sm text-cream-400 underline transition-colors hover:text-cream focus:outline-none focus:ring-2 focus:ring-olive-400"
       aria-label="Modifier mes préférences de témoins"
     >
       Gestion des témoins

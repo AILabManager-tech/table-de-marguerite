@@ -34,20 +34,25 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
 
+  const description =
+    locale === "fr"
+      ? "La Table de Marguerite \u2014 Bistro gastronomique au c\u0153ur du Vieux-Qu\u00e9bec. Cuisine de saison, produits locaux et ambiance chaleureuse."
+      : "La Table de Marguerite \u2014 Gastronomic bistro in the heart of Old Quebec. Seasonal cuisine, local products and warm atmosphere.";
+
   return {
     metadataBase: new URL("https://table-de-marguerite.vercel.app"),
     title: {
       default: t("title"),
       template: "%s | La Table de Marguerite",
     },
-    description: t("description"),
+    description,
     openGraph: {
       type: "website",
       locale: locale === "fr" ? "fr_CA" : "en_CA",
       alternateLocale: locale === "fr" ? "en_CA" : "fr_CA",
       siteName: "La Table de Marguerite",
       title: t("title"),
-      description: t("description"),
+      description,
     },
     alternates: {
       canonical: `https://table-de-marguerite.vercel.app/${locale}`,

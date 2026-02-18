@@ -198,7 +198,7 @@ export function HomeContent() {
               <div className="flex flex-col gap-4 sm:flex-row">
                 <MagneticButton
                   href="/contact"
-                  className="inline-flex items-center justify-center rounded-xl bg-terra-400 px-8 py-4 font-heading text-lg font-medium text-cream-100 transition-all hover:bg-terra-500 hover:shadow-xl hover:shadow-terra-400/25"
+                  className="inline-flex items-center justify-center rounded-xl bg-terra-600 px-8 py-4 font-heading text-lg font-medium text-cream-100 transition-all hover:bg-terra-700 hover:shadow-xl hover:shadow-terra-600/25"
                   strength={0.35}
                 >
                   {t("hero.cta")}
@@ -392,7 +392,7 @@ export function HomeContent() {
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <MagneticButton
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-xl bg-terra-400 px-10 py-5 font-heading text-lg font-medium text-cream-100 transition-all hover:bg-terra-500 hover:shadow-xl hover:shadow-terra-400/25"
+                className="inline-flex items-center justify-center rounded-xl bg-terra-600 px-10 py-5 font-heading text-lg font-medium text-cream-100 transition-all hover:bg-terra-700 hover:shadow-xl hover:shadow-terra-600/25"
                 strength={0.4}
               >
                 {t("reservation.cta")}

@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { ServicesContent } from "@/components/pages/ServicesContent";
+import { ServicesContentLazy } from "@/components/pages/ServicesContentLazy";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -23,5 +23,5 @@ export async function generateMetadata({
 }
 
 export default function MenuPage() {
-  return <ServicesContent />;
+  return <ServicesContentLazy />;
 }

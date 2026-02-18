@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { ContactContent } from "@/components/pages/ContactContent";
+import { ContactContentLazy } from "@/components/pages/ContactContentLazy";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -23,5 +23,5 @@ export async function generateMetadata({
 }
 
 export default function ContactPage() {
-  return <ContactContent />;
+  return <ContactContentLazy />;
 }
