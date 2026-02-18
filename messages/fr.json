@@ -6,6 +6,7 @@
   "nav": {
     "home": "Accueil",
     "menu": "Le Menu",
+    "about": "Notre Histoire",
     "notre-histoire": "Notre Histoire",
     "contact": "Contact",
     "cta": "Réserver"
@@ -15,8 +16,15 @@
       "title": "Une cuisine qui raconte le terroir.",
       "subtitle": "Au cœur du Vieux-Québec, La Table de Marguerite célèbre les saveurs du Québec depuis près de quatre décennies. Chaque assiette est un hommage aux producteurs d'ici.",
       "badge": "Depuis 1987",
+      "cta": "Réserver une table",
       "cta_primary": "Réserver",
       "cta_secondary": "Voir le menu"
+    },
+    "stats": {
+      "years_suffix": "ans",
+      "experience": "d'expérience culinaire",
+      "local": "produits locaux",
+      "seasons": "saisons au menu"
     },
     "philosophy": {
       "title": "Notre philosophie",
@@ -33,82 +41,154 @@
     "seasonal_menu": {
       "title": "Le menu saisonnier",
       "subtitle": "Notre carte évolue au rythme des récoltes et des arrivages. Découvrez nos inspirations de la saison.",
-      "spring": {
-        "name": "Printemps",
-        "dish1": {
-          "name": "Asperges du Québec, œuf poché et hollandaise à l'estragon",
-          "description": "Asperges vertes de la Montérégie, œuf bio fermier, sauce hollandaise légère parfumée à l'estragon frais.",
-          "price": "24"
-        },
-        "dish2": {
-          "name": "Truite de rivière, beurre noisette et fines herbes",
-          "description": "Truite arc-en-ciel de la Beauce, beurre noisette aux câpres, bouquet de fines herbes du jardin.",
-          "price": "38"
-        },
-        "dish3": {
-          "name": "Tarte à la rhubarbe et crème glacée à la vanille",
-          "description": "Rhubarbe de l'Île d'Orléans, pâte sablée au beurre, crème glacée vanille de Madagascar.",
-          "price": "16"
-        }
+      "tabs_label": "Sélectionner une saison",
+      "courses": {
+        "starter": "Entrée",
+        "main": "Plat principal",
+        "dessert": "Dessert"
       },
-      "summer": {
-        "name": "Été",
-        "dish1": {
-          "name": "Gaspacho de tomates ancestrales et burrata",
-          "description": "Tomates de variétés anciennes du marché, burrata crémeuse, huile d'olive vierge, basilic frais.",
-          "price": "22"
+      "seasons": {
+        "spring": {
+          "name": "Printemps",
+          "note": "Menu printemps — Les asperges, la rhubarbe et les fines herbes du jardin ouvrent la saison avec fraîcheur.",
+          "dishes": {
+            "starter": {
+              "name": "Asperges du Québec, œuf poché et hollandaise à l'estragon",
+              "description": "Asperges vertes de la Montérégie, œuf bio fermier, sauce hollandaise légère parfumée à l'estragon frais.",
+              "price": "24 $"
+            },
+            "main": {
+              "name": "Truite de rivière, beurre noisette et fines herbes",
+              "description": "Truite arc-en-ciel de la Beauce, beurre noisette aux câpres, bouquet de fines herbes du jardin.",
+              "price": "38 $"
+            },
+            "dessert": {
+              "name": "Tarte à la rhubarbe et crème glacée à la vanille",
+              "description": "Rhubarbe de l'Île d'Orléans, pâte sablée au beurre, crème glacée vanille de Madagascar.",
+              "price": "16 $"
+            }
+          }
         },
-        "dish2": {
-          "name": "Canard du Lac Brome, cerises et jus au thym",
-          "description": "Magret de canard rôti, cerises de saison confites, jus corsé au thym et à l'érable.",
-          "price": "42"
+        "summer": {
+          "name": "Été",
+          "note": "Menu été — Tomates ancestrales, herbes du jardin et petits fruits subliment les longues journées estivales.",
+          "dishes": {
+            "starter": {
+              "name": "Gaspacho de tomates ancestrales et burrata",
+              "description": "Tomates de variétés anciennes du marché, burrata crémeuse, huile d'olive vierge, basilic frais.",
+              "price": "22 $"
+            },
+            "main": {
+              "name": "Canard du Lac Brome, cerises et jus au thym",
+              "description": "Magret de canard rôti, cerises de saison confites, jus corsé au thym et à l'érable.",
+              "price": "42 $"
+            },
+            "dessert": {
+              "name": "Crème brûlée aux bleuets du Lac-Saint-Jean",
+              "description": "Crème vanillée onctueuse, bleuets sauvages caramélisés, tuile craquante au miel.",
+              "price": "16 $"
+            }
+          }
         },
-        "dish3": {
-          "name": "Crème brûlée aux bleuets du Lac-Saint-Jean",
-          "description": "Crème vanillée onctueuse, bleuets sauvages caramélisés, tuile craquante au miel.",
-          "price": "16"
-        }
-      },
-      "autumn": {
-        "name": "Automne",
-        "dish1": {
-          "name": "Velouté de courge butternut et noisettes torréfiées",
-          "description": "Courge butternut de Portneuf, noisettes du Québec torréfiées, huile de noisette et crème fraîche.",
-          "price": "20"
+        "autumn": {
+          "name": "Automne",
+          "note": "Menu automne — Courges, gibier et champignons forestiers composent une cuisine chaleureuse et réconfortante.",
+          "dishes": {
+            "starter": {
+              "name": "Velouté de courge butternut et noisettes torréfiées",
+              "description": "Courge butternut de Portneuf, noisettes du Québec torréfiées, huile de noisette et crème fraîche.",
+              "price": "20 $"
+            },
+            "main": {
+              "name": "Cerf de Boileau, sauce au vin rouge et champignons",
+              "description": "Médaillon de cerf rouge, sauce demi-glace au cabernet, chanterelles et cèpes forestiers.",
+              "price": "46 $"
+            },
+            "dessert": {
+              "name": "Tarte Tatin aux pommes et caramel à l'érable",
+              "description": "Pommes Cortland de Charlevoix, caramel d'érable, crème chantilly légèrement vanillée.",
+              "price": "17 $"
+            }
+          }
         },
-        "dish2": {
-          "name": "Cerf de Boileau, sauce au vin rouge et champignons",
-          "description": "Médaillon de cerf rouge, sauce demi-glace au cabernet, chanterelles et cèpes forestiers.",
-          "price": "46"
-        },
-        "dish3": {
-          "name": "Tarte Tatin aux pommes et caramel à l'érable",
-          "description": "Pommes Cortland de Charlevoix, caramel d'érable, crème chantilly légèrement vanillée.",
-          "price": "17"
-        }
-      },
-      "winter": {
-        "name": "Hiver",
-        "dish1": {
-          "name": "Soupe à l'oignon gratinée au fromage d'Oka",
-          "description": "Oignons caramélisés lentement, bouillon maison, croûton de pain artisanal, fromage d'Oka fondu.",
-          "price": "19"
-        },
-        "dish2": {
-          "name": "Braisé de joues de bœuf au vin et légumes racines",
-          "description": "Joues de bœuf braisées 8 heures, légumes racines du Québec, purée de céleri-rave.",
-          "price": "44"
-        },
-        "dish3": {
-          "name": "Fondant au chocolat noir et coulis de framboises",
-          "description": "Chocolat noir 72% Valrhona, cœur coulant, coulis de framboises du Québec, éclats de pralin.",
-          "price": "18"
+        "winter": {
+          "name": "Hiver",
+          "note": "Menu hiver — Braisés lents, fromages d'ici et chocolat réchauffent les soirées les plus froides.",
+          "dishes": {
+            "starter": {
+              "name": "Soupe à l'oignon gratinée au fromage d'Oka",
+              "description": "Oignons caramélisés lentement, bouillon maison, croûton de pain artisanal, fromage d'Oka fondu.",
+              "price": "19 $"
+            },
+            "main": {
+              "name": "Braisé de joues de bœuf au vin et légumes racines",
+              "description": "Joues de bœuf braisées 8 heures, légumes racines du Québec, purée de céleri-rave.",
+              "price": "44 $"
+            },
+            "dessert": {
+              "name": "Fondant au chocolat noir et coulis de framboises",
+              "description": "Chocolat noir 72% Valrhona, cœur coulant, coulis de framboises du Québec, éclats de pralin.",
+              "price": "18 $"
+            }
+          }
         }
       }
     },
     "gallery": {
       "title": "Ambiance & savoir-faire",
       "subtitle": "Un lieu où l'élégance du Vieux-Québec rencontre la chaleur d'un bistro de quartier.",
+      "filter_label": "Filtrer par catégorie",
+      "caption": "Photos à venir — nos plats changent au fil des saisons.",
+      "categories": {
+        "all": "Tout",
+        "starters": "Entrées",
+        "mains": "Plats",
+        "desserts": "Desserts"
+      },
+      "items": {
+        "item_0": {
+          "title": "Tartare de saumon de Gaspésie",
+          "description": "Saumon frais, avocat, mangue et vinaigrette aux agrumes."
+        },
+        "item_1": {
+          "title": "Magret de canard du Lac Brome",
+          "description": "Magret rôti, jus à l'érable et au thym, purée de patates douces."
+        },
+        "item_2": {
+          "title": "Crème brûlée à l'érable",
+          "description": "Crème onctueuse au sirop d'érable du Québec, caramélisée au chalumeau."
+        },
+        "item_3": {
+          "title": "Filet de bœuf Angus du Québec",
+          "description": "Filet grillé, sauce au poivre vert, gratin dauphinois et légumes rôtis."
+        },
+        "item_4": {
+          "title": "Fondant au chocolat noir",
+          "description": "Chocolat Valrhona 72%, cœur coulant, glace vanille et éclats de pralin."
+        },
+        "item_5": {
+          "title": "Velouté de courge butternut",
+          "description": "Courge de Portneuf, noisettes torréfiées, huile de noisette et crème fraîche."
+        }
+      },
+      "img_1": {
+        "caption": "La salle principale"
+      },
+      "img_2": {
+        "caption": "Dressage du jour"
+      },
+      "img_3": {
+        "caption": "Notre cave à vins"
+      },
+      "img_4": {
+        "caption": "La terrasse d'été"
+      },
+      "img_5": {
+        "caption": "Cheffe Marguerite en cuisine"
+      },
+      "img_6": {
+        "caption": "Le marché du matin"
+      },
       "item1": {
         "title": "La salle principale",
         "category": "Ambiance"
@@ -137,6 +217,21 @@
     "testimonials": {
       "title": "Ce que nos convives en disent",
       "subtitle": "Des moments de partage autour d'une cuisine sincère.",
+      "0": {
+        "quote": "Un repas à La Table de Marguerite, c'est un voyage gustatif au cœur du Québec. Chaque bouchée raconte une histoire. Le cerf de Boileau était tout simplement sublime.",
+        "name": "Marie-Pierre L.",
+        "role": "Gastronome"
+      },
+      "1": {
+        "quote": "Nous y célébrons chaque anniversaire depuis 15 ans. L'accueil est toujours aussi chaleureux, et le menu saisonnier nous surprend à chaque visite. Un incontournable du Vieux-Québec.",
+        "name": "Jean-François et Claire D.",
+        "role": "Habitués"
+      },
+      "2": {
+        "quote": "La cheffe Marguerite fait un travail remarquable avec les produits locaux. Le brunch du dimanche est une pure merveille — les œufs bénédictine au saumon fumé de Gaspésie sont inoubliables.",
+        "name": "Catherine B.",
+        "role": "Critique culinaire"
+      },
       "t1": {
         "quote": "Un repas à La Table de Marguerite, c'est un voyage gustatif au cœur du Québec. Chaque bouchée raconte une histoire. Le cerf de Boileau était tout simplement sublime.",
         "author": "Marie-Pierre L.",
@@ -159,7 +254,23 @@
       "phone_label": "Par téléphone",
       "phone": "(418) 555-0142",
       "online_label": "En ligne",
-      "cta": "Réserver maintenant"
+      "cta": "Réserver maintenant",
+      "menu_link": "Consulter le menu",
+      "field_date": "Date",
+      "field_guests": "Nombre de convives",
+      "field_time": "Heure",
+      "field_name": "Votre nom",
+      "field_phone": "Téléphone",
+      "guest_count": "{count, plural, =1 {1 convive} other {# convives}}",
+      "time_placeholder": "Choisir un créneau",
+      "name_placeholder": "Prénom et nom",
+      "phone_placeholder": "(418) 555-0000",
+      "submit": "Confirmer la réservation",
+      "submitting": "Réservation en cours...",
+      "error_missing_fields": "Veuillez remplir tous les champs obligatoires.",
+      "success_message": "Réservation confirmée!",
+      "success_description": "Le {date} à {time} pour {guests} convive(s). À bientôt!",
+      "privacy_note": "Vos données sont traitées conformément à la Loi 25 du Québec."
     }
   },
   "services": {
@@ -171,6 +282,97 @@
       "title": "Le Menu",
       "subtitle": "Une cuisine d'inspiration française, sublimée par les trésors du terroir québécois.",
       "badge": "Menu saisonnier"
+    },
+    "starters": {
+      "title": "Entrées",
+      "subtitle": "Des entrées qui mettent en valeur la fraîcheur et la finesse des produits d'ici.",
+      "item_1": {
+        "name": "Tartare de saumon de Gaspésie",
+        "description": "Saumon atlantique, avocat, mangue, vinaigrette aux agrumes et sésame torréfié.",
+        "price": "22 $"
+      },
+      "item_2": {
+        "name": "Velouté de saison",
+        "description": "Soupe crémeuse aux légumes de saison, crème fraîche et croûtons maison.",
+        "price": "16 $"
+      },
+      "item_3": {
+        "name": "Foie gras poêlé aux pommes",
+        "description": "Foie gras du Québec, compote de pommes au cidre de glace, brioche toastée.",
+        "price": "28 $"
+      },
+      "item_4": {
+        "name": "Salade de chèvre chaud et noix de Grenoble",
+        "description": "Fromage de chèvre gratine, mesclun, noix de Grenoble, vinaigrette au miel et moutarde.",
+        "price": "18 $"
+      }
+    },
+    "mains": {
+      "title": "Plats principaux",
+      "subtitle": "Des plats généreux qui célèbrent les producteurs et artisans du Québec.",
+      "item_1": {
+        "name": "Filet de bœuf Angus du Québec",
+        "description": "Filet grillé, sauce au poivre vert, gratin dauphinois et légumes rôtis de saison.",
+        "price": "48 $"
+      },
+      "item_2": {
+        "name": "Pavé de morue des Îles-de-la-Madeleine",
+        "description": "Morue fraîche, beurre blanc au citron, risotto aux herbes et petits légumes.",
+        "price": "38 $"
+      },
+      "item_3": {
+        "name": "Magret de canard du Lac Brome",
+        "description": "Magret rôti rosé, jus à l'érable et au thym, purée de patates douces.",
+        "price": "42 $"
+      },
+      "item_4": {
+        "name": "Risotto aux champignons forestiers",
+        "description": "Riz arborio crémeux, chanterelles, pleurotes et shiitakes, copeaux de parmesan. Végétarien.",
+        "price": "34 $"
+      }
+    },
+    "desserts": {
+      "title": "Desserts",
+      "subtitle": "Des douceurs maison pour conclure votre repas en beauté.",
+      "item_1": {
+        "name": "Crème brûlée à l'érable",
+        "description": "Crème onctueuse au sirop d'érable du Québec, caramélisée au chalumeau.",
+        "price": "16 $"
+      },
+      "item_2": {
+        "name": "Fondant au chocolat noir",
+        "description": "Chocolat Valrhona 72%, cœur coulant, glace vanille et éclats de pralin.",
+        "price": "18 $"
+      },
+      "item_3": {
+        "name": "Assiette de fromages du Québec",
+        "description": "Sélection de 5 fromages affinés, confiture de figues, noix et pain aux fruits.",
+        "price": "24 $"
+      }
+    },
+    "drinks": {
+      "title": "Carte des vins",
+      "subtitle": "Une sélection de vins québécois et importations privées pour accompagner votre repas.",
+      "item_1": {
+        "name": "Domaine St-Jacques, Réserve Rouge",
+        "description": "Vin rouge du Québec, fruité et charpenté. Notes de cerise noire et d'épices.",
+        "price": "58 $"
+      },
+      "item_2": {
+        "name": "Vignoble de l'Orpailleur, Blanc",
+        "description": "Vin blanc sec du Québec, vif et minéral. Poire, agrumes et fleurs blanches.",
+        "price": "52 $"
+      },
+      "item_3": {
+        "name": "Cidre de glace, Domaine Pinnacle",
+        "description": "Cidre de glace du Québec, doux et onctueux. Pomme confite, miel et épices.",
+        "price": "45 $"
+      },
+      "item_4": {
+        "name": "Sélection du sommelier",
+        "description": "Demandez à Sophie notre sommelière — elle saura trouver l'accord parfait pour votre repas.",
+        "price": "Variable"
+      }
     },
     "categories": {
       "entrees": {
@@ -258,7 +460,8 @@
     "chef_note": {
       "title": "Le mot de la cheffe",
       "quote": "Chaque plat que je compose est une lettre d'amour au Québec. Les producteurs d'ici sont mes complices — leur passion nourrit la mienne. Ma cuisine, c'est leur histoire racontée dans l'assiette.",
-      "author": "Marguerite Tremblay, cheffe fondatrice"
+      "author": "Marguerite Tremblay",
+      "role": "Cheffe fondatrice"
     },
     "faq": {
       "title": "Questions fréquentes",
@@ -285,6 +488,7 @@
     "hero": {
       "title": "Notre Histoire",
       "subtitle": "Du marché du Vieux-Port à la rue du Petit-Champlain — 37 ans de passion pour le terroir québécois.",
+      "badge": "Fondé en 1987",
       "established": "Fondé en 1987"
     },
     "story": {
@@ -318,6 +522,21 @@
     "team": {
       "title": "Notre équipe",
       "subtitle": "Des passionnés qui font vivre La Table de Marguerite au quotidien.",
+      "0": {
+        "name": "Marguerite Tremblay",
+        "role": "Cheffe fondatrice",
+        "bio": "Formée à l'ITHQ et perfectionnée à Lyon, Marguerite marie la rigueur française à la générosité du terroir québécois depuis 1987."
+      },
+      "1": {
+        "name": "Antoine Lavoie",
+        "role": "Sous-chef",
+        "bio": "Spécialiste en pâtisserie et desserts, Antoine sublime les produits d'ici avec créativité et précision depuis 12 ans."
+      },
+      "2": {
+        "name": "Sophie Gagnon",
+        "role": "Sommelière",
+        "bio": "Passionnée des vins du Québec, Sophie compose des accords mets-vins qui révèlent le meilleur de chaque plat."
+      },
       "member1": {
         "name": "Marguerite Tremblay",
         "role": "Cheffe fondatrice",
@@ -337,7 +556,8 @@
     "cta": {
       "title": "Venez nous rencontrer",
       "subtitle": "Réservez votre table et laissez-nous vous raconter notre histoire autour d'un bon repas.",
-      "button": "Réserver une table"
+      "button": "Réserver une table",
+      "menu_link": "Consulter le menu"
     }
   },
   "contact": {
@@ -353,7 +573,15 @@
       "name": "Votre nom complet",
       "email": "Courriel",
       "phone": "Téléphone",
+      "optional": "facultatif",
       "type": "Type de demande",
+      "type_placeholder": "Sélectionner un type",
+      "types": {
+        "reservation": "Réservation",
+        "private_event": "Événement privé",
+        "question": "Question générale",
+        "other": "Autre"
+      },
       "type_options": {
         "reservation": "Réservation",
         "event": "Événement privé",
@@ -361,22 +589,45 @@
         "other": "Autre"
       },
       "guests": "Nombre de convives",
+      "guest_singular": "convive",
+      "guest_plural": "convives",
       "message": "Votre message",
+      "message_placeholder": "Décrivez votre demande...",
       "consent": "J'accepte que mes données soient utilisées pour traiter ma demande.",
       "consent_notice": "Vos renseignements personnels sont traités conformément à la Loi 25 du Québec.",
       "consent_link": "Politique de confidentialité",
+      "privacy_link": "Politique de confidentialité",
       "submit": "Envoyer le message",
       "sending": "Envoi en cours...",
       "success": "Message envoyé avec succès! Nous vous répondrons dans les 24 heures.",
-      "error": "Une erreur est survenue. Veuillez réessayer ou nous appeler directement."
+      "error": "Une erreur est survenue. Veuillez réessayer ou nous appeler directement.",
+      "response_time": "Nous répondons habituellement dans les 24 heures ouvrables."
     },
     "info": {
+      "title": "Nous joindre",
       "address_title": "Adresse",
+      "address_label": "Adresse",
       "address": "42, rue du Petit-Champlain, Québec, QC G1K 4H4",
+      "address_city": "Québec (QC) G1K 4H4",
       "phone": "(418) 555-0142",
+      "phone_label": "Téléphone",
       "email": "info@tablede-marguerite.ca",
+      "email_label": "Courriel",
       "hours_title": "Heures d'ouverture",
-      "hours_detail": "Mar-Sam : 17h-22h | Dim Brunch : 10h-14h | Lun : Fermé"
+      "hours_label": "Horaires",
+      "hours_detail": "Mar-Sam : 17h-22h | Dim Brunch : 10h-14h | Lun : Fermé",
+      "hours_dinner": "Mar–Sam : 17h – 22h",
+      "hours_brunch": "Dim Brunch : 10h – 14h",
+      "hours_closed": "Lun : Fermé"
+    },
+    "map": {
+      "label": "Vieux-Québec",
+      "sublabel": "42, rue du Petit-Champlain"
+    },
+    "loi25": {
+      "title": "Protection des renseignements personnels",
+      "notice": "Conformément à la Loi 25 du Québec, vos données personnelles sont collectées uniquement pour traiter votre demande et ne seront jamais partagées avec des tiers sans votre consentement.",
+      "link": "Politique de confidentialité"
     },
     "validation": {
       "name_min": "Le nom doit contenir au moins 2 caractères.",
@@ -391,6 +642,8 @@
   },
   "footer": {
     "description": "Bistro gastronomique au cœur du Vieux-Québec. Cuisine française et québécoise, produits locaux et de saison depuis 1987.",
+    "cta": "Envie de découvrir notre cuisine?",
+    "cta_button": "Réserver une table",
     "nav_title": "Navigation",
     "legal_title": "Légal",
     "mentions": "Mentions légales",

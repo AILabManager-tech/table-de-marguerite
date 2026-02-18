@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "menu": "The Menu",
+    "about": "Our Story",
     "notre-histoire": "Our Story",
     "contact": "Contact",
     "cta": "Reserve"
@@ -15,8 +16,15 @@
       "title": "A cuisine that tells the story of the land.",
       "subtitle": "In the heart of Old Quebec, La Table de Marguerite has celebrated the flavors of Quebec for nearly four decades. Every plate is a tribute to our local producers.",
       "badge": "Since 1987",
+      "cta": "Reserve a table",
       "cta_primary": "Reserve",
       "cta_secondary": "View the menu"
+    },
+    "stats": {
+      "years_suffix": "years",
+      "experience": "of culinary experience",
+      "local": "local products",
+      "seasons": "seasons on the menu"
     },
     "philosophy": {
       "title": "Our philosophy",
@@ -33,82 +41,154 @@
     "seasonal_menu": {
       "title": "The seasonal menu",
       "subtitle": "Our menu evolves with the harvests and arrivals. Discover our seasonal inspirations.",
-      "spring": {
-        "name": "Spring",
-        "dish1": {
-          "name": "Quebec asparagus, poached egg and tarragon hollandaise",
-          "description": "Green asparagus from Monteregie, free-range organic egg, light hollandaise sauce with fresh tarragon.",
-          "price": "24"
-        },
-        "dish2": {
-          "name": "River trout, brown butter and fine herbs",
-          "description": "Rainbow trout from Beauce, brown butter with capers, fresh herb bouquet from the garden.",
-          "price": "38"
-        },
-        "dish3": {
-          "name": "Rhubarb tart and vanilla ice cream",
-          "description": "Rhubarb from Ile d'Orleans, buttery shortcrust pastry, Madagascar vanilla ice cream.",
-          "price": "16"
-        }
+      "tabs_label": "Select a season",
+      "courses": {
+        "starter": "Starter",
+        "main": "Main course",
+        "dessert": "Dessert"
       },
-      "summer": {
-        "name": "Summer",
-        "dish1": {
-          "name": "Heirloom tomato gazpacho and burrata",
-          "description": "Heirloom market tomatoes, creamy burrata, virgin olive oil, fresh basil.",
-          "price": "22"
+      "seasons": {
+        "spring": {
+          "name": "Spring",
+          "note": "Spring menu — Asparagus, rhubarb and garden herbs open the season with freshness.",
+          "dishes": {
+            "starter": {
+              "name": "Quebec asparagus, poached egg and tarragon hollandaise",
+              "description": "Green asparagus from Monteregie, free-range organic egg, light hollandaise sauce with fresh tarragon.",
+              "price": "$24"
+            },
+            "main": {
+              "name": "River trout, brown butter and fine herbs",
+              "description": "Rainbow trout from Beauce, brown butter with capers, fresh herb bouquet from the garden.",
+              "price": "$38"
+            },
+            "dessert": {
+              "name": "Rhubarb tart and vanilla ice cream",
+              "description": "Rhubarb from Ile d'Orleans, buttery shortcrust pastry, Madagascar vanilla ice cream.",
+              "price": "$16"
+            }
+          }
         },
-        "dish2": {
-          "name": "Lac Brome duck, cherries and thyme jus",
-          "description": "Roasted duck breast, seasonal candied cherries, robust thyme and maple jus.",
-          "price": "42"
+        "summer": {
+          "name": "Summer",
+          "note": "Summer menu — Heirloom tomatoes, garden herbs and berries brighten the long summer days.",
+          "dishes": {
+            "starter": {
+              "name": "Heirloom tomato gazpacho and burrata",
+              "description": "Heirloom market tomatoes, creamy burrata, virgin olive oil, fresh basil.",
+              "price": "$22"
+            },
+            "main": {
+              "name": "Lac Brome duck, cherries and thyme jus",
+              "description": "Roasted duck breast, seasonal candied cherries, robust thyme and maple jus.",
+              "price": "$42"
+            },
+            "dessert": {
+              "name": "Lac-Saint-Jean blueberry creme brulee",
+              "description": "Silky vanilla cream, caramelized wild blueberries, crispy honey tuile.",
+              "price": "$16"
+            }
+          }
         },
-        "dish3": {
-          "name": "Lac-Saint-Jean blueberry creme brulee",
-          "description": "Silky vanilla cream, caramelized wild blueberries, crispy honey tuile.",
-          "price": "16"
-        }
-      },
-      "autumn": {
-        "name": "Autumn",
-        "dish1": {
-          "name": "Butternut squash veloute with toasted hazelnuts",
-          "description": "Butternut squash from Portneuf, toasted Quebec hazelnuts, hazelnut oil and creme fraiche.",
-          "price": "20"
+        "autumn": {
+          "name": "Autumn",
+          "note": "Autumn menu — Squash, game and forest mushrooms compose a warm and comforting cuisine.",
+          "dishes": {
+            "starter": {
+              "name": "Butternut squash veloute with toasted hazelnuts",
+              "description": "Butternut squash from Portneuf, toasted Quebec hazelnuts, hazelnut oil and creme fraiche.",
+              "price": "$20"
+            },
+            "main": {
+              "name": "Boileau venison, red wine sauce and mushrooms",
+              "description": "Red deer medallion, cabernet demi-glace, wild chanterelles and porcini mushrooms.",
+              "price": "$46"
+            },
+            "dessert": {
+              "name": "Tarte Tatin with apples and maple caramel",
+              "description": "Cortland apples from Charlevoix, maple caramel, lightly vanilla whipped cream.",
+              "price": "$17"
+            }
+          }
         },
-        "dish2": {
-          "name": "Boileau venison, red wine sauce and mushrooms",
-          "description": "Red deer medallion, cabernet demi-glace, wild chanterelles and porcini mushrooms.",
-          "price": "46"
-        },
-        "dish3": {
-          "name": "Tarte Tatin with apples and maple caramel",
-          "description": "Cortland apples from Charlevoix, maple caramel, lightly vanilla whipped cream.",
-          "price": "17"
-        }
-      },
-      "winter": {
-        "name": "Winter",
-        "dish1": {
-          "name": "French onion soup gratineed with Oka cheese",
-          "description": "Slowly caramelized onions, house-made broth, artisan bread crouton, melted Oka cheese.",
-          "price": "19"
-        },
-        "dish2": {
-          "name": "Braised beef cheeks with wine and root vegetables",
-          "description": "Beef cheeks braised for 8 hours, Quebec root vegetables, celeriac puree.",
-          "price": "44"
-        },
-        "dish3": {
-          "name": "Dark chocolate fondant and raspberry coulis",
-          "description": "72% Valrhona dark chocolate, molten center, Quebec raspberry coulis, praline shards.",
-          "price": "18"
+        "winter": {
+          "name": "Winter",
+          "note": "Winter menu — Slow braises, local cheeses and chocolate warm the coldest evenings.",
+          "dishes": {
+            "starter": {
+              "name": "French onion soup gratineed with Oka cheese",
+              "description": "Slowly caramelized onions, house-made broth, artisan bread crouton, melted Oka cheese.",
+              "price": "$19"
+            },
+            "main": {
+              "name": "Braised beef cheeks with wine and root vegetables",
+              "description": "Beef cheeks braised for 8 hours, Quebec root vegetables, celeriac puree.",
+              "price": "$44"
+            },
+            "dessert": {
+              "name": "Dark chocolate fondant and raspberry coulis",
+              "description": "72% Valrhona dark chocolate, molten center, Quebec raspberry coulis, praline shards.",
+              "price": "$18"
+            }
+          }
         }
       }
     },
     "gallery": {
       "title": "Ambiance & craftsmanship",
       "subtitle": "A place where the elegance of Old Quebec meets the warmth of a neighborhood bistro.",
+      "filter_label": "Filter by category",
+      "caption": "Photos coming soon — our dishes change with the seasons.",
+      "categories": {
+        "all": "All",
+        "starters": "Starters",
+        "mains": "Mains",
+        "desserts": "Desserts"
+      },
+      "items": {
+        "item_0": {
+          "title": "Gaspe salmon tartare",
+          "description": "Fresh salmon, avocado, mango and citrus vinaigrette."
+        },
+        "item_1": {
+          "title": "Lac Brome duck breast",
+          "description": "Roasted breast, maple and thyme jus, sweet potato puree."
+        },
+        "item_2": {
+          "title": "Maple creme brulee",
+          "description": "Silky cream with Quebec maple syrup, torch-caramelized."
+        },
+        "item_3": {
+          "title": "Quebec Angus beef filet",
+          "description": "Grilled filet, green peppercorn sauce, gratin dauphinois and roasted vegetables."
+        },
+        "item_4": {
+          "title": "Dark chocolate fondant",
+          "description": "72% Valrhona chocolate, molten center, vanilla ice cream and praline shards."
+        },
+        "item_5": {
+          "title": "Butternut squash veloute",
+          "description": "Squash from Portneuf, toasted hazelnuts, hazelnut oil and creme fraiche."
+        }
+      },
+      "img_1": {
+        "caption": "The main dining room"
+      },
+      "img_2": {
+        "caption": "Today's plating"
+      },
+      "img_3": {
+        "caption": "Our wine cellar"
+      },
+      "img_4": {
+        "caption": "The summer terrace"
+      },
+      "img_5": {
+        "caption": "Chef Marguerite in the kitchen"
+      },
+      "img_6": {
+        "caption": "The morning market"
+      },
       "item1": {
         "title": "The main dining room",
         "category": "Ambiance"
@@ -137,6 +217,21 @@
     "testimonials": {
       "title": "What our guests say",
       "subtitle": "Moments of sharing around a sincere cuisine.",
+      "0": {
+        "quote": "A meal at La Table de Marguerite is a culinary journey through the heart of Quebec. Every bite tells a story. The Boileau venison was simply sublime.",
+        "name": "Marie-Pierre L.",
+        "role": "Gastronome"
+      },
+      "1": {
+        "quote": "We have celebrated every anniversary here for 15 years. The welcome is always warm, and the seasonal menu surprises us with every visit. A must in Old Quebec.",
+        "name": "Jean-Francois and Claire D.",
+        "role": "Regulars"
+      },
+      "2": {
+        "quote": "Chef Marguerite does remarkable work with local products. The Sunday brunch is a pure delight — the eggs Benedict with Gaspe smoked salmon are unforgettable.",
+        "name": "Catherine B.",
+        "role": "Food critic"
+      },
       "t1": {
         "quote": "A meal at La Table de Marguerite is a culinary journey through the heart of Quebec. Every bite tells a story. The Boileau venison was simply sublime.",
         "author": "Marie-Pierre L.",
@@ -159,7 +254,23 @@
       "phone_label": "By phone",
       "phone": "(418) 555-0142",
       "online_label": "Online",
-      "cta": "Reserve now"
+      "cta": "Reserve now",
+      "menu_link": "View the menu",
+      "field_date": "Date",
+      "field_guests": "Number of guests",
+      "field_time": "Time",
+      "field_name": "Your name",
+      "field_phone": "Phone",
+      "guest_count": "{count, plural, =1 {1 guest} other {# guests}}",
+      "time_placeholder": "Choose a time slot",
+      "name_placeholder": "First and last name",
+      "phone_placeholder": "(418) 555-0000",
+      "submit": "Confirm reservation",
+      "submitting": "Reserving...",
+      "error_missing_fields": "Please fill in all required fields.",
+      "success_message": "Reservation confirmed!",
+      "success_description": "On {date} at {time} for {guests} guest(s). See you soon!",
+      "privacy_note": "Your data is processed in accordance with Quebec's Law 25."
     }
   },
   "services": {
@@ -171,6 +282,97 @@
       "title": "The Menu",
       "subtitle": "French-inspired cuisine, elevated by the treasures of Quebec's terroir.",
       "badge": "Seasonal menu"
+    },
+    "starters": {
+      "title": "Starters",
+      "subtitle": "Starters that highlight the freshness and finesse of local products.",
+      "item_1": {
+        "name": "Gaspe salmon tartare",
+        "description": "Atlantic salmon, avocado, mango, citrus vinaigrette and toasted sesame.",
+        "price": "$22"
+      },
+      "item_2": {
+        "name": "Seasonal veloute",
+        "description": "Creamy soup with seasonal vegetables, creme fraiche and house-made croutons.",
+        "price": "$16"
+      },
+      "item_3": {
+        "name": "Pan-seared foie gras with apples",
+        "description": "Quebec foie gras, apple compote with ice cider, toasted brioche.",
+        "price": "$28"
+      },
+      "item_4": {
+        "name": "Warm goat cheese salad with walnuts",
+        "description": "Gratineed goat cheese, mesclun, walnuts, honey and mustard vinaigrette.",
+        "price": "$18"
+      }
+    },
+    "mains": {
+      "title": "Main courses",
+      "subtitle": "Generous dishes that celebrate Quebec's producers and artisans.",
+      "item_1": {
+        "name": "Quebec Angus beef filet",
+        "description": "Grilled filet, green peppercorn sauce, gratin dauphinois and seasonal roasted vegetables.",
+        "price": "$48"
+      },
+      "item_2": {
+        "name": "Iles-de-la-Madeleine cod pave",
+        "description": "Fresh cod, lemon beurre blanc, herb risotto and petite vegetables.",
+        "price": "$38"
+      },
+      "item_3": {
+        "name": "Lac Brome duck breast",
+        "description": "Roasted rose duck breast, maple and thyme jus, sweet potato puree.",
+        "price": "$42"
+      },
+      "item_4": {
+        "name": "Wild mushroom risotto",
+        "description": "Creamy arborio rice, chanterelles, oyster mushrooms and shiitakes, Parmesan shavings. Vegetarian.",
+        "price": "$34"
+      }
+    },
+    "desserts": {
+      "title": "Desserts",
+      "subtitle": "House-made sweets to end your meal on a high note.",
+      "item_1": {
+        "name": "Maple creme brulee",
+        "description": "Silky cream with Quebec maple syrup, torch-caramelized.",
+        "price": "$16"
+      },
+      "item_2": {
+        "name": "Dark chocolate fondant",
+        "description": "72% Valrhona chocolate, molten center, vanilla ice cream and praline shards.",
+        "price": "$18"
+      },
+      "item_3": {
+        "name": "Quebec cheese platter",
+        "description": "Selection of 5 artisan cheeses, fig jam, nuts and fruit bread.",
+        "price": "$24"
+      }
+    },
+    "drinks": {
+      "title": "Wine list",
+      "subtitle": "A selection of Quebec wines and private imports to complement your meal.",
+      "item_1": {
+        "name": "Domaine St-Jacques, Reserve Rouge",
+        "description": "Quebec red wine, fruity and full-bodied. Notes of black cherry and spices.",
+        "price": "$58"
+      },
+      "item_2": {
+        "name": "Vignoble de l'Orpailleur, Blanc",
+        "description": "Dry Quebec white wine, crisp and mineral. Pear, citrus and white flowers.",
+        "price": "$52"
+      },
+      "item_3": {
+        "name": "Ice cider, Domaine Pinnacle",
+        "description": "Quebec ice cider, sweet and luscious. Candied apple, honey and spices.",
+        "price": "$45"
+      },
+      "item_4": {
+        "name": "Sommelier's selection",
+        "description": "Ask Sophie our sommelier — she will find the perfect pairing for your meal.",
+        "price": "Varies"
+      }
     },
     "categories": {
       "entrees": {
@@ -258,7 +460,8 @@
     "chef_note": {
       "title": "A word from the chef",
       "quote": "Every dish I create is a love letter to Quebec. The local producers are my allies — their passion fuels mine. My cuisine is their story told on the plate.",
-      "author": "Marguerite Tremblay, founding chef"
+      "author": "Marguerite Tremblay",
+      "role": "Founding chef"
     },
     "faq": {
       "title": "Frequently asked questions",
@@ -285,6 +488,7 @@
     "hero": {
       "title": "Our Story",
       "subtitle": "From the Old Port market to rue du Petit-Champlain — 37 years of passion for Quebec's terroir.",
+      "badge": "Founded in 1987",
       "established": "Founded in 1987"
     },
     "story": {
@@ -318,6 +522,21 @@
     "team": {
       "title": "Our team",
       "subtitle": "Passionate people who bring La Table de Marguerite to life every day.",
+      "0": {
+        "name": "Marguerite Tremblay",
+        "role": "Founding chef",
+        "bio": "Trained at ITHQ and perfected in Lyon, Marguerite has married French rigor with Quebec terroir generosity since 1987."
+      },
+      "1": {
+        "name": "Antoine Lavoie",
+        "role": "Sous-chef",
+        "bio": "A pastry and desserts specialist, Antoine has been elevating local products with creativity and precision for 12 years."
+      },
+      "2": {
+        "name": "Sophie Gagnon",
+        "role": "Sommelier",
+        "bio": "Passionate about Quebec wines, Sophie creates food and wine pairings that bring out the best in every dish."
+      },
       "member1": {
         "name": "Marguerite Tremblay",
         "role": "Founding chef",
@@ -337,7 +556,8 @@
     "cta": {
       "title": "Come meet us",
       "subtitle": "Reserve your table and let us tell you our story over a fine meal.",
-      "button": "Reserve a table"
+      "button": "Reserve a table",
+      "menu_link": "View the menu"
     }
   },
   "contact": {
@@ -353,7 +573,15 @@
       "name": "Your full name",
       "email": "Email",
       "phone": "Phone",
+      "optional": "optional",
       "type": "Type of inquiry",
+      "type_placeholder": "Select a type",
+      "types": {
+        "reservation": "Reservation",
+        "private_event": "Private event",
+        "question": "General question",
+        "other": "Other"
+      },
       "type_options": {
         "reservation": "Reservation",
         "event": "Private event",
@@ -361,22 +589,45 @@
         "other": "Other"
       },
       "guests": "Number of guests",
+      "guest_singular": "guest",
+      "guest_plural": "guests",
       "message": "Your message",
+      "message_placeholder": "Describe your inquiry...",
       "consent": "I agree that my data may be used to process my request.",
       "consent_notice": "Your personal information is processed in accordance with Quebec's Law 25.",
       "consent_link": "Privacy Policy",
+      "privacy_link": "Privacy Policy",
       "submit": "Send message",
       "sending": "Sending...",
       "success": "Message sent successfully! We will respond within 24 hours.",
-      "error": "An error occurred. Please try again or call us directly."
+      "error": "An error occurred. Please try again or call us directly.",
+      "response_time": "We typically respond within 24 business hours."
     },
     "info": {
+      "title": "Get in touch",
       "address_title": "Address",
+      "address_label": "Address",
       "address": "42, rue du Petit-Champlain, Quebec City, QC G1K 4H4",
+      "address_city": "Quebec City (QC) G1K 4H4",
       "phone": "(418) 555-0142",
+      "phone_label": "Phone",
       "email": "info@tablede-marguerite.ca",
+      "email_label": "Email",
       "hours_title": "Opening hours",
-      "hours_detail": "Tue-Sat: 5pm-10pm | Sun Brunch: 10am-2pm | Mon: Closed"
+      "hours_label": "Hours",
+      "hours_detail": "Tue-Sat: 5pm-10pm | Sun Brunch: 10am-2pm | Mon: Closed",
+      "hours_dinner": "Tue–Sat: 5pm – 10pm",
+      "hours_brunch": "Sun Brunch: 10am – 2pm",
+      "hours_closed": "Mon: Closed"
+    },
+    "map": {
+      "label": "Old Quebec",
+      "sublabel": "42, rue du Petit-Champlain"
+    },
+    "loi25": {
+      "title": "Protection of personal information",
+      "notice": "In accordance with Quebec's Law 25, your personal data is collected solely to process your request and will never be shared with third parties without your consent.",
+      "link": "Privacy Policy"
     },
     "validation": {
       "name_min": "Name must be at least 2 characters.",
@@ -391,6 +642,8 @@
   },
   "footer": {
     "description": "Gastronomic bistro in the heart of Old Quebec. French and Quebecois cuisine, local and seasonal products since 1987.",
+    "cta": "Eager to discover our cuisine?",
+    "cta_button": "Reserve a table",
     "nav_title": "Navigation",
     "legal_title": "Legal",
     "mentions": "Legal Notice",
