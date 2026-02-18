@@ -8,7 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ClientWidgets } from "@/components/layout/ClientWidgets";
 import { JsonLd, localBusinessSchema } from "@/components/seo/JsonLd";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "../globals.css";
 
 // NEXOS: Typographie chaleureux organique — La Table de Marguerite
@@ -61,8 +61,13 @@ export async function generateMetadata({
         en: "https://table-de-marguerite.vercel.app/en",
       },
     },
-    themeColor: "#4A5A3C",
     icons: { icon: "/favicon.ico" },
+  };
+}
+
+export async function generateViewport(): Promise<Viewport> {
+  return {
+    themeColor: "#4A5A3C",
   };
 }
 

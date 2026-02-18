@@ -49,7 +49,7 @@ const SEASON_COLORS: Record<
   },
   summer: {
     tab: "text-terra-500 hover:bg-terra-50",
-    tabActive: "bg-terra-400 text-cream-100 shadow-lg shadow-terra-300/30",
+    tabActive: "bg-terra-700 text-cream-100 shadow-lg shadow-terra-300/30",
     accent: "text-terra-500",
     border: "border-terra-200",
     badge: "bg-terra-100 text-terra-700",

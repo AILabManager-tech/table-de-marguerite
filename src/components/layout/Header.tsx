@@ -96,7 +96,7 @@ export function Header() {
           {/* CTA */}
           <Link
             href="/contact"
-            className="rounded-xl bg-terra-400 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-terra-500 hover:scale-[1.02] hover:shadow-lg hover:shadow-terra-400/20"
+            className="rounded-xl bg-terra-700 px-5 py-2 text-sm font-medium text-white transition-all hover:bg-terra-800 hover:scale-[1.02] hover:shadow-lg hover:shadow-terra-700/20"
           >
             {t("cta")}
           </Link>
@@ -160,7 +160,7 @@ export function Header() {
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-xl bg-terra-400 px-5 py-2 text-sm font-medium text-white hover:bg-terra-500"
+                className="rounded-xl bg-terra-700 px-5 py-2 text-sm font-medium text-white hover:bg-terra-800"
               >
                 {t("cta")}
               </Link>

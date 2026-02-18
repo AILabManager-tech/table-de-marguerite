@@ -31,7 +31,7 @@ export function Footer() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-xl bg-terra-400 px-8 py-3 font-medium text-white transition-all hover:bg-terra-500 hover:scale-[1.02] hover:shadow-lg hover:shadow-terra-400/30"
+            className="inline-flex items-center justify-center rounded-xl bg-terra-700 px-8 py-3 font-medium text-white transition-all hover:bg-terra-800 hover:scale-[1.02] hover:shadow-lg hover:shadow-terra-700/30"
           >
             {t("cta_button")}
           </Link>
@@ -141,7 +141,7 @@ export function Footer() {
               />
               <button
                 type="submit"
-                className="rounded-lg bg-terra-400 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-terra-500"
+                className="rounded-lg bg-terra-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-terra-800"
               >
                 OK
               </button>
