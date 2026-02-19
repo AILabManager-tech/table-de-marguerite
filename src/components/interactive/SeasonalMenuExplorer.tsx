@@ -44,12 +44,12 @@ const SEASON_COLORS: Record<
     icon: "text-olive-500",
   },
   summer: {
-    tab: "text-terra-500 hover:bg-terra-50",
+    tab: "text-terra-700 hover:bg-terra-50",
     tabActive: "bg-terra-700 text-cream-100 shadow-lg shadow-terra-300/30",
-    accent: "text-terra-500",
+    accent: "text-terra-700",
     border: "border-terra-200",
     badge: "bg-terra-100 text-terra-700",
-    icon: "text-terra-400",
+    icon: "text-terra-600",
   },
   autumn: {
     tab: "text-prune-500 hover:bg-prune-50",

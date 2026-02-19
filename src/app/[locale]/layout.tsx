@@ -90,6 +90,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${cormorant.variable} ${lato.variable}`}>
       <head>
+        <title>La Table de Marguerite — Bistro gastronomique, Vieux-Québec</title>
         <meta name="description" content={locale === 'fr' ? 'La Table de Marguerite : bistro gastronomique dans le Vieux-Québec. Cuisine française et québécoise, produits locaux et de saison, depuis 1987.' : 'La Table de Marguerite: gastronomic bistro in Old Quebec City. French and Quebecois cuisine, local and seasonal products, since 1987.'} />
       </head>
       <body className="font-body bg-cream-200 text-bark antialiased">
